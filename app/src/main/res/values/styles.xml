@@ -2,11 +2,9 @@
 <resources>
 
     <style name="rounded" parent="">
-
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>
         <item name="color">@color/white</item>
-
     </style>
 
     <style name="actionbar" parent="Theme.Material3.Light">
@@ -27,6 +25,11 @@
     <!-- Toolbar -->
     <style name="MyToolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="titleTextAppearance">@style/My_TextAppearance_Toolbar</item>
+    </style>
+
+    <!--Splash Screen-->
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/logo</item>
     </style>
 
 </resources>

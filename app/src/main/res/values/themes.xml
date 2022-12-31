@@ -14,14 +14,16 @@
         <!-- Customize your theme here. -->
     </style>
 
+
     <!--  SplashScreen-->
     <style name="splashScreen" parent="Theme.SplashScreen">
 
-        <item name="windowSplashScreenBackground">@color/teal_200</item>
+        <item name="windowSplashScreenBackground">@color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
-        <item name="windowSplashScreenAnimationDuration">300</item>
+        <item name="windowSplashScreenAnimationDuration">800</item>
+        <item name="android:windowSplashScreenBrandingImage" tools:ignore="NewApi">@drawable/letras_logo</item>
         <item name="postSplashScreenTheme">@style/Theme.MisPrimerosAuxilitos</item>
-
+        <item name="android:fontFamily">@font/dynapuff</item>
 
     </style>
     

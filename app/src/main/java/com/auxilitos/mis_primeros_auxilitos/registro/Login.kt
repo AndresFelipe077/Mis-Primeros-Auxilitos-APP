@@ -26,10 +26,10 @@ class Login : AppCompatActivity() {
         setContentView(binding.root)//R.layout.activity_login
 
 
-
-
         var btn_login = findViewById<Button>(R.id.btn_login);
         var btn = findViewById<TextView>(R.id.register);
+
+        /*
 
         binding.btnMotionToast.setOnClickListener{
 
@@ -78,6 +78,8 @@ class Login : AppCompatActivity() {
 
         }
 
+        */
+
         btn_login.setOnClickListener{
 
             val i = Intent(this,MainActivity::class.java)
@@ -96,11 +98,20 @@ class Login : AppCompatActivity() {
         }
 
         btn.setOnClickListener(View.OnClickListener {
-            Toast.makeText(this, "Holis", Toast.LENGTH_LONG).show()
+            MotionToast.createColorToast(
+                this,
+                "Mis Primeros Auxilitos",
+                "Registro de usuario",
+                MotionToastStyle.SUCCESS,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(this,R.font.dynapuff))
             val i = Intent(this,Registro::class.java)
             startActivity(i)
 
         })
+
+
 
 
     }//Fin oncreate
