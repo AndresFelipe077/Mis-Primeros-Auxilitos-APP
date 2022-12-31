@@ -55,34 +55,6 @@
                     />
 
 
-                <!--<EditText
-                    android:id="@+id/email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="15"
-                    android:fontFamily="@font/dynapuff"
-                    android:hint="Correo"
-                    android:inputType="textEmailAddress"
-                    android:textColor="#0511F2"
-                    android:textColorHint="#0511F2"
-                    android:layout_marginTop="15sp"
-                    android:layout_margin="10sp"
-                    />-->
-
-                <!--<EditText
-                    android:id="@+id/password"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="15"
-                    android:fontFamily="@font/dynapuff"
-                    android:hint="Contraseña"
-                    android:inputType="textPassword"
-                    android:textColor="#0511F2"
-                    android:textColorHint="#0511F2"
-                    android:layout_marginTop="15sp"
-                    android:layout_margin="10sp"
-                    />-->
-
                 <com.google.android.material.textfield.TextInputLayout
 
                     android:id="@+id/correo"
@@ -165,6 +137,19 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/dynapuff"
                     android:text="iniciar sesión"
+                    android:layout_marginTop="10sp"
+                    android:backgroundTint="#0C6EFC"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_motionToast"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dynapuff"
+                    android:text="Motion Toast"
                     android:layout_marginTop="10sp"
                     android:backgroundTint="#0C6EFC"
                     android:textColor="@color/white"

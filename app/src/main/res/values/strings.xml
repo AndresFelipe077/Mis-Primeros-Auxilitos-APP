@@ -3,4 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Juegos</string>
     <string name="title_notifications">Ajustes</string>
+
+    <string name="title_profile">Ajustes</string>
+
 </resources>

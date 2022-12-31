@@ -13,12 +13,10 @@
         <item name="android:fontFamily">@font/dynapuff</item>
     </style>
 
-    <!--<style name="noActionbar" parent="Theme.Material3.Light.NoActionBar">
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/white</item>
+    <style name="noActionbar" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:fontFamily">@font/dynapuff</item>
+    </style>
 
-    </style> con esto puedes llamarlo desde manifiest y poder adarpatar el no actionbar personalizado-->
 
     <style name="My_TextAppearance_Toolbar" parent="@style/TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">@font/dynapuff</item>

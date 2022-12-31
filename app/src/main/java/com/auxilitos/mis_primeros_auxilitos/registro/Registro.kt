@@ -11,14 +11,11 @@ import com.auxilitos.mis_primeros_auxilitos.R
 
 class Registro : AppCompatActivity() {
 
-
     private lateinit var btn_register:Button
     private lateinit var btn_regresar:Button
     private lateinit var checkMasculino:CheckBox
     private lateinit var checkFemenino:CheckBox
     private lateinit var checkOtro:CheckBox
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +37,6 @@ class Registro : AppCompatActivity() {
         }
 
         checkButton()
-
 
 
     }//Fin oncreate
@@ -87,8 +83,6 @@ class Registro : AppCompatActivity() {
 
 
     }
-
-
 
 }//Fin todo
 

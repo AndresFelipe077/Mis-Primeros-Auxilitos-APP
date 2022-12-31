@@ -2,57 +2,72 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/actionbar"
         tools:targetApi="31">
 
+        <!--SplashScreen-->
         <activity
-            android:name=".registro.Login"
+            android:name=".registro.SplashScreen"
             android:exported="true"
-            android:theme="@style/Theme.Material3.Light.NoActionBar"
-            >
-
+            android:theme="@style/splashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
 
+        <!-- Login -->
+        <activity
+            android:name=".registro.Login"
+            android:exported="false"
+            android:theme="@style/noActionbar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <!-- Registro -->
         <activity
             android:name=".registro.Registro"
             android:exported="false"
-            android:theme="@style/Theme.Material3.Light.NoActionBar"
-            >
+            android:theme="@style/Theme.Material3.Light.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
 
+        <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
-            android:exported="false"
-            android:label="@string/app_name">
-
-
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
 
+        <!-- Profile -->
+        <activity
+            android:name=".registro.Profile"
+            android:exported="false"
+            android:label="@string/title_profile">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
     </application>
 
 </manifest>
