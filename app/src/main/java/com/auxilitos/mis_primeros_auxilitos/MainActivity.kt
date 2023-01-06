@@ -7,12 +7,15 @@ import android.widget.Button
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityMainBinding
 import com.auxilitos.mis_primeros_auxilitos.registro.Profile
+import www.sanju.motiontoast.MotionToast
+import www.sanju.motiontoast.MotionToastStyle
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,7 +45,14 @@ class MainActivity : AppCompatActivity() {
 
 
         btn_profile.setOnClickListener(View.OnClickListener {
-            Toast.makeText(this, "Perfil", Toast.LENGTH_LONG).show()
+            MotionToast.createColorToast(
+                this,
+                "Mis Primeros Auxilitos",
+                "Perfil del usuario",
+                MotionToastStyle.SUCCESS,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(this,R.font.dynapuff))
             val i = Intent(this, Profile::class.java)
             startActivity(i)
         })
