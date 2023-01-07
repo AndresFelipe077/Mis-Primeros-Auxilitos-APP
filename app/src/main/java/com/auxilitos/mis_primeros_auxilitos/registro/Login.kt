@@ -4,10 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.util.PatternsCompat
 import com.auxilitos.mis_primeros_auxilitos.MainActivity
-import com.auxilitos.mis_primeros_auxilitos.R
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityLoginBinding
 import com.auxilitos.mis_primeros_auxilitos.model.request.LoginRequest
@@ -16,8 +14,6 @@ import com.auxilitos.mis_primeros_auxilitos.toast.ToastCustom
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import www.sanju.motiontoast.MotionToast
-import www.sanju.motiontoast.MotionToastStyle
 
 class Login : AppCompatActivity() {
 
