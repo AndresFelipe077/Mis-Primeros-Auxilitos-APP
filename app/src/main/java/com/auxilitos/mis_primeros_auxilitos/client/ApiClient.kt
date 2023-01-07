@@ -8,22 +8,20 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    fun getRetrofit(): Retrofit{
+    private fun getRetrofit(): Retrofit {
 
-        val logger = HttpLoggingInterceptor();
+        val logger = HttpLoggingInterceptor()
         logger.setLevel(HttpLoggingInterceptor.Level.BODY)
 
         val client = OkHttpClient().newBuilder()
             .addInterceptor(logger)
             .build()
 
-        val retrofit = Retrofit.Builder()
+        return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .baseUrl("http://192.168.1.106:8000/")
             .build()
-
-        return retrofit
     }
 
     fun getApiService(): ApiService{

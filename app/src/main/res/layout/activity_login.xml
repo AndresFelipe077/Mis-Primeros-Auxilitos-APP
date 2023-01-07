@@ -13,7 +13,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                     android:layout_height="78dp"
                     app:srcCompat="@drawable/logo"
                     android:layout_marginTop="35dp"
-                    />
+                    tools:ignore="ContentDescription" />
 
             </LinearLayout>
 
@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/dynapuff"
-                    android:text="Bienvenido"
+                    android:text="@string/bienvenido"
                     android:textColor="#0F71F2"
                     android:textSize="23sp"
                     android:layout_marginTop="2sp"
@@ -65,7 +65,7 @@
                     android:layout_margin="10sp"
                     android:layout_marginTop="15sp"
                     android:ems="15"
-                    android:hint="Correo"
+                    android:hint="@string/correo"
                     android:textColor="#0511F2"
                     android:textColorHint="#0511F2"
                     app:boxBackgroundMode="outline"
@@ -96,7 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:endIconMode="password_toggle"
-                    android:hint="Contraseña"
+                    android:hint="@string/contrasena"
                     app:boxBackgroundMode="outline"
                     android:layout_marginTop="15sp"
                     android:layout_margin="10sp"
@@ -132,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="-100sp"
                     android:fontFamily="@font/dynapuff"
-                    android:text="Recuérdame"
+                    android:text="@string/txt_recordar"
                     android:textColor="#202528" />
 
                 <Button
@@ -141,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/dynapuff"
-                    android:text="iniciar sesión"
+                    android:text="@string/iniciar_sesion"
                     android:layout_marginTop="10sp"
                     android:backgroundTint="#0C6EFC"
                     android:textColor="@color/white"
@@ -162,7 +162,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dynapuff"
-                        android:text="¿No tienes cuenta?"
+                        android:text="@string/txt_cuenta_NULL"
                         android:textColor="#202528"
                         />
 
@@ -171,8 +171,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dynapuff"
-                        android:text="Registrate"
-                        android:layout_marginLeft="5dp"
+                        android:text="@string/registrate"
+                        android:layout_marginStart="5dp"
                         android:textColor="#1271FD"
                         android:background="@android:color/transparent"
                         />
@@ -185,7 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/dynapuff"
-                    android:text="He olvidado mi contraseña"
+                    android:text="@string/txt_olvidar_password"
                     android:textColor="#1271FD"
                     android:layout_gravity="center"
                     android:layout_marginTop="5sp"
@@ -196,7 +196,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/dynapuff"
-                    android:text="-Inicia sesión con-"
+                    android:text="@string/iniciar_sesion"
                     android:textColor="#202528"
                     android:layout_gravity="center"
                     android:layout_marginTop="20sp"
@@ -217,7 +217,8 @@
                         android:layout_height="77dp"
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
-                        app:srcCompat="@drawable/icons8_facebook_nuevo_72___" />
+                        app:srcCompat="@drawable/icons8_facebook_nuevo_72___"
+                        tools:ignore="ContentDescription" />
 
                     <ImageButton
                         android:id="@+id/imageButton"
@@ -225,7 +226,8 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
-                        app:srcCompat="@drawable/icons8_logo_de_google_72___" />
+                        app:srcCompat="@drawable/icons8_logo_de_google_72___"
+                        tools:ignore="ContentDescription" />
 
                 </LinearLayout>
 
@@ -241,7 +243,7 @@
                     android:backgroundTint="#202528"
                     android:fontFamily="@font/dynapuff"
                     android:gravity="center"
-                    android:text="Copyryght © 2023"
+                    android:text="@string/copyryght"
                     android:textColor="#FFFFFF"
 
                     />

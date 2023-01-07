@@ -11,7 +11,6 @@ class ToastCustom {
 
     fun toastSuccess(context: Context, title: String, message: String)
     {
-
         MotionToast.createColorToast(
             context as Activity,
             title,
@@ -21,12 +20,10 @@ class ToastCustom {
             MotionToast.LONG_DURATION,
             ResourcesCompat.getFont(context, R.font.dynapuff)
         )
-
     }
 
     fun toastError(context: Context, title: String, message: String)
     {
-
         MotionToast.createColorToast(
             context as Activity,
             title,
@@ -36,12 +33,10 @@ class ToastCustom {
             MotionToast.LONG_DURATION,
             ResourcesCompat.getFont(context, R.font.dynapuff)
         )
-
     }
 
     fun toastWarning(context: Context, title: String, message: String)
     {
-
         MotionToast.darkToast(
             context as Activity,
             title,
@@ -51,7 +46,6 @@ class ToastCustom {
             MotionToast.LONG_DURATION,
             ResourcesCompat.getFont(context, R.font.dynapuff)
         )
-
     }
 
 }

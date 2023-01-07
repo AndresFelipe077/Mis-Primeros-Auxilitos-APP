@@ -12,7 +12,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +32,7 @@
                     android:id="@+id/btn_regresar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Regresar"
+                    android:text="@string/regresar"
                     android:layout_gravity="center"
                     android:backgroundTint="#198655"
                     />
@@ -50,7 +51,7 @@
                     android:id="@+id/editarPerfil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Editar perfil"
+                    android:text="@string/editar_perfil"
                     android:layout_gravity="center"
                     android:backgroundTint="#0D6EFD"
                     />
@@ -59,7 +60,7 @@
                     android:id="@+id/eliminarCuenta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Eliminar cuenta"
+                    android:text="@string/eliminar_cuenta"
                     android:layout_gravity="center"
                     android:backgroundTint="#DD3445"
                     />
@@ -95,7 +96,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Descripción"
+                        android:text="@string/descripcion"
                         android:textSize="17sp"
                         android:textStyle="bold"
                         />
@@ -104,7 +105,7 @@
                         android:id="@+id/description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mi hijo es un niño adorable, le encanta ayudar a los demas es una personas increible, tiene 7 años."
+                        android:text="@string/text_prueba_descripcion"
                         android:layout_margin="20dp"
                         />
 
@@ -126,7 +127,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nombre: "
+                    android:text="@string/name"
                     android:layout_margin="15dp"
                     />
 
@@ -143,7 +144,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="15dp"
-                        android:text="Andres Felipe Pizo Luligo"
+                        android:text="@string/name_prueba"
                         android:layout_gravity="center"
                         />
                 </androidx.cardview.widget.CardView>
@@ -161,7 +162,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Correo: "
+                    android:text="@string/correo"
                     android:layout_margin="15dp"
                     />
 
@@ -177,7 +178,7 @@
                         android:id="@+id/correo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="felpilgamesstudio@gmail.com"
+                        android:text="@string/correo_prueba"
                         android:layout_gravity="center"
                         android:layout_margin="15dp"
                         android:gravity="center"
@@ -200,7 +201,7 @@
                     android:id="@+id/genero"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Genero"
+                    android:text="@string/genero"
                     android:layout_marginStart="-100dp"
                     android:layout_margin="15dp"
                     />
@@ -216,7 +217,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Masculino"
+                        android:text="@string/txt_masculino"
                         android:layout_margin="15dp"
                         android:layout_gravity="center"
                         />
@@ -235,7 +236,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fecha de \n nacimiento: "
+                    android:text="@string/fecha_de_n_nacimiento"
                     android:layout_margin="15dp"
                     android:gravity="center"
                     />
@@ -254,7 +255,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="15dp"
-                        android:text="2022-12-23"
+                        android:text="@string/fecha_Nacimiento_prueba"
                         android:layout_gravity="center"/>
 
                 </androidx.cardview.widget.CardView>
@@ -279,21 +280,21 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Juegos "
+                        android:text="@string/juegos"
                         android:textColor="#0D6EFD"
                         />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Retos ganados: "
+                        android:text="@string/retos_ganados"
                         />
 
                     <TextView
                         android:id="@+id/juegoGanados"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10"
+                        android:text="@string/num_retos_ganados_10"
                         />
 
                 </LinearLayout>
@@ -301,12 +302,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Trivias"
+                    android:text="@string/txt_trivias"
                     />
 
                 <ProgressBar
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
                     style="?android:attr/progressBarStyleHorizontal"
                     tools:progress="80"
                     android:progressTint="#0F71F2"
@@ -315,12 +316,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Adivinar objetos"
+                    android:text="@string/adivinar_objetos"
                     />
 
                 <ProgressBar
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
                     style="?android:attr/progressBarStyleHorizontal"
                     tools:progress="80"
                     android:progressTint="#0F71F2"
@@ -349,7 +350,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Juegos por ganar"
+                        android:text="@string/juegos_por_ganar"
                         android:textColor="#0D6EFD"
                         />
 
@@ -359,12 +360,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Trivias"
+                    android:text="@string/txt_trivias"
                     />
 
                 <ProgressBar
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
                     style="?android:attr/progressBarStyleHorizontal"
                     tools:progress="20"
                     android:progressTint="#0F71F2"
@@ -374,23 +375,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Adivinar objetos"
+                    android:text="@string/adivinar_objetos"
                     />
 
-                <com.google.android.material.progressindicator.LinearProgressIndicator
+
+                <ProgressBar
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="40dp"
+                    style="?android:attr/progressBarStyleHorizontal"
                     tools:progress="20"
                     android:progressTint="#0F71F2"
                     android:secondaryProgressTint="#0F71F2"
                     />
 
-                <!--<ProgressBar
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    style="?android:attr/progressBarStyleHorizontal"
-
-                    />-->
 
             </LinearLayout>
 
@@ -416,7 +413,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Habilita la autenticación de dis factores"
+                        android:text="@string/title_autenticacion_doble_factor"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         />
@@ -424,7 +421,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Pide ayuda a tus padres, se te solicitará un token seguro y aleatorio, lo podrás recuperar con la aplicación Google Authenticator con el teléfono"
+                        android:text="@string/text_autenticar"
                         android:layout_marginTop="5dp"
                         />
 
@@ -434,7 +431,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dynapuff"
-                        android:text="Habilitar"
+                        android:text="@string/habilitar"
                         android:layout_marginTop="10sp"
                         android:backgroundTint="#198655"
                         android:textColor="@color/white"

@@ -1,34 +1,30 @@
 package com.auxilitos.mis_primeros_auxilitos.registro
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.util.PatternsCompat
 import com.auxilitos.mis_primeros_auxilitos.MainActivity
 import com.auxilitos.mis_primeros_auxilitos.R
+import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityLoginBinding
+import com.auxilitos.mis_primeros_auxilitos.model.request.LoginRequest
+import com.auxilitos.mis_primeros_auxilitos.model.response.LoginResponse
 import com.auxilitos.mis_primeros_auxilitos.toast.ToastCustom
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
-import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
-import com.auxilitos.mis_primeros_auxilitos.model.response.LoginResponse
-import com.auxilitos.mis_primeros_auxilitos.model.request.LoginRequest
 
 class Login : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    val toast = ToastCustom()
+    private val toast = ToastCustom()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)//R.layout.activity_login
@@ -40,7 +36,7 @@ class Login : AppCompatActivity() {
             initData()
         }
 
-        binding.register.setOnClickListener(View.OnClickListener {
+        binding.register.setOnClickListener {
             MotionToast.createColorToast(
                 this,
                 "Mis Primeros Auxilitos",
@@ -52,7 +48,7 @@ class Login : AppCompatActivity() {
             val i = Intent(this,Registro::class.java)
             startActivity(i)
 
-        })
+        }
 
     }//Fin oncreate
 
@@ -93,7 +89,7 @@ class Login : AppCompatActivity() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if(response.isSuccessful)
                 {
-                    move(response.body()!!.email)
+                    move(/*response.body()!!.email*/)
                     finish()
                 }
                 else
@@ -103,7 +99,7 @@ class Login : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                toast.toastError(this@Login, "Error", "Ha ocurrido un error inesperado" + t.localizedMessage)
+                toast.toastError(this@Login, "Error", "Ha ocurrido un error inesperado " + t.localizedMessage)
             }
 
         })
@@ -111,9 +107,9 @@ class Login : AppCompatActivity() {
 
     }
 
-    private fun move(email : String)
+    private fun move(/*email : String*/)
     {
-        startActivity(Intent(this, MainActivity::class.java).putExtra("email", email))
+        startActivity(Intent(this, MainActivity::class.java)/*.putExtra("email", email)*/)
     }
 
     private fun validate(){
