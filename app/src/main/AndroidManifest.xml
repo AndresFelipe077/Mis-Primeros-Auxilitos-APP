@@ -69,7 +69,7 @@
                 android:value="" />
         </activity>
 
-        <!-- Profile -->
+        <!-- Perfil -->
         <activity
             android:name=".registro.Profile"
             android:exported="false"
