@@ -97,6 +97,7 @@ class Login : AppCompatActivity() {
     private fun move(/*email : String*/)
     {
         startActivity(Intent(this, MainActivity::class.java)/*.putExtra("email", email)*/)
+        finish()
     }
 
     private fun validate(){

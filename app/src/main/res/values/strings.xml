@@ -47,5 +47,6 @@
     <string name="name_prueba">Andres Felipe Pizo Luligo</string>
     <string name="correo_prueba">felpilgamesstudio@gmail.com</string>
     <string name="fecha_Nacimiento_prueba">2022–12–13</string>
+    <string name="seleccionar_fecha">Seleccionar fecha</string>
 
 </resources>
