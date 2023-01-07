@@ -7,8 +7,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.PatternsCompat
+import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityRegistroBinding
+import com.auxilitos.mis_primeros_auxilitos.model.request.RegisterRequest
+import com.auxilitos.mis_primeros_auxilitos.model.response.RegisterResponse
 import com.auxilitos.mis_primeros_auxilitos.toast.ToastCustom
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.regex.Pattern
 
 class Registro : AppCompatActivity() {
@@ -40,61 +46,119 @@ class Registro : AppCompatActivity() {
 
         binding.btnRegister.setOnClickListener {
             validate()
-            toast.toastSuccess(this, "Registro", "Registrado!!!")
+            getInputs()
+
         }
 
         binding.btnRegresar.setOnClickListener {
-            val i = Intent(this, Login::class.java)
-            startActivity(i)
+            startActivity(Intent(this, Login::class.java))
         }
 
     }
 
-    private fun checkBoxValidate()
+    private fun getInputs()
     {
+        val name            = binding.name.text.toString()
+        val email           = binding.email.text.toString()
+        val fechaNacimiento = binding.fechaNacimiento.text.toString()
+        val password        = binding.password.text.toString()
+        val passwordConfirm = binding.passwordConfirm.text.toString()
 
-        binding.checkBoxMasculino.setOnCheckedChangeListener { _: CompoundButton, _: Boolean ->
-
-            if (binding.checkBoxMasculino.isChecked) {
-                binding.checkBoxFemenino.isEnabled = false
-                binding.checkBoxOtro.isEnabled = false
-
-            } else if (!binding.checkBoxMasculino.isChecked) {
-                binding.checkBoxFemenino.isEnabled = true
-                binding.checkBoxOtro.isEnabled = true
-            }
+        if(name.isNotEmpty() && email.isNotEmpty()  && fechaNacimiento.isNotEmpty() && password.isNotEmpty() && passwordConfirm.isNotEmpty())
+        {
+            checkBoxValidate()
+            loginUser(name, email, checkBoxValidate(), fechaNacimiento, password, passwordConfirm)
         }
-
-        binding.checkBoxFemenino.setOnCheckedChangeListener { _: CompoundButton, _: Boolean ->
-
-            if (binding.checkBoxFemenino.isChecked) {
-                binding.checkBoxMasculino.isEnabled = false
-                binding.checkBoxOtro.isEnabled = false
-
-            } else if (!binding.checkBoxFemenino.isChecked) {
-                binding.checkBoxMasculino.isEnabled = true
-                binding.checkBoxOtro.isEnabled = true
-            }
+        else
+        {
+            toast.toastWarning(this, "Campos incompletos", "Completa los campos")
         }
+    }
 
-        binding.checkBoxOtro.setOnCheckedChangeListener { _: CompoundButton, _: Boolean ->
-
-            if (binding.checkBoxOtro.isChecked) {
-                binding.checkBoxMasculino.isEnabled = false
-                binding.checkBoxFemenino.isEnabled = false
-
-            } else if (!binding.checkBoxOtro.isChecked) {
-                binding.checkBoxMasculino.isEnabled = true
-                binding.checkBoxFemenino.isEnabled = true
+    private fun loginUser(name: String, email: String, genero: String, fechaNacimiento: String, password: String, passwordConfirm: String) {
+        val registerRequest = RegisterRequest(name, email, genero, fechaNacimiento, password, passwordConfirm)
+        val apiCall = ApiClient.getApiService().registerUser(registerRequest)
+        apiCall.enqueue(object : Callback<RegisterResponse> {
+            override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
+                if(response.isSuccessful)
+                {
+                    move(/*response.body()!!.email*/)
+                    finish()
+                }
+                else
+                {
+                    toast.toastError(this@Registro, "Error", "Sucedio un error inesperado o corrige tus credenciales")
+                }
             }
-        }
+
+            override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                toast.toastError(this@Registro, "Error", "Ha ocurrido un error inesperado " + t.localizedMessage)
+            }
+
+        })
 
 
     }
 
+    private fun move(/*email : String*/)
+    {
+        startActivity(Intent(this@Registro, Login::class.java)/*.putExtra("email", email)*/)
+        toast.toastSuccess(this@Registro, "Mis Primeros Auxilitos", "Registrado con exito!!!")
+    }
+
+    private fun checkBoxValidate(): String{
+        val checkM = binding.checkBoxMasculino
+        val checkF = binding.checkBoxFemenino
+        val checkO = binding.checkBoxOtro
+        checkM.setOnCheckedChangeListener { _: CompoundButton, _: Boolean ->
+
+            if (checkM.isChecked) {
+                checkF.isEnabled = false
+                checkO.isEnabled = false
+
+            } else if (!checkM.isChecked) {
+                checkF.isEnabled = true
+                checkO.isEnabled = true
+            }
+
+        }
+
+        checkF.setOnCheckedChangeListener { _: CompoundButton, _: Boolean ->
+
+            if (checkF.isChecked) {
+                checkM.isEnabled = false
+                checkO.isEnabled = false
+
+            } else if (!checkF.isChecked) {
+                checkM.isEnabled = true
+                checkO.isEnabled = true
+            }
+        }
+
+        checkO.setOnCheckedChangeListener { _: CompoundButton, _: Boolean ->
+
+            if (checkO.isChecked) {
+                checkM.isEnabled = false
+                checkF.isEnabled = false
+
+            } else if (!checkO.isChecked) {
+                checkM.isEnabled = true
+                checkF.isEnabled = true
+            }
+        }
+
+        return if(checkM.isChecked) {
+            "Masculino"
+        } else if(checkF.isChecked) {
+            "Femenino"
+        } else{
+            "Otro"
+        }
+
+    }
 
     private fun validate(){
-        val result = arrayOf(validateEmail(), validatePassword(), validateEditText(), validateCheckBox())
+        val result = arrayOf(validateEmail(), validatePassword(), validateNameAndDate(), validateCheckBox())
         if(false in result)
         {
             return
@@ -135,7 +199,7 @@ class Registro : AppCompatActivity() {
 
     }
 
-    private fun validateEditText(): Boolean {
+    private fun validateNameAndDate(): Boolean {
         val name = binding.name.text.toString()
         val fechaNacimiento = binding.fechaNacimiento.text.toString()
         return if(name.isEmpty()) {

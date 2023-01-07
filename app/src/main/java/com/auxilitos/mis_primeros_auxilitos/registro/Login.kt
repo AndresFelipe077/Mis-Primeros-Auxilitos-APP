@@ -37,17 +37,8 @@ class Login : AppCompatActivity() {
         }
 
         binding.register.setOnClickListener {
-            MotionToast.createColorToast(
-                this,
-                "Mis Primeros Auxilitos",
-                "Registro de usuario",
-                MotionToastStyle.SUCCESS,
-                MotionToast.GRAVITY_BOTTOM,
-                MotionToast.LONG_DURATION,
-                ResourcesCompat.getFont(this,R.font.dynapuff))
-            val i = Intent(this,Registro::class.java)
-            startActivity(i)
-
+            toast.toastSuccess(this, "Mis Primeros Auxilitos", "Registro de usuario")
+            startActivity(Intent(this,Registro::class.java))
         }
 
     }//Fin oncreate
