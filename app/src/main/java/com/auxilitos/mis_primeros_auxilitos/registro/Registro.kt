@@ -2,6 +2,7 @@ package com.auxilitos.mis_primeros_auxilitos.registro
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.CompoundButton

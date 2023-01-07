@@ -14,13 +14,16 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/actionbar"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        tools:ignore="LockedOrientationActivity">
 
         <!--Splash Screen-->
         <activity
             android:name=".registro.SplashScreen"
             android:exported="true"
-            android:theme="@style/splashScreen">
+            android:theme="@style/splashScreen"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,8 +38,9 @@
         <activity
             android:name=".registro.Login"
             android:exported="false"
-            android:theme="@style/noActionbar">
-
+            android:theme="@style/noActionbar"
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -46,7 +50,9 @@
         <activity
             android:name=".registro.Registro"
             android:exported="false"
-            android:theme="@style/Theme.Material3.Light.NoActionBar">
+            android:theme="@style/Theme.Material3.Light.NoActionBar"
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -55,7 +61,9 @@
         <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -65,7 +73,9 @@
         <activity
             android:name=".registro.Profile"
             android:exported="false"
-            android:label="@string/title_profile">
+            android:label="@string/title_profile"
+            android:screenOrientation="portrait"
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
