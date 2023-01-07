@@ -180,7 +180,10 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_weight="1"
-                tools:ignore="InefficientWeight">
+                tools:ignore="InefficientWeight"
+                android:layout_marginLeft="10sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="10sp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -225,7 +228,7 @@
                     app:civ_border_color="#FF000000"
                     android:layout_weight="1"
                     android:gravity="center"
-
+                    android:fontFamily="@font/dynapuff"
                     />
 
             </LinearLayout>

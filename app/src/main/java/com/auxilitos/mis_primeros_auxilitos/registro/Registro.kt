@@ -201,7 +201,13 @@ class Registro : AppCompatActivity(), View.OnClickListener {//Fin
         val tvCheckBox     = binding.tvCheckBox
         val tvCheckTerms   = binding.tvCheckBoxTerms
 
-        return if((!checkMasculino) and (!checkFemenino) and (!checkOtro))
+        return if((!checkMasculino) and (!checkFemenino) and (!checkOtro) and (!checkTerms))
+        {
+            tvCheckBox.text   = "Marca alguna casilla"
+            tvCheckTerms.text = "Acepta los terminos y condiciones para continuar"
+            false
+        }
+        else if((!checkMasculino) and (!checkFemenino) and (!checkOtro))
         {
             tvCheckBox.text = "Marca alguna casilla"
             false
