@@ -1,17 +1,14 @@
 package com.auxilitos.mis_primeros_auxilitos.registro
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.CompoundButton
-import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.PatternsCompat
-import androidx.fragment.app.DialogFragment
+import com.auxilitos.mis_primeros_auxilitos.classesImport.DatePicker
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityRegistroBinding
 import com.auxilitos.mis_primeros_auxilitos.model.request.RegisterRequest
@@ -282,35 +279,14 @@ class Registro : AppCompatActivity(), View.OnClickListener {//Fin
     }
 
     override fun onClick(p0: View?) {
-        val Dialogfecha = DatePickerFragment{year, month, day -> mostrarResultado(year, month, day) }
+        val Dialogfecha = DatePicker.DatePickerFragment { year, month, day -> mostrarResultado(year, month, day) }
         Dialogfecha.show(supportFragmentManager, "DatePicker")
     }
 
     @SuppressLint("SetTextI18n")
     private fun mostrarResultado(year: Int, month: Int, day: Int) {
         binding.fechaNacimiento.setText("$year-$month-$day")
-
     }
-
-    class DatePickerFragment (val listener: (year:Int, month:Int, day:Int)-> Unit):DialogFragment(), DatePickerDialog.OnDateSetListener{
-
-        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
-            val c = Calendar.getInstance()
-            val year = c.get(Calendar.YEAR)
-            val month = c.get(Calendar.MONTH)
-            val day = c.get(Calendar.DAY_OF_MONTH)
-
-            return DatePickerDialog(requireActivity(), this, year, month, day)
-        }
-
-        override fun onDateSet(p0: DatePicker?, year: Int, month: Int, day: Int) {
-            listener(year, month+1, day)
-        }
-
-
-    }
-
 
 }
 
