@@ -8,6 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityMainBinding
+import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityProfileBinding
 import com.auxilitos.mis_primeros_auxilitos.registro.Profile
 import com.auxilitos.mis_primeros_auxilitos.toast.ToastCustom
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -15,14 +16,28 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var bindingProfile: ActivityProfileBinding
     private val toast = ToastCustom()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initData()
+
+    }
+
+    private fun initData() {
+        navView()
+        binding.btnProfile.setOnClickListener{
+            toast.toastSuccess(this, "Mis Primeros Auxilitos", "Perfil del usuario")
+            startActivity(Intent(this, Profile::class.java))
+        }
+
+    }
+
+    private fun navView() {
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
@@ -35,13 +50,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-
-        binding.btnProfile.setOnClickListener{
-            toast.toastSuccess(this, "Mis Primeros Auxilitos", "Perfil del usuario")
-            startActivity(Intent(this, Profile::class.java))
-        }
-
     }
 
 

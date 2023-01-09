@@ -39,7 +39,7 @@
     <string name="txt_trivias">Trivias</string>
     <string name="adivinar_objetos">Adivinar objetos</string>
     <string name="juegos_por_ganar">Juegos por ganar</string>
-    <string name="title_autenticacion_doble_factor">Habilita la autenticación de dis factores</string>
+    <string name="title_autenticacion_doble_factor">Habilita la autenticación de doble factores</string>
     <string name="text_autenticar">Pide ayuda a tus padres, se te solicitará un token seguro y aleatorio, lo podrás recuperar con la aplicación Google Authenticator con el teléfono</string>
     <string name="habilitar">Habilitar</string>
     <string name="ajustes">Ajustes</string>
@@ -48,5 +48,12 @@
     <string name="correo_prueba">felpilgamesstudio@gmail.com</string>
     <string name="fecha_Nacimiento_prueba">2022–12–13</string>
     <string name="seleccionar_fecha">Seleccionar fecha</string>
+    <string name="title_edit_profile">Editar perfil</string>
+    <string name="edit_profile_message">Campo para editar perfil</string>
+    <string name="edit_profile_cancel">Cancelar</string>
+    <string name="edit_profile_decline">Rechazar</string>
+    <string name="edit_profile_accept">Aceptar</string>
+    <string name="edit_profile_update">Actualizar</string>
+    <string name="actualizar_perfil">Actualizar perfil</string>
 
 </resources>

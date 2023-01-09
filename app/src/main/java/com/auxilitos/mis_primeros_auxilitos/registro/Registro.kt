@@ -4,12 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.PatternsCompat
 import com.auxilitos.mis_primeros_auxilitos.classesImport.DatePicker
+import com.auxilitos.mis_primeros_auxilitos.classesImport.KeyBoard
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
+import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityProfileBinding
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityRegistroBinding
 import com.auxilitos.mis_primeros_auxilitos.model.request.RegisterRequest
 import com.auxilitos.mis_primeros_auxilitos.model.response.RegisterResponse
@@ -24,11 +25,12 @@ class Registro : AppCompatActivity(), View.OnClickListener {//Fin
 
     private lateinit var binding: ActivityRegistroBinding
     private val toast = ToastCustom()
-    private val PASSWORD_PATTERN = Pattern.compile(
+    private var keyBoard = KeyBoard()
+    private val PASSWORDPATTERN = Pattern.compile(
         "^" +
                 "(?=.*[@#$%^&+=!|°()?¡¿*.:,])" +  // at least 1 special character
-                "(?=\\S+$)" +  // no white spaces
-                ".{8,}" +  // at least 4 characters
+                "(?=\\S+$)" +                     // no white spaces
+                ".{8,}" +                         // at least 4 characters
                 "$"
     )
 
@@ -39,13 +41,15 @@ class Registro : AppCompatActivity(), View.OnClickListener {//Fin
 
         initDate()
 
-    }//Fin oncreate
 
+
+    }//Fin oncreate
 
     private fun initDate()
     {
-        hideKeyBoard()
+
         checkBoxValidate()
+        keyBoard
         binding.btnSeleccionarFecha.setOnClickListener(this)
 
         binding.btnRegister.setOnClickListener {
@@ -88,8 +92,7 @@ class Registro : AppCompatActivity(), View.OnClickListener {//Fin
             override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
                 if(response.isSuccessful)
                 {
-
-                    move(/*response.body()!!.email*/)
+                    move()
                     finish()
                 }
                 else
@@ -107,9 +110,9 @@ class Registro : AppCompatActivity(), View.OnClickListener {//Fin
 
     }
 
-    private fun move(/*email : String*/)
+    private fun move()
     {
-        startActivity(Intent(this@Registro, Login::class.java)/*.putExtra("email", email)*/)
+        startActivity(Intent(this@Registro, Login::class.java))
         toast.toastSuccess(this@Registro, "Mis Primeros Auxilitos", "Registrado con exito!!!")
     }
 
@@ -172,7 +175,6 @@ class Registro : AppCompatActivity(), View.OnClickListener {//Fin
 
         }
     }
-
 
     private fun validateEmail():Boolean {
         val email = binding.email.text.toString()
@@ -260,7 +262,7 @@ class Registro : AppCompatActivity(), View.OnClickListener {//Fin
             binding.passwordConfirm.error = ("La contraseña debe contener al menos 8 caracteres")
             false
         }
-        else if (!PASSWORD_PATTERN.matcher(password).matches() and !PASSWORD_PATTERN.matcher(passwordConfirmation).matches()) {
+        else if (!PASSWORDPATTERN.matcher(password).matches() and !PASSWORDPATTERN.matcher(passwordConfirmation).matches()) {
             binding.password.error = ("Contraseña debil, incluye al menos un caracter especial sin espacios")
             binding.passwordConfirm.error = ("Contraseña debil, incluye al menos un caracter especial sin espacios")
             false
@@ -272,15 +274,10 @@ class Registro : AppCompatActivity(), View.OnClickListener {//Fin
         }
     }
 
-    private fun hideKeyBoard()
-    {
-        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(binding.viewRoot.windowToken, 0)
-    }
-
+    //Mostrar calendario
     override fun onClick(p0: View?) {
-        val Dialogfecha = DatePicker.DatePickerFragment { year, month, day -> mostrarResultado(year, month, day) }
-        Dialogfecha.show(supportFragmentManager, "DatePicker")
+        val dialogfecha = DatePicker.DatePickerFragment { year, month, day -> mostrarResultado(year, month, day) }
+        dialogfecha.show(supportFragmentManager, "DatePicker")
     }
 
     @SuppressLint("SetTextI18n")

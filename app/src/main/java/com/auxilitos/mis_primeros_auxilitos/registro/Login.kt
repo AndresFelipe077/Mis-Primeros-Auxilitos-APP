@@ -2,10 +2,10 @@ package com.auxilitos.mis_primeros_auxilitos.registro
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.PatternsCompat
 import com.auxilitos.mis_primeros_auxilitos.MainActivity
+import com.auxilitos.mis_primeros_auxilitos.classesImport.KeyBoard
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityLoginBinding
 import com.auxilitos.mis_primeros_auxilitos.model.request.LoginRequest
@@ -19,15 +19,16 @@ class Login : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private val toast = ToastCustom()
+    private var keyBoard = KeyBoard()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)//R.layout.activity_login
+        setContentView(binding.root)
 
-        hideKeyBoard()
 
         binding.btnlogin.setOnClickListener{
+            keyBoard
             validate()
             initData()
         }
@@ -40,20 +41,17 @@ class Login : AppCompatActivity() {
     }//Fin oncreate
 
 
-    private fun initData()
-    {
+    private fun initData() {
         clickListener()
     }
 
-    private fun clickListener()
-    {
+    private fun clickListener() {
         binding.btnlogin.setOnClickListener{
             getInputs()
         }
     }
 
-    private fun getInputs()
-    {
+    private fun getInputs() {
         val email = binding.email.text.toString()
         val password = binding.password.text.toString()
 
@@ -68,15 +66,14 @@ class Login : AppCompatActivity() {
 
     }
 
-    private fun loginUser(email: String, password: String)
-    {
+    private fun loginUser(email: String, password: String) {
         val loginRequest = LoginRequest(email,password)
         val apiCall = ApiClient.getApiService().loginUser(loginRequest)
         apiCall.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if(response.isSuccessful)
                 {
-                    move(/*response.body()!!.email*/)
+                    move()
                     finish()
                 }
                 else
@@ -91,12 +88,10 @@ class Login : AppCompatActivity() {
 
         })
 
-
     }
 
-    private fun move(/*email : String*/)
-    {
-        startActivity(Intent(this, MainActivity::class.java)/*.putExtra("email", email)*/)
+    private fun move() {
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 
@@ -136,11 +131,6 @@ class Login : AppCompatActivity() {
         }
     }
 
-    private fun hideKeyBoard()
-    {
-        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(binding.viewRoot.windowToken, 0)
-    }
 
 
 }//Fin todo
