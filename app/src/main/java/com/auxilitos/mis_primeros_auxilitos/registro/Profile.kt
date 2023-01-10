@@ -1,7 +1,6 @@
 package com.auxilitos.mis_primeros_auxilitos.registro
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -108,36 +107,27 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         val mBuilder = MaterialAlertDialogBuilder(this)
             mBuilder.setTitle(resources.getString(R.string.title))
             mBuilder.setIcon(R.drawable.logo)
-            mBuilder.setNegativeButton(resources.getString(R.string.edit_profile_cancel)) { _, _ ->
-                fun onClick(dialogInterface: DialogInterface, i: Int) {
-                    dialogInterface.dismiss()
-                }
+            mBuilder.setNegativeButton(resources.getString(R.string.edit_profile_cancel)) { dialogInterface, _ ->
+                dialogInterface.dismiss()
             }
-            mBuilder.setPositiveButton("Actualizar perfil",DialogInterface.OnClickListener { dialogInterface, i ->
-                /*validate()
-                if(name.text.isNotEmpty() && email.text.isNotEmpty()  && fechaNacimientoEditText.text.isNotEmpty())
-                {
-                    if(validateNameAndDate() and validateCheckBox()) {
-                        toast.toastSuccess(this, "Perfil", "Actualización exitosa!!!")
-                    }//pizoluligoa@gmail.com 12345678!
-                }*/
-            })
+            mBuilder.setPositiveButton("Actualizar perfil") { _, i -> }
 
 
         mBuilder.setView(view)
         val dialog: AlertDialog = mBuilder.create()
         dialog.show()//.setPositiveButtonIcon(resources.getDrawable(R.drawable.logo, theme))
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            if (!name.text.toString().isEmpty()  && !email.text.toString().isEmpty() && !fechaNacimientoEditText.text.toString().isEmpty() && validateCheckBox())
-            {
-                toast.toastSuccess(this, "Perfil", "Perfil editado correctamente")
-                dialog.dismiss()
-            } else {
-                validate()
-                toast.toastError(this, "Perfil", "Por favor llena todos los campos!!!")
+            if(validateEmail() and validateNameAndDate() and validateCheckBox()) {
+                if (!name.text.toString().isEmpty()  && !email.text.toString().isEmpty() && !fechaNacimientoEditText.text.toString().isEmpty() && validateCheckBox())
+                {
+                    toast.toastSuccess(this, "Perfil", "Perfil editado correctamente")
+                    dialog.dismiss()
+                } else {
+                    validate()
+                    toast.toastError(this, "Perfil", "Por favor llena todos los campos!!!")
+                }
             }
         }
-
         checkBoxValidate(checkMasculino,checkFemenino,checkOtro)
 
     }
