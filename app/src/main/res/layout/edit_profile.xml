@@ -13,6 +13,7 @@
         android:background="#00EF0A0A">
 
         <LinearLayout
+            android:id="@+id/layout_edit_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
@@ -68,6 +69,18 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/dynapuff"
+                android:text=""
+                android:textColor="@color/red"
+                android:textSize="15sp"
+                app:hintAnimationEnabled="true"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@null"/>
 
             <com.google.android.material.textfield.TextInputLayout
 
@@ -100,6 +113,19 @@
                     android:textColorHint="#0511F2" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/dynapuff"
+                android:text=""
+                android:textColor="@color/red"
+                android:textSize="15sp"
+                app:hintAnimationEnabled="true"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@null"/>
 
 
             <TextView
@@ -206,7 +232,7 @@
                     tools:ignore="NestedWeights">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/fechaNacimiento"
+                        android:id="@+id/fechaNacimientoEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dynapuff"
@@ -234,7 +260,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tvCheckBoxTerms"
+                android:id="@+id/tvFechaNacimiento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"

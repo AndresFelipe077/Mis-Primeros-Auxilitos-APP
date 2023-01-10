@@ -10,7 +10,6 @@ import androidx.core.util.PatternsCompat
 import com.auxilitos.mis_primeros_auxilitos.classesImport.DatePicker
 import com.auxilitos.mis_primeros_auxilitos.classesImport.KeyBoard
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
-import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityProfileBinding
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityRegistroBinding
 import com.auxilitos.mis_primeros_auxilitos.model.request.RegisterRequest
 import com.auxilitos.mis_primeros_auxilitos.model.response.RegisterResponse
@@ -55,7 +54,6 @@ class Registro : AppCompatActivity(), View.OnClickListener {//Fin
         binding.btnRegister.setOnClickListener {
             validate()
             getInputs()
-
         }
 
         binding.btnRegresar.setOnClickListener {
@@ -110,8 +108,7 @@ class Registro : AppCompatActivity(), View.OnClickListener {//Fin
 
     }
 
-    private fun move()
-    {
+    private fun move() {
         startActivity(Intent(this@Registro, Login::class.java))
         toast.toastSuccess(this@Registro, "Mis Primeros Auxilitos", "Registrado con exito!!!")
     }
