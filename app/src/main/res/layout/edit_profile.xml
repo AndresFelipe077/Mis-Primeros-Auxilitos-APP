@@ -17,12 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="10sp"
             android:background="@drawable/roundedlayout"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="15sp"
+            android:padding="10sp"
             >
 
 
@@ -67,20 +67,22 @@
                     android:textColor="#0c30ff"
                     android:textColorHint="#0c30ff" />
 
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="@font/dynapuff"
+                    android:text=""
+                    android:textColor="@color/red"
+                    android:textSize="15sp"
+                    app:hintAnimationEnabled="true"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@null"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="@font/dynapuff"
-                android:text=""
-                android:textColor="@color/red"
-                android:textSize="15sp"
-                app:hintAnimationEnabled="true"
-                app:errorEnabled="true"
-                app:errorIconDrawable="@null"/>
+
 
             <com.google.android.material.textfield.TextInputLayout
 
@@ -112,20 +114,22 @@
                     android:textColor="#0511F2"
                     android:textColorHint="#0511F2" />
 
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="@font/dynapuff"
+                    android:text=""
+                    android:textColor="@color/red"
+                    android:textSize="15sp"
+                    app:hintAnimationEnabled="true"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@null"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/tvEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="@font/dynapuff"
-                android:text=""
-                android:textColor="@color/red"
-                android:textSize="15sp"
-                app:hintAnimationEnabled="true"
-                app:errorEnabled="true"
-                app:errorIconDrawable="@null"/>
+
 
 
             <TextView

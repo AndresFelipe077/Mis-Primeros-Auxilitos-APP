@@ -30,17 +30,17 @@ class Profile : AppCompatActivity(), View.OnClickListener {
     private val toast = ToastCustom()
     private var keyBoard = KeyBoard()
 
-    private lateinit var name:EditText
-    private lateinit var email:EditText
-    private lateinit var checkMasculino:CheckBox
-    private lateinit var checkFemenino:CheckBox
-    private lateinit var checkOtro:CheckBox
-    private lateinit var fechaNacimientoEditText:EditText
-    private lateinit var btnSeleccionarFecha:CircleImageView
-    private lateinit var tvname:TextView
-    private lateinit var tvEmail:TextView
-    private lateinit var tvCheckBox:TextView
-    private lateinit var tvFechaNacimiento:TextView
+    private lateinit var name: EditText
+    private lateinit var email: EditText
+    private lateinit var checkMasculino: CheckBox
+    private lateinit var checkFemenino: CheckBox
+    private lateinit var checkOtro: CheckBox
+    private lateinit var fechaNacimientoEditText: EditText
+    private lateinit var btnSeleccionarFecha: CircleImageView
+    private lateinit var tvname: TextView
+    private lateinit var tvEmail: TextView
+    private lateinit var tvCheckBox: TextView
+    private lateinit var tvFechaNacimiento: TextView
 
 
     @SuppressLint("SetTextI18n", "InflateParams")
@@ -58,16 +58,16 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
         keyBoard
 
-        binding.btnRegresar.setOnClickListener{
+        binding.btnRegresar.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
-        binding.editarPerfil.setOnClickListener{
+        binding.editarPerfil.setOnClickListener {
 
             Dialog()
         }
 
-        binding.eliminarCuenta.setOnClickListener{
+        binding.eliminarCuenta.setOnClickListener {
 
             //val deleteUser = ApiClient.getApiService().deleteUser()
             toast.toastError(this, "Mis Primeros Auxilitos", "Perfil eliminado")
@@ -75,13 +75,13 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
         }
 
-        binding.logout.setOnClickListener{
+        binding.logout.setOnClickListener {
             getUserLogout()
         }
 
     }
 
-    @SuppressLint("MissingInflatedId", "UseCompatLoadingForDrawables")
+    @SuppressLint("MissingInflatedId", "UseCompatLoadingForDrawables", "SuspiciousIndentation")
     private fun Dialog() {
 
         //val mBuilder = AlertDialog.Builder(this)
@@ -89,37 +89,37 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         //Vista
         val view = layoutInflater.inflate(R.layout.edit_profile, null)
 
-        name                    = view.findViewById(R.id.name)
-        email                   = view.findViewById(R.id.email)
-        btnSeleccionarFecha     = view.findViewById(R.id.btnSeleccionarFecha)
+        name = view.findViewById(R.id.name)
+        email = view.findViewById(R.id.email)
+        btnSeleccionarFecha = view.findViewById(R.id.btnSeleccionarFecha)
         fechaNacimientoEditText = view.findViewById(R.id.fechaNacimientoEditText)
-        checkMasculino          = view.findViewById(R.id.check_box_masculino)
-        checkFemenino           = view.findViewById(R.id.check_box_femenino)
-        checkOtro               = view.findViewById(R.id.check_box_otro)
+        checkMasculino = view.findViewById(R.id.check_box_masculino)
+        checkFemenino = view.findViewById(R.id.check_box_femenino)
+        checkOtro = view.findViewById(R.id.check_box_otro)
 
-        tvname                  = view.findViewById(R.id.tvName)
-        tvEmail                 = view.findViewById(R.id.tvEmail)
-        tvCheckBox              = view.findViewById(R.id.tvCheckBox)
-        tvFechaNacimiento       = view.findViewById(R.id.tvFechaNacimiento)
+        tvname = view.findViewById(R.id.tvName)
+        tvEmail = view.findViewById(R.id.tvEmail)
+        tvCheckBox = view.findViewById(R.id.tvCheckBox)
+        tvFechaNacimiento = view.findViewById(R.id.tvFechaNacimiento)
 
         btnSeleccionarFecha.setOnClickListener(this)
 
-        val mBuilder = MaterialAlertDialogBuilder(this)
-            mBuilder.setTitle(resources.getString(R.string.title))
-            mBuilder.setIcon(R.drawable.logo)
-            mBuilder.setNegativeButton(resources.getString(R.string.edit_profile_cancel)) { dialogInterface, _ ->
-                dialogInterface.dismiss()
-            }
-            mBuilder.setPositiveButton("Actualizar perfil") { _, i -> }
+        val alertDialog = MaterialAlertDialogBuilder(this)
 
+        alertDialog.setTitle(resources.getString(R.string.title))
+        alertDialog.setIcon(R.drawable.logo)
+        alertDialog.setNegativeButtonIcon(resources.getDrawable(R.drawable.cerrar, theme))
+        alertDialog.setPositiveButtonIcon(resources.getDrawable(R.drawable.enviar, theme))
 
-        mBuilder.setView(view)
-        val dialog: AlertDialog = mBuilder.create()
+        alertDialog.setView(view)
+        val dialog: AlertDialog = alertDialog.create()
         dialog.show()//.setPositiveButtonIcon(resources.getDrawable(R.drawable.logo, theme))
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            if(validateEmail() and validateNameAndDate() and validateCheckBox()) {
-                if (!name.text.toString().isEmpty()  && !email.text.toString().isEmpty() && !fechaNacimientoEditText.text.toString().isEmpty() && validateCheckBox())
-                {
+            if (validateEmail() and validateNameAndDate() and validateCheckBox()) {
+                if (!name.text.toString().isEmpty() && !email.text.toString()
+                        .isEmpty() && !fechaNacimientoEditText.text.toString()
+                        .isEmpty() && validateCheckBox()
+                ) {
                     toast.toastSuccess(this, "Perfil", "Perfil editado correctamente")
                     dialog.dismiss()
                 } else {
@@ -128,12 +128,16 @@ class Profile : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }
-        checkBoxValidate(checkMasculino,checkFemenino,checkOtro)
+        checkBoxValidate(checkMasculino, checkFemenino, checkOtro)
 
     }
 
 
-    private fun checkBoxValidate(checkM: CheckBox, checkF:CheckBox, checkO:CheckBox): String{//(checkM: CheckBox, checkF:CheckBox, checkO:CheckBox)
+    private fun checkBoxValidate(
+        checkM: CheckBox,
+        checkF: CheckBox,
+        checkO: CheckBox
+    ): String {//(checkM: CheckBox, checkF:CheckBox, checkO:CheckBox)
         val checkM = checkM
         val checkF = checkF
         val checkO = checkO
@@ -174,11 +178,11 @@ class Profile : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-        return if(checkM.isChecked) {
+        return if (checkM.isChecked) {
             "Masculino"
-        } else if(checkF.isChecked) {
+        } else if (checkF.isChecked) {
             "Femenino"
-        } else{
+        } else {
             "Otro"
         }
 
@@ -186,68 +190,65 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
     private fun validate() {
         val result = arrayOf(validateEmail(), validateNameAndDate(), validateCheckBox())
-        if(false in result)
-        {
+        if (false in result) {
             return
         }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun validateEmail():Boolean {
-    val email = email.text.toString()
-    return if(email.isEmpty()){
-        tvEmail.text = "El campo del correo no puede estar vacio"
-        false
-    }else if(!PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()) {
-        tvEmail.text = "Por favor ingresa un correo valido"
-        false
-    } else {
-        tvEmail.text = null
-        true
+    private fun validateEmail(): Boolean {
+        val email = email.text.toString()
+        return if (email.isEmpty()) {
+            tvEmail.text = "El campo del correo no puede estar vacio"
+            false
+        } else if (!PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()) {
+            tvEmail.text = "Por favor ingresa un correo valido"
+            false
+        } else {
+            tvEmail.text = null
+            true
+        }
     }
-}
 
     @SuppressLint("SetTextI18n")
     private fun validateCheckBox(): Boolean {
-    val checkMasculino = checkMasculino.isChecked
-    val checkFemenino  = checkFemenino.isChecked
-    val checkOtro      = checkOtro.isChecked
+        val checkMasculino = checkMasculino.isChecked
+        val checkFemenino = checkFemenino.isChecked
+        val checkOtro = checkOtro.isChecked
 
-    val tvCheckBox     = tvCheckBox
+        val tvCheckBox = tvCheckBox
 
-    return if((!checkMasculino) and (!checkFemenino) and (!checkOtro))
-    {
-        tvCheckBox.text   = "Marca alguna casilla"
-        false
+        return if ((!checkMasculino) and (!checkFemenino) and (!checkOtro)) {
+            tvCheckBox.text = "Marca alguna casilla"
+            false
+        } else {
+            tvCheckBox.text = null
+            true
+        }
+
     }
-    else
-    {
-        tvCheckBox.text  = null
-        true
-    }
-
-}
 
     @SuppressLint("SetTextI18n")
     private fun validateNameAndDate(): Boolean {
-    val name = name.text.toString()
-    val fechaNacimiento = fechaNacimientoEditText.text.toString()
-    return if(name.isEmpty()) {
-        tvname.text = "El campo no puede estar vacio"
-        false
-    } else if(fechaNacimiento.isEmpty()){
-        tvFechaNacimiento.text = "El campo no puede estar vacio"
-        false
-    } else {
-        tvname.text = null
-        tvFechaNacimiento.text = null
-        true
+        val name = name.text.toString()
+        val fechaNacimiento = fechaNacimientoEditText.text.toString()
+        return if (name.isEmpty()) {
+            tvname.text = "El campo no puede estar vacio"
+            false
+        } else if (fechaNacimiento.isEmpty()) {
+            tvFechaNacimiento.text = "El campo no puede estar vacio"
+            false
+        } else {
+            tvname.text = null
+            tvFechaNacimiento.text = null
+            true
+        }
     }
-}
 
     //Mostrar calendario
     override fun onClick(p0: View?) {
-        val dialogfecha = DatePicker.DatePickerFragment { year, month, day -> mostrarResultado(year, month, day) }
+        val dialogfecha =
+            DatePicker.DatePickerFragment { year, month, day -> mostrarResultado(year, month, day) }
         dialogfecha.show(supportFragmentManager, "DatePicker")
     }
 
@@ -257,26 +258,24 @@ class Profile : AppCompatActivity(), View.OnClickListener {
     }
 
     fun getUserLogout() {
-    val userLogout: Call<RegisterResponse>? = ApiClient.getApiService().logoutUser()
-    userLogout?.enqueue(object : Callback<RegisterResponse?> {
-        override fun onResponse(
-            call: Call<RegisterResponse?>,
-            response: Response<RegisterResponse?>
-        ) {
-            if (response.isSuccessful) {
-                toast.toastSuccess(this@Profile, "Cerrar sesión", "Cuenta cerrada con exito!!!")
-                //startActivity(Intent(this@Profile, Login::class.java))
+        val userLogout: Call<RegisterResponse>? = ApiClient.getApiService().logoutUser()
+        userLogout?.enqueue(object : Callback<RegisterResponse?> {
+            override fun onResponse(
+                call: Call<RegisterResponse?>,
+                response: Response<RegisterResponse?>
+            ) {
+                if (response.isSuccessful) {
+                    toast.toastSuccess(this@Profile, "Cerrar sesión", "Cuenta cerrada con exito!!!")
+                    //startActivity(Intent(this@Profile, Login::class.java))
+                } else {
+                    toast.toastError(this@Profile, "Error", "Vuelve a intentarlo!!!")
+                }
             }
-            else
-            {
-                toast.toastError(this@Profile, "Error", "Vuelve a intentarlo!!!")
-            }
-        }
 
-        override fun onFailure(call: Call<RegisterResponse?>, t: Throwable) {
-            toast.toastError(this@Profile, "Error", "Ha sucedido un error")
-        }
-    })
-}
+            override fun onFailure(call: Call<RegisterResponse?>, t: Throwable) {
+                toast.toastError(this@Profile, "Error", "Ha sucedido un error")
+            }
+        })
+    }
 
 }//Fin
