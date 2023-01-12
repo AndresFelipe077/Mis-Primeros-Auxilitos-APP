@@ -55,5 +55,9 @@
     <string name="edit_profile_accept">Aceptar</string>
     <string name="edit_profile_update">Actualizar</string>
     <string name="actualizar_perfil">Actualizar perfil</string>
+    <string name="he_olvidado_mi_contrase_a">He olvidado mi contraseña</string>
+    <string name="text_olvidar_password">¿Olvidaste tu contraseña? No hay problema 😎. Simplemente con ayuda de tus padres escribe tu correo electrónico y te enviaremos un enlace de restablecimiento de contraseña 😀.</string>
+    <string name="enlace_restablecer">Enlace de restablecemiento</string>
+    <string name="aceptar">aceptar</string>
 
 </resources>

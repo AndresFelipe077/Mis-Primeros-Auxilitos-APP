@@ -1,9 +1,11 @@
 package com.auxilitos.mis_primeros_auxilitos.registro
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -12,10 +14,12 @@ import com.auxilitos.mis_primeros_auxilitos.MainActivity
 import com.auxilitos.mis_primeros_auxilitos.R
 import com.auxilitos.mis_primeros_auxilitos.classesImport.DatePicker
 import com.auxilitos.mis_primeros_auxilitos.classesImport.KeyBoard
+import com.auxilitos.mis_primeros_auxilitos.classesImport.ModalBottomSheet
+import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityProfileBinding
 import com.auxilitos.mis_primeros_auxilitos.model.response.RegisterResponse
-import com.auxilitos.mis_primeros_auxilitos.toast.ToastCustom
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
@@ -30,6 +34,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
     private val toast = ToastCustom()
     private var keyBoard = KeyBoard()
 
+    private lateinit var viewRoot: LinearLayout
     private lateinit var name: EditText
     private lateinit var email: EditText
     private lateinit var checkMasculino: CheckBox
@@ -41,6 +46,9 @@ class Profile : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvEmail: TextView
     private lateinit var tvCheckBox: TextView
     private lateinit var tvFechaNacimiento: TextView
+
+    private lateinit var cerrar: Button
+    private lateinit var btnToast : Button
 
 
     @SuppressLint("SetTextI18n", "InflateParams")
@@ -63,7 +71,6 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         }
 
         binding.editarPerfil.setOnClickListener {
-
             Dialog()
         }
 
@@ -75,32 +82,31 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
         }
 
-        binding.logout.setOnClickListener {
-            getUserLogout()
-        }
+        buttonSheet()
+
 
     }
 
     @SuppressLint("MissingInflatedId", "UseCompatLoadingForDrawables", "SuspiciousIndentation")
     private fun Dialog() {
 
-        //val mBuilder = AlertDialog.Builder(this)
-
         //Vista
-        val view = layoutInflater.inflate(R.layout.edit_profile, null)
+        val view                = layoutInflater.inflate(R.layout.edit_profile, null)
 
-        name = view.findViewById(R.id.name)
-        email = view.findViewById(R.id.email)
-        btnSeleccionarFecha = view.findViewById(R.id.btnSeleccionarFecha)
+        viewRoot                = view.findViewById(R.id.viewRoot)
+        hideKeyboard()
+        name                    = view.findViewById(R.id.name)
+        email                   = view.findViewById(R.id.email)
+        btnSeleccionarFecha     = view.findViewById(R.id.btnSeleccionarFecha)
         fechaNacimientoEditText = view.findViewById(R.id.fechaNacimientoEditText)
-        checkMasculino = view.findViewById(R.id.check_box_masculino)
-        checkFemenino = view.findViewById(R.id.check_box_femenino)
-        checkOtro = view.findViewById(R.id.check_box_otro)
+        checkMasculino          = view.findViewById(R.id.check_box_masculino)
+        checkFemenino           = view.findViewById(R.id.check_box_femenino)
+        checkOtro               = view.findViewById(R.id.check_box_otro)
 
-        tvname = view.findViewById(R.id.tvName)
-        tvEmail = view.findViewById(R.id.tvEmail)
-        tvCheckBox = view.findViewById(R.id.tvCheckBox)
-        tvFechaNacimiento = view.findViewById(R.id.tvFechaNacimiento)
+        tvname                  = view.findViewById(R.id.tvName)
+        tvEmail                 = view.findViewById(R.id.tvEmail)
+        tvCheckBox              = view.findViewById(R.id.tvCheckBox)
+        tvFechaNacimiento       = view.findViewById(R.id.tvFechaNacimiento)
 
         btnSeleccionarFecha.setOnClickListener(this)
 
@@ -116,7 +122,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         dialog.show()//.setPositiveButtonIcon(resources.getDrawable(R.drawable.logo, theme))
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
             if (validateEmail() and validateNameAndDate() and validateCheckBox()) {
-                if (!name.text.toString().isEmpty() && !email.text.toString()
+                if (name.text.toString().isEmpty() && !email.text.toString()
                         .isEmpty() && !fechaNacimientoEditText.text.toString()
                         .isEmpty() && validateCheckBox()
                 ) {
@@ -257,6 +263,12 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         fechaNacimientoEditText.setText("$year-$month-$day")
     }
 
+
+    fun hideKeyboard(){
+        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(viewRoot.windowToken, 0)
+    }
+
     fun getUserLogout() {
         val userLogout: Call<RegisterResponse>? = ApiClient.getApiService().logoutUser()
         userLogout?.enqueue(object : Callback<RegisterResponse?> {
@@ -277,5 +289,35 @@ class Profile : AppCompatActivity(), View.OnClickListener {
             }
         })
     }
+
+
+    @SuppressLint("MissingInflatedId", "UseCompatLoadingForDrawables", "SuspiciousIndentation", "InflateParams")
+    private fun buttonSheet() {
+
+        val view  = layoutInflater.inflate(R.layout.bottom_sheet, null)
+        val modalBottomSheet = ModalBottomSheet()
+        cerrar    = view.findViewById(R.id.btn_cerrar)
+
+        val modalBottomSheetBehavior = (modalBottomSheet.dialog as? BottomSheetDialog)?.behavior
+
+
+        binding.logout.setOnClickListener{
+
+            modalBottomSheetBehavior?.expandedOffset
+            modalBottomSheet.dialog
+            modalBottomSheetBehavior?.halfExpandedRatio
+            modalBottomSheet.show(supportFragmentManager, ModalBottomSheet.TAG)
+
+        }
+
+        cerrar.setOnClickListener{
+            modalBottomSheet.dismiss()
+        }
+
+
+    }
+
+
+
 
 }//Fin

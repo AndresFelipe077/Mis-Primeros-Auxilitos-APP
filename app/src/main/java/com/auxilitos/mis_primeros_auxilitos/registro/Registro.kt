@@ -13,7 +13,7 @@ import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityRegistroBinding
 import com.auxilitos.mis_primeros_auxilitos.model.request.RegisterRequest
 import com.auxilitos.mis_primeros_auxilitos.model.response.RegisterResponse
-import com.auxilitos.mis_primeros_auxilitos.toast.ToastCustom
+import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

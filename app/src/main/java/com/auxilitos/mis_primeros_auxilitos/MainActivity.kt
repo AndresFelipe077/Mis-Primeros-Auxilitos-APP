@@ -7,16 +7,14 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityMainBinding
-import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityProfileBinding
 import com.auxilitos.mis_primeros_auxilitos.registro.Profile
-import com.auxilitos.mis_primeros_auxilitos.toast.ToastCustom
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var bindingProfile: ActivityProfileBinding
     private val toast = ToastCustom()
 
     override fun onCreate(savedInstanceState: Bundle?) {

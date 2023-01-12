@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/viewRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".registro.Login"
     android:orientation="vertical"
     android:background="@drawable/fondo_login"
+    android:id="@+id/viewRoot"
     >
 
     <ScrollView
@@ -22,6 +22,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -126,15 +127,24 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-
-                <CheckBox
-                    android:id="@+id/checkBox"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="-100sp"
-                    android:fontFamily="@font/dynapuff"
-                    android:text="@string/txt_recordar"
-                    android:textColor="#202528" />
+                    android:orientation="horizontal"
+                    android:layout_margin="4dp">
+
+                    <CheckBox
+                        android:id="@+id/checkBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dynapuff"
+                        android:text="@string/txt_recordar"
+                        android:textColor="#202528" />
+
+
+                </LinearLayout>
+
+
 
                 <Button
                     android:id="@+id/btnlogin"
@@ -182,7 +192,7 @@
 
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/olvidarPasswordView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/dynapuff"
@@ -209,26 +219,29 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center"
-                    android:layout_marginTop="20sp">
+                    android:layout_marginTop="20sp"
+                    android:layout_margin="10dp">
 
 
                     <ImageButton
                         android:id="@+id/imageButton2"
-                        android:layout_width="77dp"
-                        android:layout_height="77dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
-                        app:srcCompat="@drawable/icons8_facebook_nuevo_72___"
-                        tools:ignore="ContentDescription" />
+                        app:srcCompat="@drawable/facebook"
+                        tools:ignore="ContentDescription"
+                        android:layout_margin="5dp"/>
 
                     <ImageButton
                         android:id="@+id/imageButton"
-                        android:layout_width="77dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
-                        app:srcCompat="@drawable/icons8_logo_de_google_72___"
-                        tools:ignore="ContentDescription" />
+                        app:srcCompat="@drawable/google"
+                        tools:ignore="ContentDescription"
+                        android:layout_margin="5dp"/>
 
                 </LinearLayout>
 
