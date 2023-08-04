@@ -28,10 +28,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun initData() {
         navView()
-        binding.btnProfile.setOnClickListener{
-            toast.toastSuccess(this, "Mis Primeros Auxilitos", "Perfil del usuario")
-            startActivity(Intent(this, Profile::class.java))
-        }
+        //binding.btnProfile.setOnClickListener{
+        //    toast.toastSuccess(this, "Mis Primeros Auxilitos", "Perfil del usuario")
+        //    startActivity(Intent(this, Profile::class.java))
+        //}
 
     }
 
