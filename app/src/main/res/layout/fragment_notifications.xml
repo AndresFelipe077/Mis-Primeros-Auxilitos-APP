@@ -8,31 +8,74 @@
     android:orientation="vertical"
     >
 
-    <TextView
-        android:id="@+id/text_notifications"
-        android:text="@string/ajustes"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_go_home"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/text_notifications"
+            android:text="@string/ajustes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="70dp">
 
         <Button
-            android:id="@+id/btn_profile"
+        android:id="@+id/btn_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/perfil"
+        android:layout_gravity="center" />
+
+        <Button
+            android:id="@+id/btn_mision_vision"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/perfil"
+            android:text="@string/mision_y_vision"
+            android:layout_gravity="center" />
+
+        <Button
+            android:id="@+id/btn_credits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/creditos"
+            android:layout_gravity="center" />
+
+        <Button
+            android:id="@+id/btn_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ayuda"
+            android:layout_gravity="center" />
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cerrar_sesion"
             android:layout_gravity="center" />
 
     </LinearLayout>
