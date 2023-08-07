@@ -11,6 +11,7 @@ import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityLoginBinding
 import com.auxilitos.mis_primeros_auxilitos.model.request.LoginRequest
 import com.auxilitos.mis_primeros_auxilitos.model.response.LoginResponse
+import com.auxilitos.mis_primeros_auxilitos.model.response.UserManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,6 +20,8 @@ class Login : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private val toast = ToastCustom()
+
+    var userId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +73,7 @@ class Login : AppCompatActivity() {
 
     }
 
-    private fun loginUser(email: String, password: String) {
+    /*private fun loginUser(email: String, password: String) {
         val loginRequest = LoginRequest(email,password)
         val apiCall = ApiClient.getApiService().loginUser(loginRequest)
         apiCall.enqueue(object : Callback<LoginResponse> {
@@ -93,13 +96,48 @@ class Login : AppCompatActivity() {
 
         })
 
+    }*/
+
+    private fun loginUser(email: String, password: String) {
+        val loginRequest = LoginRequest(email, password)
+        val apiCall = ApiClient.getApiService().loginUser(loginRequest)
+        apiCall.enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (response.isSuccessful) {
+                    val loginResponse = response.body()
+                    loginResponse?.let {
+
+                        val userId = it.user.id
+
+                        UserManager.setUserId(userId)
+
+                        move()
+                        finish()
+                    }
+                } else {
+                    toast.toastError(this@Login, "Error", "Corrige tus credenciales")
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                toast.toastError(this@Login, "Error", "Ha ocurrido un error inesperado " + t.localizedMessage)
+            }
+        })
     }
 
+
+
+    /***
+     * Function by move to MainActivity
+     */
     private fun move() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 
+    /***
+     *  Validate email and password
+     */
     private fun validate(){
         val result = arrayOf(validateEmail(), validatePassword())
         if(false in result)
