@@ -61,7 +61,7 @@
                         android:scaleType="fitCenter"
                         android:padding="16dp"
                         android:background="?android:attr/selectableItemBackground"
-                        tools:ignore="ContentDescription" />
+                        android:contentDescription="@string/game_of_auxilitos"/>
 
                 </androidx.cardview.widget.CardView>
 
@@ -82,7 +82,8 @@
                         android:scaleType="fitCenter"
                         android:padding="16dp"
                         android:background="?android:attr/selectableItemBackground"
-                        tools:ignore="ContentDescription" />
+                        android:contentDescription="@string/game_of_auxilitos"/>
+
 
                 </androidx.cardview.widget.CardView>
 
@@ -110,7 +111,8 @@
                         android:scaleType="fitCenter"
                         android:padding="16dp"
                         android:background="?android:attr/selectableItemBackground"
-                        tools:ignore="ContentDescription" />
+                        android:contentDescription="@string/game_of_auxilitos"/>
+
 
                 </androidx.cardview.widget.CardView>
 
@@ -131,7 +133,8 @@
                         android:scaleType="fitCenter"
                         android:padding="16dp"
                         android:background="?android:attr/selectableItemBackground"
-                        tools:ignore="ContentDescription" />
+                        android:contentDescription="@string/game_of_auxilitos"/>
+
 
                 </androidx.cardview.widget.CardView>
 
