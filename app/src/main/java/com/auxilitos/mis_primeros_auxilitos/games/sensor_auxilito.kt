@@ -16,7 +16,6 @@ import java.util.Random
 
 class sensor_auxilito : AppCompatActivity() {
 
-
     private lateinit var sensorManager: SensorManager
     private lateinit var accelerometer: Sensor
     private lateinit var layout: RelativeLayout
@@ -25,6 +24,7 @@ class sensor_auxilito : AppCompatActivity() {
     private var maxYOffset: Float = 0f
 
     private val random = Random()
+    private var lastTouchedImage: ImageView? = null
 
     private val sensorEventListener = object : SensorEventListener {
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
@@ -32,19 +32,17 @@ class sensor_auxilito : AppCompatActivity() {
         }
 
         override fun onSensorChanged(event: SensorEvent?) {
-            if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
-                // Mover todas las imágenes, incluidas las duplicadas
+            // Si se está arrastrando una imagen, no actualizamos las coordenadas por el acelerómetro
+            if (lastTouchedImage == null && event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
                 for (i in 0 until layout.childCount) {
                     val imageView = layout.getChildAt(i) as? ImageView
                     imageView?.let {
                         val xOffset = it.x - event.values[0]
                         val yOffset = it.y + event.values[1]
 
-                        // Ajustar las coordenadas para que la imagen no se salga de la pantalla
                         val newXOffset = xOffset.coerceIn(0f, maxXOffset)
                         val newYOffset = yOffset.coerceIn(0f, maxYOffset)
 
-                        // Establecer las nuevas coordenadas en la vista
                         it.x = newXOffset
                         it.y = newYOffset
                     }
@@ -60,27 +58,35 @@ class sensor_auxilito : AppCompatActivity() {
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
-        layout = findViewById(R.id.layout) // Buscar el RelativeLayout en el diseño
+        layout = findViewById(R.id.layout)
 
-        // Obtener las dimensiones de la pantalla
         val display = (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
         maxXOffset = display.width.toFloat()
         maxYOffset = display.height.toFloat()
 
         layout.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                // Crear y configurar la nueva imagen
-                val duplicatedImage = ImageView(this)
-                duplicatedImage.setImageDrawable(getDrawable(R.drawable.botiquin))
-                duplicatedImage.layoutParams = RelativeLayout.LayoutParams(100, 100)
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    // Crear y configurar la nueva imagen
+                    val newImageId = getRandomImageResource()
+                    val newImage = ImageView(this)
+                    newImage.setImageResource(newImageId)
+                    newImage.layoutParams = RelativeLayout.LayoutParams(100, 100)
+                    newImage.x = event.x
+                    newImage.y = event.y
 
-                val newX = random.nextInt(display.width - 100).toFloat()
-                val newY = random.nextInt(display.height - 100).toFloat()
-                duplicatedImage.x = newX
-                duplicatedImage.y = newY
-
-                // Agregar la nueva imagen duplicada al RelativeLayout
-                layout.addView(duplicatedImage)
+                    layout.addView(newImage)
+                    lastTouchedImage = newImage
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    // Arrastrar la imagen si fue tocada previamente
+                    lastTouchedImage?.x = event.x - lastTouchedImage!!.width / 2
+                    lastTouchedImage?.y = event.y - lastTouchedImage!!.height / 2
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    // Limpiar la referencia a la última imagen tocada
+                    lastTouchedImage = null
+                }
             }
             true
         }
@@ -99,6 +105,12 @@ class sensor_auxilito : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         sensorManager.unregisterListener(sensorEventListener)
+    }
+
+    private fun getRandomImageResource(): Int {
+        // Aquí deberías proporcionar una lista de IDs de recursos de imágenes diferentes
+        val imageResources = listOf(R.drawable.botiquin, R.drawable.nino, R.drawable.pildora, R.drawable.cura)
+        return imageResources[random.nextInt(imageResources.size)]
     }
 
 
