@@ -7,17 +7,24 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import com.auxilitos.mis_primeros_auxilitos.R
+import java.util.Random
 
 class sensor_auxilito : AppCompatActivity() {
 
+
     private lateinit var sensorManager: SensorManager
     private lateinit var accelerometer: Sensor
+    private lateinit var layout: RelativeLayout
 
-    private lateinit var imageView: ImageView
-    private var xOffset: Float = 0f
-    private var yOffset: Float = 0f
+    private var maxXOffset: Float = 0f
+    private var maxYOffset: Float = 0f
+
+    private val random = Random()
 
     private val sensorEventListener = object : SensorEventListener {
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
@@ -26,16 +33,26 @@ class sensor_auxilito : AppCompatActivity() {
 
         override fun onSensorChanged(event: SensorEvent?) {
             if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
-                // Actualizar las coordenadas de acuerdo con los valores del acelerómetro
-                xOffset -= event.values[0] * 2
-                yOffset += event.values[1] * 2
+                // Mover todas las imágenes, incluidas las duplicadas
+                for (i in 0 until layout.childCount) {
+                    val imageView = layout.getChildAt(i) as? ImageView
+                    imageView?.let {
+                        val xOffset = it.x - event.values[0]
+                        val yOffset = it.y + event.values[1]
 
-                // Establecer las nuevas coordenadas en la vista
-                imageView.x = xOffset
-                imageView.y = yOffset
+                        // Ajustar las coordenadas para que la imagen no se salga de la pantalla
+                        val newXOffset = xOffset.coerceIn(0f, maxXOffset)
+                        val newYOffset = yOffset.coerceIn(0f, maxYOffset)
+
+                        // Establecer las nuevas coordenadas en la vista
+                        it.x = newXOffset
+                        it.y = newYOffset
+                    }
+                }
             }
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sensor_auxilito)
@@ -43,7 +60,30 @@ class sensor_auxilito : AppCompatActivity() {
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
-        imageView = findViewById(R.id.img_botiquin)
+        layout = findViewById(R.id.layout) // Buscar el RelativeLayout en el diseño
+
+        // Obtener las dimensiones de la pantalla
+        val display = (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
+        maxXOffset = display.width.toFloat()
+        maxYOffset = display.height.toFloat()
+
+        layout.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                // Crear y configurar la nueva imagen
+                val duplicatedImage = ImageView(this)
+                duplicatedImage.setImageDrawable(getDrawable(R.drawable.botiquin))
+                duplicatedImage.layoutParams = RelativeLayout.LayoutParams(100, 100)
+
+                val newX = random.nextInt(display.width - 100).toFloat()
+                val newY = random.nextInt(display.height - 100).toFloat()
+                duplicatedImage.x = newX
+                duplicatedImage.y = newY
+
+                // Agregar la nueva imagen duplicada al RelativeLayout
+                layout.addView(duplicatedImage)
+            }
+            true
+        }
 
     }
 
