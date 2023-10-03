@@ -12,8 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.auxilitos.mis_primeros_auxilitos.R
 import com.auxilitos.mis_primeros_auxilitos.databinding.FragmentHomeBinding
+import com.auxilitos.mis_primeros_auxilitos.service.ApiService
 
 class HomeFragment : Fragment() {
+
+    // val call = ApiService.getContent()
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ImageAdapter
