@@ -6,32 +6,134 @@
     android:layout_height="match_parent"
     tools:context=".ui.notifications.NotificationsFragment"
     android:orientation="vertical"
+    android:background="@drawable/fondo_login"
     >
 
-    <TextView
-        android:id="@+id/text_notifications"
-        android:text="@string/ajustes"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/btn_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/perfil"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.224" />
+        <TextView
+            android:id="@+id/text_notifications"
+            android:text="@string/ajustes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="70dp">
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10sp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/btn_profile"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/profile"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#003BFF"
+                    android:layout_gravity="center"
+                    />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10sp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/btn_mision_vision"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/mision_vision"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#003BFF"
+                    android:layout_gravity="center"
+                    />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10sp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/btn_credits"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/atribucion"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#003BFF"
+                    android:layout_gravity="center"
+                    />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10sp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/btn_help"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/ayuda"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#003BFF"
+                    android:layout_gravity="center"
+                    />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10sp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/btn_logout"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/logout"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#003BFF"
+                    android:layout_gravity="center"
+                    />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
 
 </LinearLayout>

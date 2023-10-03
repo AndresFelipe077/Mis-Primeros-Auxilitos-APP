@@ -59,5 +59,13 @@
     <string name="text_olvidar_password">¿Olvidaste tu contraseña? No hay problema 😎. Simplemente con ayuda de tus padres escribe tu correo electrónico y te enviaremos un enlace de restablecimiento de contraseña 😀.</string>
     <string name="enlace_restablecer">Enlace de restablecemiento</string>
     <string name="aceptar">aceptar</string>
+    <string name="mision_y_vision">Misión y visión</string>
+    <string name="creditos">✔ Créditos</string>
+    <string name="ayuda">Ayuda</string>
+    <string name="cerrar_sesion">▼ Cerrar sesión</string>
+    <string name="settings_go_home">◀</string>
+    <string name="todo">TODO</string>
+    <string name="cancelar">cancelar</string>
+    <string name="game_of_auxilitos">Game of auxilitos</string>
 
 </resources>
