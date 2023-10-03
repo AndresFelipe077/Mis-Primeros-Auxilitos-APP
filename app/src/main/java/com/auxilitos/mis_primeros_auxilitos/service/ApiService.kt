@@ -2,6 +2,7 @@ package com.auxilitos.mis_primeros_auxilitos.service
 
 import com.auxilitos.mis_primeros_auxilitos.model.request.LoginRequest
 import com.auxilitos.mis_primeros_auxilitos.model.request.RegisterRequest
+import com.auxilitos.mis_primeros_auxilitos.model.response.ContenidoResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.LoginResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.RegisterResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.User
@@ -15,6 +16,9 @@ interface ApiService {
 
     @GET("/api/users/{userId}")
     fun getUserProfile(@Path("userId") userId: String): Call<User>
+
+    @GET("/api/contenidos")
+    fun getContent(): Call<ContenidoResponse>
 
     @POST("/api/login/")
     fun loginUser(@Body loginRequest: LoginRequest): Call<LoginResponse>
