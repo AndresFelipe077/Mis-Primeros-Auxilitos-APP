@@ -1,6 +1,8 @@
 package com.auxilitos.mis_primeros_auxilitos.games
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -12,9 +14,14 @@ import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import com.auxilitos.mis_primeros_auxilitos.R
+import com.auxilitos.mis_primeros_auxilitos.ui.dashboard.DashboardFragment
+import de.hdodenhof.circleimageview.CircleImageView
 import java.util.Random
 
+@Suppress("DEPRECATION")
 class sensor_auxilito : AppCompatActivity() {
+
+    private lateinit var btnRegresar: CircleImageView
 
     private lateinit var sensorManager: SensorManager
     private lateinit var accelerometer: Sensor
@@ -51,9 +58,12 @@ class sensor_auxilito : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sensor_auxilito)
+
+        btnRegresar = findViewById(R.id.btn_return)
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
@@ -91,6 +101,13 @@ class sensor_auxilito : AppCompatActivity() {
             true
         }
 
+        btnRegresar.setOnClickListener {
+            val fragment = DashboardFragment()
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.navigation_dashboard, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
     }
 
     override fun onResume() {
