@@ -21,8 +21,6 @@ class Login : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val toast = ToastCustom()
 
-    var userId = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -144,8 +142,6 @@ class Login : AppCompatActivity() {
         {
             return
         }
-
-
     }
 
     private fun validateEmail():Boolean {

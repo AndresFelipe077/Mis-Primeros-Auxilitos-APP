@@ -17,16 +17,16 @@ import retrofit2.http.Path
 
 interface ApiService {
 
-    @GET("/api/users/{userId}")
+    @GET("api/users/{userId}")
     fun getUserProfile(@Path("userId") userId: String): Call<User>
 
-    @GET("/api/contenidos")
+    @GET("api/contenidos")
     fun getContent(): Call<ContenidoResponse>
 
     @GET("api/contenidos/{id}")
     fun getOneContent(@Path("id") id: String): Call<ContenidoResponse>
 
-    @POST("/api/contenidos")
+    @POST("api/contenidos")
     fun createContent(@Body contentRequest: ContentRequest): Call<ContenidoResponse>
 
     @PUT("api/contenidos/{id}")
@@ -35,17 +35,17 @@ interface ApiService {
     @DELETE("api/contenidos/{id}")
     fun deleteContent(@Body contentRequest: ContentRequest, @Path("id") id: String): Call<ContenidoResponse>
 
-    @POST("/api/login/")
+    @POST("api/login/")
     fun loginUser(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
-    @POST("/api/register/")
+    @POST("api/register/")
     fun registerUser(@Body registerRequest: RegisterRequest): Call<RegisterResponse>
 
-    @GET("/api/logout/")
+    @GET("api/logout/")
     fun logoutUser(): Call<RegisterResponse>?
     //fun getPublicaciones(): Call<List<Publicaciones?>?>?
 
-    @GET("/api/delete/")
+    @GET("api/delete/")
     fun deleteUser(): Call<User>
 
 
