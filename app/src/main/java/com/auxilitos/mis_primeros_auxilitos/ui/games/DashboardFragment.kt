@@ -1,4 +1,4 @@
-package com.auxilitos.mis_primeros_auxilitos.ui.dashboard
+package com.auxilitos.mis_primeros_auxilitos.ui.games
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.auxilitos.mis_primeros_auxilitos.databinding.FragmentDashboardBinding
-import com.auxilitos.mis_primeros_auxilitos.games.sensor_auxilito
-import com.auxilitos.mis_primeros_auxilitos.registro.Profile
+import com.auxilitos.mis_primeros_auxilitos.games.AparecerObjetosAuxilitos
 
 class DashboardFragment : Fragment() {
 
@@ -39,7 +38,7 @@ class DashboardFragment : Fragment() {
 
         binding.game1.setOnClickListener{
             //toast.toastSuccess(this.requireActivity(), "Mis Primeros Auxilitos", "Perfil del usuario")
-            startActivity(Intent(this.requireContext(), sensor_auxilito::class.java))
+            startActivity(Intent(this.requireContext(), AparecerObjetosAuxilitos::class.java))
         }
 
         return root

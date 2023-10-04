@@ -15,9 +15,10 @@
         android:theme="@style/actionbar"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        >
         <activity
-            android:name=".games.sensor_auxilito"
+            android:name=".games.AparecerObjetosAuxilitos"
             android:exported="false"
             android:screenOrientation="portrait" />
         <!-- Olvide mi contraseña -->

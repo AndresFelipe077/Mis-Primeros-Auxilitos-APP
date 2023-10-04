@@ -67,5 +67,7 @@
     <string name="todo">TODO</string>
     <string name="cancelar">cancelar</string>
     <string name="game_of_auxilitos">Game of auxilitos</string>
+    <string name="title_of_image">Title of image</string>
+    <string name="this_is_a_author">This is a author</string>
 
 </resources>

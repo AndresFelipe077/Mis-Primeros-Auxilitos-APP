@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_marginBottom="10dp">
+    android:layout_marginBottom="10dp"
+    android:id="@+id/item_layout">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -24,7 +26,7 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Title of image"
+                android:text="@string/title_of_image"
                 android:textAlignment="center" />
 
             <ImageView
@@ -36,13 +38,13 @@
                 android:layout_gravity="center_vertical"
                 android:scaleType="centerInside"
                 android:layout_marginTop="20dp"
-            />
+                tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/description"
+                android:id="@+id/author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="This is a author"
+                android:text="@string/this_is_a_author"
                 android:layout_gravity="bottom"
                 android:layout_margin="10dp" />
 

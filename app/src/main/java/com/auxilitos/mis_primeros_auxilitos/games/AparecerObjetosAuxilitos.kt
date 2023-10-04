@@ -13,13 +13,14 @@ import android.view.MotionEvent
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import com.auxilitos.mis_primeros_auxilitos.MainActivity
 import com.auxilitos.mis_primeros_auxilitos.R
-import com.auxilitos.mis_primeros_auxilitos.ui.dashboard.DashboardFragment
+import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.Random
 
 @Suppress("DEPRECATION")
-class sensor_auxilito : AppCompatActivity() {
+class AparecerObjetosAuxilitos : AppCompatActivity() {
 
     private lateinit var btnRegresar: CircleImageView
 
@@ -57,6 +58,8 @@ class sensor_auxilito : AppCompatActivity() {
             }
         }
     }
+
+    private val toast = ToastCustom()
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,11 +105,14 @@ class sensor_auxilito : AppCompatActivity() {
         }
 
         btnRegresar.setOnClickListener {
-            val fragment = DashboardFragment()
+            /*val fragment = DashboardFragment()
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.navigation_dashboard, fragment)
             transaction.addToBackStack(null)
-            transaction.commit()
+            transaction.commit()*/
+            startActivity(Intent(this, MainActivity::class.java))
+            toast.toastSuccess(this, "Mis Primeros Auxilitos", "😉😉😉😉😉😉😉😉")
+            finish()
         }
     }
 

@@ -26,11 +26,7 @@ class Login : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        binding.btnlogin.setOnClickListener{
-            validate()
-            initData()
-        }
+        clickListener()
 
         binding.register.setOnClickListener {
             toast.toastSuccess(this, "Mis Primeros Auxilitos", "Registro de usuario")
@@ -44,13 +40,9 @@ class Login : AppCompatActivity() {
 
     }//Fin oncreate
 
-
-    private fun initData() {
-        clickListener()
-    }
-
     private fun clickListener() {
         binding.btnlogin.setOnClickListener{
+            validate()
             hideKeyboard()
             getInputs()
         }
@@ -70,31 +62,6 @@ class Login : AppCompatActivity() {
         }
 
     }
-
-    /*private fun loginUser(email: String, password: String) {
-        val loginRequest = LoginRequest(email,password)
-        val apiCall = ApiClient.getApiService().loginUser(loginRequest)
-        apiCall.enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if(response.isSuccessful)
-                {
-
-                    move()
-                    finish()
-                }
-                else
-                {
-                    toast.toastError(this@Login, "Error", "Corrige tus credenciales")
-                }
-            }
-
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                toast.toastError(this@Login, "Error", "Ha ocurrido un error inesperado " + t.localizedMessage)
-            }
-
-        })
-
-    }*/
 
     private fun loginUser(email: String, password: String) {
         val loginRequest = LoginRequest(email, password)
@@ -125,7 +92,7 @@ class Login : AppCompatActivity() {
 
 
 
-    /***
+    /**
      * Function by move to MainActivity
      */
     private fun move() {
@@ -133,7 +100,7 @@ class Login : AppCompatActivity() {
         finish()
     }
 
-    /***
+    /**
      *  Validate email and password
      */
     private fun validate(){

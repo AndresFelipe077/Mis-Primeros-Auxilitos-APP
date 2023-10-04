@@ -40,8 +40,6 @@ class Registro : AppCompatActivity(), View.OnClickListener {//Fin
 
         initDate()
 
-
-
     }//Fin oncreate
 
     private fun initDate()

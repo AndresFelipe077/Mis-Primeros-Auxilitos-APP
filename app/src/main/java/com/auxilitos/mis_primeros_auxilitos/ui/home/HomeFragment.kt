@@ -1,6 +1,5 @@
 package com.auxilitos.mis_primeros_auxilitos.ui.home
 
-import ImageAdapter
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,9 +14,7 @@ import com.auxilitos.mis_primeros_auxilitos.R
 import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.databinding.FragmentHomeBinding
-import com.auxilitos.mis_primeros_auxilitos.model.response.ContenidoResponse
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.auxilitos.mis_primeros_auxilitos.model.response.ContentResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,10 +23,11 @@ class HomeFragment : Fragment() {
 
     private val toast = ToastCustom()
 
-    private val allContent: MutableList<ContenidoResponse> = mutableListOf()
+    private val dogImages = mutableListOf<String>()
+    private val allContent: MutableList<ContentResponse> = mutableListOf()
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: ImageAdapter
+    private lateinit var adapter: ContentAdapter
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -42,6 +40,9 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        getAllContent()
+
         val homeViewModel =
             ViewModelProvider(this)[HomeViewModel::class.java]
 
@@ -53,8 +54,6 @@ class HomeFragment : Fragment() {
             textView.text = it
         }
 
-        getAllContent()
-
         return root
     }
 
@@ -64,9 +63,7 @@ class HomeFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        Log.d("CONTENT", allContent.toString())
-
-        adapter = ImageAdapter(allContent)
+        adapter = ContentAdapter(allContent)
         recyclerView.adapter = adapter
     }
 
@@ -75,10 +72,9 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-
-    private fun getAllContent(){
-        val apiGetContent = ApiClient.getApiService().getContent()
-        apiGetContent.enqueue(object : Callback<ContenidoResponse> {
+    fun getAllContent() {
+        val apiGetContent = ApiClient.getApiService().getOneContent("1")
+        apiGetContent.enqueue(object : Callback<ContentResponse> {
             /**
              * Invoked for a received HTTP response.
              *
@@ -87,15 +83,28 @@ class HomeFragment : Fragment() {
              * Call [Response.isSuccessful] to determine if the response indicates success.
              */
             override fun onResponse(
-                call: Call<ContenidoResponse>,
-                response: Response<ContenidoResponse>
+                call: Call<ContentResponse>,
+                response: Response<ContentResponse>
             ) {
                 if (response.isSuccessful) {
                     val contentResponse = response.body()
                     contentResponse?.let {
-                        allContent.add(it)
-                        // Aquí puedes notificar a tu adaptador (si estás usando un RecyclerView) que los datos han cambiado.
-                        // adapter.notifyDataSetChanged()
+                        //allContent.add(it)
+                        val arrayContent = ContentResponse(
+                            id = it.id,
+                            title = it.title,
+                            autor = it.autor,
+                            slug =  it.slug,
+                            description = it.description,
+                            url = ApiClient.baseUrl + it.url,
+                            user_id = it.user_id,
+                            created_at = it.created_at,
+                            updated_at = it.updated_at
+                        )
+                        Log.e("asdsfasdfd", ApiClient.baseUrl + it.url)
+                        allContent.add(
+                            arrayContent
+                        )
                     }
                 }
             }
@@ -104,9 +113,13 @@ class HomeFragment : Fragment() {
              * Invoked when a network exception occurred talking to the server or when an unexpected exception
              * occurred creating the request or processing the response.
              */
-            override fun onFailure(call: Call<ContenidoResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ContentResponse>, t: Throwable) {
                 Log.e("Error content", t.toString())
-                toast.toastErrorFragment(this@HomeFragment, "Conexión", "Ups!, ha ocurrido un error inesperado 😢")
+                toast.toastErrorFragment(
+                    this@HomeFragment,
+                    "Conexión",
+                    "Ups!, ha ocurrido un error inesperado 😢"
+                )
             }
 
         })
