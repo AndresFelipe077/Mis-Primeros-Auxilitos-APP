@@ -57,7 +57,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/facebook"
+                        android:src="@drawable/botiquin"
                         android:scaleType="fitCenter"
                         android:padding="16dp"
                         android:background="?android:attr/selectableItemBackground"
@@ -78,7 +78,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/settings"
+                        android:src="@drawable/nino"
                         android:scaleType="fitCenter"
                         android:padding="16dp"
                         android:background="?android:attr/selectableItemBackground"
@@ -89,7 +89,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -138,7 +138,7 @@
 
                 </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
+            </LinearLayout>-->
 
         </LinearLayout>
 
