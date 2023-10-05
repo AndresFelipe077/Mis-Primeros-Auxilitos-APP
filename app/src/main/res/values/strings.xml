@@ -69,5 +69,9 @@
     <string name="game_of_auxilitos">Game of auxilitos</string>
     <string name="title_of_image">Title of image</string>
     <string name="this_is_a_author">This is a author</string>
+    <string name="mision">Misión</string>
+    <string name="text_mision">Brindar a nuestros niños una educación integral en primeros auxilios preparándolos frente a cualquier dificultad o emergencia, utilizando herramientas didácticas y tecnológicas para desarrollar toda su capacidad, para que sean los héroes del mañana.</string>
+    <string name="vision">Visión</string>
+    <string name="text_vision">Para el año 2024 los niños estarán preparados para prestar servicios en primeros auxilios y capacitados para poder reaccionar a un evento de emergencia.</string>
 
 </resources>

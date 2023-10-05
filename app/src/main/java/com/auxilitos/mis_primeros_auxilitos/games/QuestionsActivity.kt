@@ -6,12 +6,11 @@ import android.os.Bundle
 import android.webkit.WebChromeClient
 import androidx.appcompat.app.AppCompatActivity
 import com.auxilitos.mis_primeros_auxilitos.classesImport.CustomWebViewClient
-import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
-import com.auxilitos.mis_primeros_auxilitos.databinding.ActivitySelectObjectWebBinding
+import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityQuestionsBinding
 
-class SelectObjectWeb : AppCompatActivity() {
+class QuestionsActivity : AppCompatActivity() {
 
-  private lateinit var binding: ActivitySelectObjectWebBinding
+  private lateinit var binding: ActivityQuestionsBinding
 
   private val url: String = "https://www.sesamestreet.org/games?id=20838"
 
@@ -19,7 +18,7 @@ class SelectObjectWeb : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-    binding = ActivitySelectObjectWebBinding.inflate(layoutInflater)
+    binding = ActivityQuestionsBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
     supportActionBar?.setDisplayHomeAsUpEnabled(false)
@@ -47,6 +46,6 @@ class SelectObjectWeb : AppCompatActivity() {
       }
     }
 
-  }
 
+  }
 }

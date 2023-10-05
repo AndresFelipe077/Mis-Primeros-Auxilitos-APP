@@ -54,11 +54,11 @@
                     app:cardBackgroundColor="#80FFFFFF">
 
                     <ImageButton
-                        android:id="@+id/game1"
+                        android:id="@+id/btn_touch_first_aid_game"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/botiquin"
+                        android:src="@drawable/first_aid_kit"
                         android:scaleType="fitCenter"
                         android:padding="16dp"
                         android:background="?android:attr/selectableItemBackground"
@@ -76,7 +76,7 @@
                     app:cardBackgroundColor="#80FFFFFF">
 
                     <ImageButton
-                        android:id="@+id/selectObjectWeb"
+                        android:id="@+id/btn_selectObjectWeb"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
@@ -91,7 +91,7 @@
 
             </LinearLayout>
 
-            <!--<LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -106,10 +106,11 @@
                     app:cardBackgroundColor="#80FFFFFF">
 
                     <ImageButton
+                        android:id="@+id/btn_questions_game"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/settings"
+                        android:src="@drawable/question_mark"
                         android:scaleType="fitCenter"
                         android:padding="16dp"
                         android:background="?android:attr/selectableItemBackground"
@@ -127,7 +128,7 @@
                     app:cardCornerRadius="16dp"
                     app:cardBackgroundColor="#80FFFFFF">
 
-                    <ImageButton
+                    <!--<ImageButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
@@ -136,11 +137,11 @@
                         android:padding="16dp"
                         android:background="?android:attr/selectableItemBackground"
                         android:contentDescription="@string/game_of_auxilitos"/>
-
+-->
 
                 </androidx.cardview.widget.CardView>
 
-            </LinearLayout>-->
+            </LinearLayout>
 
         </LinearLayout>
 

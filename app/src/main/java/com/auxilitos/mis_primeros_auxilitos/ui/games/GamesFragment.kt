@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.auxilitos.mis_primeros_auxilitos.databinding.FragmentGamesBinding
 import com.auxilitos.mis_primeros_auxilitos.games.AparecerObjetosAuxilitos
+import com.auxilitos.mis_primeros_auxilitos.games.QuestionsActivity
 import com.auxilitos.mis_primeros_auxilitos.games.SelectObjectWeb
 
 class GamesFragment : Fragment() {
@@ -37,14 +38,18 @@ class GamesFragment : Fragment() {
         }
 
 
-        binding.game1.setOnClickListener{
+        binding.btnTouchFirstAidGame.setOnClickListener{
             //toast.toastSuccess(this.requireActivity(), "Mis Primeros Auxilitos", "Perfil del usuario")
             startActivity(Intent(this.requireContext(), AparecerObjetosAuxilitos::class.java))
         }
 
-        binding.selectObjectWeb.setOnClickListener {
+        binding.btnSelectObjectWeb.setOnClickListener {
           startActivity(Intent(this.requireContext(), SelectObjectWeb::class.java))
         }
+
+      binding.btnQuestionsGame.setOnClickListener {
+        startActivity(Intent(this.requireContext(), QuestionsActivity::class.java))
+      }
 
         return root
     }

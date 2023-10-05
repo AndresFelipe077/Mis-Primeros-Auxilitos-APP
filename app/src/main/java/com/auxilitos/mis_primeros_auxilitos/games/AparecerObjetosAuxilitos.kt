@@ -69,7 +69,7 @@ class AparecerObjetosAuxilitos : AppCompatActivity() {
         btnRegresar = findViewById(R.id.btn_return)
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)!!
 
         layout = findViewById(R.id.layout)
 
