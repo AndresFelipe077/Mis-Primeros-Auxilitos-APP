@@ -1,9 +1,6 @@
 package com.auxilitos.mis_primeros_auxilitos.ui.home
 
-import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.auxilitos.mis_primeros_auxilitos.R
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
