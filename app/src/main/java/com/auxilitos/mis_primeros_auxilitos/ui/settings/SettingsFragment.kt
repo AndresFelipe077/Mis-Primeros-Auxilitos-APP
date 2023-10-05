@@ -12,6 +12,7 @@ import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.databinding.FragmentNotificationsBinding
 import com.auxilitos.mis_primeros_auxilitos.registro.Login
 import com.auxilitos.mis_primeros_auxilitos.registro.Profile
+import com.auxilitos.mis_primeros_auxilitos.settings.MisionVisionActivity
 
 class SettingsFragment : Fragment() {
 
@@ -42,6 +43,11 @@ class SettingsFragment : Fragment() {
         binding.btnProfile.setOnClickListener{
             toast.toastSuccess(this.requireActivity(), "Mis Primeros Auxilitos", "Perfil del usuario")
             startActivity(Intent(this.requireContext(), Profile::class.java))
+        }
+
+        binding.btnMisionVision.setOnClickListener{
+            toast.toastSuccess(this.requireActivity(), "Mis Primeros Auxilitos", "Vista de la misión y visión")
+            startActivity(Intent(this.requireContext(), MisionVisionActivity::class.java))
         }
 
         binding.btnLogout.setOnClickListener{
