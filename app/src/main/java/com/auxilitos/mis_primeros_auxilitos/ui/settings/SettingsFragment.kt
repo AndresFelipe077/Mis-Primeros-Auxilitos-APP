@@ -9,14 +9,14 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
-import com.auxilitos.mis_primeros_auxilitos.databinding.FragmentNotificationsBinding
+import com.auxilitos.mis_primeros_auxilitos.databinding.FragmentSettingsBinding
 import com.auxilitos.mis_primeros_auxilitos.registro.Login
 import com.auxilitos.mis_primeros_auxilitos.registro.Profile
 import com.auxilitos.mis_primeros_auxilitos.settings.MisionVisionActivity
 
 class SettingsFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentSettingsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -32,7 +32,7 @@ class SettingsFragment : Fragment() {
         val notificationsViewModel =
             ViewModelProvider(this)[SettingsViewModel::class.java]
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
