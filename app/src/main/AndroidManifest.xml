@@ -18,6 +18,9 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="31">
         <activity
+            android:name=".games.QuestionsActivity"
+            android:exported="false" />
+        <activity
             android:name=".games.SelectObjectWeb"
             android:exported="false" />
         <activity
