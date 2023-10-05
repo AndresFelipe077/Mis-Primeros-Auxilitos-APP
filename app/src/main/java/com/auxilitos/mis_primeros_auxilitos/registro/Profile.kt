@@ -352,7 +352,6 @@ class Profile : AppCompatActivity(), View.OnClickListener {
                             .error(R.drawable.logo) // Imagen de error si no se puede cargar la imagen
                             .into(profileImage)
 
-
                     }
                 }
             }
