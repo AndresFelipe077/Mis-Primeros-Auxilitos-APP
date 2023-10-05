@@ -18,7 +18,7 @@ class ContentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.author.text = contentModel.autor
 
         // Verificar si la URL es para un video o una imagen
-        if (contentModel.url.endsWith(".mp4")) {
+        if (contentModel.url.matches(Regex(".+\\.(mp4|avi|mov|mkv|wmv|flv|webm)$", RegexOption.IGNORE_CASE))) {
             // Si es un video, usar VideoView
             val videoUri = Uri.parse(ApiClient.baseUrl + contentModel.url)
             binding.videoView.visibility = View.VISIBLE
