@@ -21,7 +21,7 @@ interface ApiService {
     fun getUserProfile(@Path("userId") userId: String): Call<User>
 
     @GET("/api/contenidos")
-    fun getContent(): Call<ContentResponse>
+    fun getContent(): Call<List<ContentResponse>>
 
     @GET("/api/contenidos/{id}")
     fun getOneContent(@Path("id") id: String): Call<ContentResponse>

@@ -5,7 +5,6 @@ import android.content.Context
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.auxilitos.mis_primeros_auxilitos.R
-import com.auxilitos.mis_primeros_auxilitos.ui.home.HomeFragment
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 
@@ -48,6 +47,7 @@ class ToastCustom {
             ResourcesCompat.getFont(fragment.requireContext(), R.font.dynapuff)
         )
     }
+
 
     fun toastWarning(context: Context, title: String, message: String)
     {

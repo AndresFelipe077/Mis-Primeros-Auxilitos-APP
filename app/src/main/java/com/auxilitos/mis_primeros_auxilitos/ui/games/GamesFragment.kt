@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.auxilitos.mis_primeros_auxilitos.databinding.FragmentDashboardBinding
 import com.auxilitos.mis_primeros_auxilitos.games.AparecerObjetosAuxilitos
 
-class DashboardFragment : Fragment() {
+class GamesFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 
@@ -24,14 +24,14 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this)[DashboardViewModel::class.java]
+        val gamesViewModel =
+            ViewModelProvider(this)[GamesViewModel::class.java]
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
+        gamesViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
 
