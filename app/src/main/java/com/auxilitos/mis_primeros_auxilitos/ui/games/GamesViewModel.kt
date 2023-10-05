@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class GamesViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "Vista de juegos"

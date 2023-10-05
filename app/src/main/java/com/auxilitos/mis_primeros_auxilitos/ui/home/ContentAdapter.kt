@@ -20,5 +20,4 @@ class ContentAdapter(private val contentList: List<ContentResponse>) : RecyclerV
         holder.render(item)
     }
 
-
 }

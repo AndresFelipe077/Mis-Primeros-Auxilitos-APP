@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.games.DashboardFragment"
+    tools:context=".ui.games.GamesFragment"
     android:orientation="vertical"
     android:background="@drawable/fondo_login"
     >
