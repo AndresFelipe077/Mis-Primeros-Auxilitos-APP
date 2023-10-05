@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.auxilitos.mis_primeros_auxilitos.databinding.FragmentDashboardBinding
+import com.auxilitos.mis_primeros_auxilitos.databinding.FragmentGamesBinding
 import com.auxilitos.mis_primeros_auxilitos.games.AparecerObjetosAuxilitos
+import com.auxilitos.mis_primeros_auxilitos.games.SelectObjectWeb
 
 class GamesFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentGamesBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -27,7 +28,7 @@ class GamesFragment : Fragment() {
         val gamesViewModel =
             ViewModelProvider(this)[GamesViewModel::class.java]
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentGamesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textDashboard
@@ -39,6 +40,10 @@ class GamesFragment : Fragment() {
         binding.game1.setOnClickListener{
             //toast.toastSuccess(this.requireActivity(), "Mis Primeros Auxilitos", "Perfil del usuario")
             startActivity(Intent(this.requireContext(), AparecerObjetosAuxilitos::class.java))
+        }
+
+        binding.selectObjectWeb.setOnClickListener {
+          startActivity(Intent(this.requireContext(), SelectObjectWeb::class.java))
         }
 
         return root

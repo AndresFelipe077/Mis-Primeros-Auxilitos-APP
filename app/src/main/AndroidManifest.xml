@@ -16,13 +16,17 @@
         android:theme="@style/actionbar"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity"
-        tools:targetApi="31"
-        >
+        tools:targetApi="31">
+        <activity
+            android:name=".games.SelectObjectWeb"
+            android:exported="false" />
+        <activity
+            android:name=".games.MainActivity"
+            android:exported="false" />
         <activity
             android:name=".games.AparecerObjetosAuxilitos"
             android:exported="false"
-            android:screenOrientation="portrait" />
-        <!-- Olvide mi contraseña -->
+            android:screenOrientation="portrait" /> <!-- Olvide mi contraseña -->
         <activity
             android:name=".registro.OlvidarPassword"
             android:exported="false">

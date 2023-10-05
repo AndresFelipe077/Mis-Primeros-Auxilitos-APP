@@ -34,45 +34,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:visibility="gone" />
-            <!--<RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <VideoView
-                    android:id="@+id/videoView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                &lt;!&ndash; Botón de adelanto &ndash;&gt;
-                <ImageButton
-                    android:id="@+id/fastForwardButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginEnd="0dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/logo"
-                    android:layout_centerHorizontal="true"
-                    android:onClick="onFastForwardClick" />
-
-                &lt;!&ndash; Botón de retroceso &ndash;&gt;
-                <ImageButton
-                    android:id="@+id/rewindButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginEnd="0dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/logo"
-                    android:layout_centerHorizontal="true"
-                    android:onClick="onRewindClick" />
-
-            </RelativeLayout>-->
-
 
             <ImageView
                 android:id="@+id/imageView"
