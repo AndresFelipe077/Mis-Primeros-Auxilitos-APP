@@ -31,9 +31,15 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
 
         val v:View = inflater.inflate(R.layout.bottom_sheet, container, false)
 
-        val btn = v.findViewById<Button>(R.id.btn_cerrar)
+        val btn_cerrar_sesion = v.findViewById<Button>(R.id.btn_cerrar_sesion)
 
-        btn.setOnClickListener{
+        val btn_cancelar = v.findViewById<Button>(R.id.btn_cancelar)
+
+        btn_cancelar.setOnClickListener{
+            dismiss()
+        }
+
+        btn_cerrar_sesion.setOnClickListener{
             toast.toastSuccess(mContext!!, "Cerrar sesión", "Sesión cerrada con exito!!!")
             dismiss()
             startActivity(Intent(mContext, Login::class.java))

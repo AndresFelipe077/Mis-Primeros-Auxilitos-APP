@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -16,17 +17,26 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="31">
-
-        <!--Olvide mi contraseña-->
+        <activity
+            android:name=".games.QuestionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".games.SelectObjectWeb"
+            android:exported="false" />
+        <activity
+            android:name=".games.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".games.AparecerObjetosAuxilitos"
+            android:exported="false"
+            android:screenOrientation="portrait" /> <!-- Olvide mi contraseña -->
         <activity
             android:name=".registro.OlvidarPassword"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-
-        <!-- Splash Screen -->
+        </activity> <!-- Splash Screen -->
         <activity
             android:name=".registro.SplashScreen"
             android:exported="true"

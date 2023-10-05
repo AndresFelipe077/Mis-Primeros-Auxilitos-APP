@@ -7,9 +7,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.auxilitos.mis_primeros_auxilitos.R
 import com.auxilitos.mis_primeros_auxilitos.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: ContentAdapter
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -22,6 +28,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         val homeViewModel =
             ViewModelProvider(this)[HomeViewModel::class.java]
 
@@ -32,11 +39,27 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        recyclerView = view.findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+
+        homeViewModel.contentData.observe(viewLifecycleOwner) { newData ->
+            adapter = ContentAdapter(newData)
+            recyclerView.adapter = adapter
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 }

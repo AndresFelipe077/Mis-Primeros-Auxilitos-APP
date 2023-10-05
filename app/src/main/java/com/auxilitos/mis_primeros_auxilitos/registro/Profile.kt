@@ -49,7 +49,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvCheckBox: TextView
     private lateinit var tvFechaNacimiento: TextView
 
-    private lateinit var cerrar: Button
+    private lateinit var cerrarSesion: Button
     private lateinit var btnToast : Button
 
     private lateinit var profileImage: CircleImageView
@@ -307,7 +307,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
         val view  = layoutInflater.inflate(R.layout.bottom_sheet, null)
         val modalBottomSheet = ModalBottomSheet()
-        cerrar    = view.findViewById(R.id.btn_cerrar)
+        cerrarSesion    = view.findViewById(R.id.btn_cerrar_sesion)
 
         val modalBottomSheetBehavior = (modalBottomSheet.dialog as? BottomSheetDialog)?.behavior
 
@@ -321,7 +321,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
         }
 
-        cerrar.setOnClickListener{
+        cerrarSesion.setOnClickListener{
             modalBottomSheet.dismiss()
         }
 
@@ -351,7 +351,6 @@ class Profile : AppCompatActivity(), View.OnClickListener {
                             .placeholder(R.drawable.logo) // Imagen de carga mientras se carga la imagen
                             .error(R.drawable.logo) // Imagen de error si no se puede cargar la imagen
                             .into(profileImage)
-
 
                     }
                 }

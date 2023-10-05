@@ -4,21 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment"
+    tools:context=".ui.settings.SettingsFragment"
     android:orientation="vertical"
+    android:background="@drawable/fondo_login"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/btn_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/settings_go_home"
-            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/text_notifications"
@@ -37,47 +31,109 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="70dp">
-
-        <Button
-        android:id="@+id/btn_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/perfil"
-        android:layout_gravity="center" />
-
-        <Button
-            android:id="@+id/btn_mision_vision"
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/mision_y_vision"
-            android:layout_gravity="center" />
+            android:orientation="vertical"
+            android:layout_marginTop="70dp">
 
-        <Button
-            android:id="@+id/btn_credits"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/creditos"
-            android:layout_gravity="center" />
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10sp">
 
-        <Button
-            android:id="@+id/btn_help"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ayuda"
-            android:layout_gravity="center" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/btn_profile"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/profile"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#003BFF"
+                    android:layout_gravity="center"
+                    />
 
-        <Button
-            android:id="@+id/btn_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cerrar_sesion"
-            android:layout_gravity="center" />
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </LinearLayout>
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10sp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/btn_mision_vision"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/mision_vision"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#003BFF"
+                    android:layout_gravity="center"
+                    />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10sp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/btn_credits"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/atribucion"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#003BFF"
+                    android:layout_gravity="center"
+                    />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10sp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/btn_help"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/ayuda"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#003BFF"
+                    android:layout_gravity="center"
+                    />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10sp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/btn_logout"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/logout"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#003BFF"
+                    android:layout_gravity="center"
+                    />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
 
 </LinearLayout>

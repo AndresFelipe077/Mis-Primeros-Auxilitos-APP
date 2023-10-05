@@ -8,6 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
+    val baseUrl = "http://192.168.1.110:8000" // Reemplaza esto con tu baseUrl
+
     private fun getRetrofit(): Retrofit {
 
         val logger = HttpLoggingInterceptor()
@@ -20,7 +22,7 @@ object ApiClient {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
-            .baseUrl("http://192.168.1.105:8000/")
+            .baseUrl(baseUrl)
             .build()
     }
 
