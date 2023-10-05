@@ -10,14 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.auxilitos.mis_primeros_auxilitos.R
-import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.databinding.FragmentHomeBinding
-import java.util.concurrent.TimeUnit
-import okhttp3.*
 
 class HomeFragment : Fragment() {
-
-    private lateinit var webSocket: WebSocket
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ContentAdapter
@@ -33,27 +28,6 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        // Configurar el cliente WebSocket
-        val client = OkHttpClient.Builder()
-            .readTimeout(3, TimeUnit.SECONDS) // Configurar el tiempo de espera para leer mensajes
-            .build()
-
-        // URL del servidor WebSocket (reemplázala con tu URL)
-        val socketUrl = ApiClient.baseUrl
-
-        // Crear una solicitud de conexión WebSocket
-        val request = Request.Builder().url(socketUrl).build()
-
-        // Establecer el listener para manejar mensajes WebSocket
-        val socketListener = object : WebSocketListener() {
-            override fun onMessage(webSocket: WebSocket, text: String) {
-
-            }
-        }
-
-        // Conectar al servidor WebSocket
-        webSocket = client.newWebSocket(request, socketListener)
 
         val homeViewModel =
             ViewModelProvider(this)[HomeViewModel::class.java]
@@ -75,7 +49,7 @@ class HomeFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        val homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
         homeViewModel.contentData.observe(viewLifecycleOwner) { newData ->
             adapter = ContentAdapter(newData)
@@ -85,7 +59,6 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        webSocket.close(1000, "Usuario salió del fragmento")
         _binding = null
     }
 
