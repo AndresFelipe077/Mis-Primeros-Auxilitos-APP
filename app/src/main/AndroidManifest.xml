@@ -18,14 +18,15 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="31">
         <activity
+            android:name=".settings.MisionVisionActivity"
+            android:exported="false" />
+        <activity
             android:name=".games.QuestionsActivity"
             android:exported="false" />
         <activity
             android:name=".games.SelectObjectWeb"
             android:exported="false" />
-        <activity
-            android:name=".games.MainActivity"
-            android:exported="false" />
+
         <activity
             android:name=".games.AparecerObjetosAuxilitos"
             android:exported="false"
