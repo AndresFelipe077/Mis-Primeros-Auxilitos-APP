@@ -15,7 +15,7 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.auxilitos.mis_primeros_auxilitos.ui.games.GamesFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_games" />
 
     <fragment
         android:id="@+id/navigation_notifications"
