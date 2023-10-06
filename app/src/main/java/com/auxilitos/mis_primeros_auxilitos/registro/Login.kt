@@ -30,7 +30,7 @@ class Login : AppCompatActivity() {
 
         binding.register.setOnClickListener {
             toast.toastSuccess(this, "Mis Primeros Auxilitos", "Registro de usuario")
-            startActivity(Intent(this,Registro::class.java))
+            startActivity(Intent(this, Registro::class.java))
         }
 
         binding.olvidarPasswordView.setOnClickListener{

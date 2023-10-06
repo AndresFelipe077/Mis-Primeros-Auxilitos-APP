@@ -4,9 +4,10 @@
     <!-- Otros elementos de menú si los tienes -->
 
     <item
-        android:id="@+id/action_button"
-        android:title="Botón"
+        android:id="@+id/upload_content"
+        android:title="@string/go_to_upload"
         app:showAsAction="always"
         app:actionLayout="@layout/button_toolbar_upload" />
+
 
 </menu>
