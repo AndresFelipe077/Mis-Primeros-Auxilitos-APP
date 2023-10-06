@@ -65,24 +65,13 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
         setSupportActionBar(findViewById(R.id.toolbar))
 
+        binding.uploadContent.setOnClickListener{
+            startActivity(Intent(this, ContentPostActivity::class.java))
+        }
+
         initData()
 
     }//Fin onCreate
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_toolbar, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.upload_content -> {
-                startActivity(Intent(this, ContentPostActivity::class.java))
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
 
     private fun initData() {
