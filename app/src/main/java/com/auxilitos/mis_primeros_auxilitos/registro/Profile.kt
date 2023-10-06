@@ -70,7 +70,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
     }//Fin onCreate
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_toolbar, menu) // Inflar el menú de la barra de herramientas
+        menuInflater.inflate(R.menu.menu_toolbar, menu)
         return true
     }
 
@@ -344,7 +344,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    /***
+    /**
      *  Get data of User by id login
      */
     fun getUserProfile(userId: String) {
