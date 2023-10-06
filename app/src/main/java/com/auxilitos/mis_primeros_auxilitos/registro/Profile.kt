@@ -19,6 +19,7 @@ import com.auxilitos.mis_primeros_auxilitos.classesImport.KeyBoard
 import com.auxilitos.mis_primeros_auxilitos.classesImport.ModalBottomSheet
 import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
+import com.auxilitos.mis_primeros_auxilitos.content.ContentPostActivity
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityProfileBinding
 import com.auxilitos.mis_primeros_auxilitos.model.response.RegisterResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.User
@@ -56,7 +57,6 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var profileImage: CircleImageView
 
-
     @SuppressLint("SetTextI18n", "InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +67,6 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
         initData()
 
-
     }//Fin onCreate
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -77,8 +76,8 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_button -> {
-                // Acción cuando se selecciona el botón en el menú
+            R.id.upload_content -> {
+                startActivity(Intent(this, ContentPostActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

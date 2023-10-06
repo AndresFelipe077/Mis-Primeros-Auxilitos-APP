@@ -74,5 +74,10 @@
     <string name="vision">Visión</string>
     <string name="text_vision">Para el año 2024 los niños estarán preparados para prestar servicios en primeros auxilios y capacitados para poder reaccionar a un evento de emergencia.</string>
     <string name="profile_title">Perfil</string>
+    <string name="contenido_de_primero_auxilitos">Contenido de primero auxilitos!!! 😎</string>
+    <string name="titulo">Título</string>
+    <string name="preview_image_content_description">This ImageButton deals with a preview image to upload</string>
+    <string name="go_to_upload">Go to upload</string>
+    <string name="subir_contenido">Subir contenido</string>
 
 </resources>

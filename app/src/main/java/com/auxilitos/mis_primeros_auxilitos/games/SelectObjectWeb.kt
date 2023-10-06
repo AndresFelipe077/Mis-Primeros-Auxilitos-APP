@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.webkit.WebChromeClient
 import androidx.appcompat.app.AppCompatActivity
 import com.auxilitos.mis_primeros_auxilitos.classesImport.CustomWebViewClient
-import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivitySelectObjectWebBinding
 
 class SelectObjectWeb : AppCompatActivity() {
