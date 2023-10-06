@@ -23,18 +23,19 @@ import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityProfileBinding
 import com.auxilitos.mis_primeros_auxilitos.model.response.RegisterResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.User
 import com.auxilitos.mis_primeros_auxilitos.model.response.UserManager
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.bumptech.glide.Glide
 
 @Suppress("NAME_SHADOWING")
 class Profile : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityProfileBinding
+
     private val toast = ToastCustom()
     private var keyBoard = KeyBoard()
 
@@ -52,7 +53,6 @@ class Profile : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvFechaNacimiento: TextView
 
     private lateinit var cerrarSesion: Button
-    private lateinit var btnToast : Button
 
     private lateinit var profileImage: CircleImageView
 

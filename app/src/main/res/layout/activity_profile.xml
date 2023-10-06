@@ -15,7 +15,10 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#00000000"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.Light">
+        app:theme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@color/black"
+        app:title="Perfil"
+        >
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
