@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Otros elementos de menú si los tienes -->
+
+    <item
+        android:id="@+id/action_button"
+        android:title="Botón"
+        app:showAsAction="always"
+        app:actionLayout="@layout/button_toolbar_upload" />
+
+</menu>

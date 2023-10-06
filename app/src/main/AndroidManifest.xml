@@ -83,7 +83,10 @@
             android:name=".registro.Profile"
             android:exported="false"
             android:label="@string/title_profile"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/noActionbar"
+
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
