@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
@@ -61,10 +63,28 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(findViewById(R.id.toolbar))
+
         initData()
 
 
     }//Fin onCreate
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu) // Inflar el menú de la barra de herramientas
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_button -> {
+                // Acción cuando se selecciona el botón en el menú
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 
     private fun initData() {
 
@@ -93,8 +113,6 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         }
 
         buttonSheet()
-
-
 
     }
 
@@ -301,7 +319,6 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         })
     }
 
-
     @SuppressLint("MissingInflatedId", "UseCompatLoadingForDrawables", "SuspiciousIndentation", "InflateParams")
     private fun buttonSheet() {
 
@@ -361,6 +378,5 @@ class Profile : AppCompatActivity(), View.OnClickListener {
             }
         })
     }
-
 
 }//Fin
