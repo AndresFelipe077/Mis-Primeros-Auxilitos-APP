@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".content.ContentPostActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/fondo_login"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -97,8 +99,8 @@
 
                     <ImageButton
                         android:id="@+id/imageUrl"
-                        android:layout_width="100sp"
-                        android:layout_height="100sp"
+                        android:layout_width="200sp"
+                        android:layout_height="200sp"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
                         android:src="@drawable/image_preview"

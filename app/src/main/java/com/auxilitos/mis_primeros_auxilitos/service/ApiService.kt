@@ -7,12 +7,16 @@ import com.auxilitos.mis_primeros_auxilitos.model.response.ContentResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.LoginResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.RegisterResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.User
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface ApiService {
@@ -26,8 +30,16 @@ interface ApiService {
     @GET("/api/contenidos/{id}")
     fun getOneContent(@Path("id") id: String): Call<ContentResponse>
 
+    @Multipart
     @POST("/api/contenidos")
-    fun createContent(@Body contentRequest: ContentRequest): Call<ContentResponse>
+    fun createContent(
+        @Part("title") title: RequestBody,
+        @Part("slug") slug: RequestBody,
+        @Part url: MultipartBody.Part,
+        @Part("autor") autor: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("user_id") userId: RequestBody
+    ): Call<ContentResponse>
 
     @PUT("/api/contenidos/{id}")
     fun updateContent(@Body contentRequest: ContentRequest, @Path("id") id: String): Call<ContentResponse>
