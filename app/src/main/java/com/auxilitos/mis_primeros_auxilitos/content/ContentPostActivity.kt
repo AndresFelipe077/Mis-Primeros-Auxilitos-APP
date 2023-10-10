@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.auxilitos.mis_primeros_auxilitos.MainActivity
 import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityContentPostBinding
@@ -117,13 +118,12 @@ class ContentPostActivity : AppCompatActivity() {
           ).execute()
         }
 
-        Log.e("AQUIIII", response.toString())
-
         withContext(Dispatchers.Main) {
           if (response != null) {
             if (response.isSuccessful) {
               // Solicitud exitosa
               toast.toastSuccess(this@ContentPostActivity, "Mis primeros auxilitos", "Contenido creado exitosamente!!!")
+              startActivity(Intent(applicationContext, MainActivity::class.java))
             } else {
               // Manejar error
               toast.toastError(this@ContentPostActivity, "Error", "Por favor, llena todos los campos")
