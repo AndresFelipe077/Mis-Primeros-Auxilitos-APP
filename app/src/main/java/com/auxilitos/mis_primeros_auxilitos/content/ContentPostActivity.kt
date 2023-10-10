@@ -7,12 +7,17 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.auxilitos.mis_primeros_auxilitos.MainActivity
+import com.auxilitos.mis_primeros_auxilitos.R
 import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityContentPostBinding
 import com.auxilitos.mis_primeros_auxilitos.model.request.ContentRequest
 import com.auxilitos.mis_primeros_auxilitos.registro.Profile
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,10 +35,28 @@ class ContentPostActivity : AppCompatActivity() {
   private val toast = ToastCustom()
   private lateinit var imageUri: Uri
 
-  private val contract = registerForActivityResult(ActivityResultContracts.GetContent()) {
-      imageUri = it!!
+  private val contract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+    uri?.let {
+      imageUri = it
       binding.imageUrl.setImageURI(it)
+
+      val borderDrawable = ContextCompat.getDrawable(this, R.drawable.bordernavigation) // Obtén el fondo redondeado desde los recursos
+      binding.imageUrl.background = borderDrawable // Establece el fondo redondeado en el ImageButton
+
+      val requestOptions = RequestOptions()
+        .placeholder(R.drawable.image_preview) // Imagen de placeholder mientras se carga la imagen
+        .error(R.drawable.error) // Imagen de error si la carga falla
+        .diskCacheStrategy(DiskCacheStrategy.NONE) // Evita el almacenamiento en caché de la imagen para que se vuelva a cargar cada vez
+
+      Glide.with(this)
+        .load(imageUri)
+        .apply(requestOptions)
+        .centerCrop() // Escala la imagen para llenar el área del ImageButton mientras mantiene las proporciones y corta el exceso
+        .into(binding.imageUrl)
+
+    }
   }
+
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
