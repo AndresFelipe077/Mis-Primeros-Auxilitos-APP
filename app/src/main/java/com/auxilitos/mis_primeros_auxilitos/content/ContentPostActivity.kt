@@ -2,9 +2,9 @@ package com.auxilitos.mis_primeros_auxilitos.content
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.auxilitos.mis_primeros_auxilitos.MainActivity
@@ -28,7 +28,7 @@ class ContentPostActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityContentPostBinding
   private val toast = ToastCustom()
-  lateinit var imageUri: Uri
+  private lateinit var imageUri: Uri
 
   private val contract = registerForActivityResult(ActivityResultContracts.GetContent()) {
       imageUri = it!!
