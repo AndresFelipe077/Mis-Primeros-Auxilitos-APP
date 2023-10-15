@@ -59,7 +59,6 @@
                     android:layout_marginStart="30dp"
                     android:foreground="?android:attr/selectableItemBackground"
                     card_view:cardCornerRadius="16dp"
-                    card_view:cardBackgroundColor="#80FFFFFF"
                     tools:ignore="RtlHardcoded">
 
                     <LinearLayout
@@ -107,7 +106,6 @@
                     android:layout_marginStart="30dp"
                     android:foreground="?android:attr/selectableItemBackground"
                     card_view:cardCornerRadius="16dp"
-                    card_view:cardBackgroundColor="#80FFFFFF"
                     tools:ignore="RtlHardcoded">
 
                     <LinearLayout
@@ -154,7 +152,6 @@
                     android:layout_marginStart="30dp"
                     android:foreground="?android:attr/selectableItemBackground"
                     card_view:cardCornerRadius="16dp"
-                    card_view:cardBackgroundColor="#80FFFFFF"
                     tools:ignore="RtlHardcoded">
 
                     <LinearLayout
@@ -201,7 +198,6 @@
                     android:layout_marginStart="30dp"
                     android:foreground="?android:attr/selectableItemBackground"
                     card_view:cardCornerRadius="16dp"
-                    card_view:cardBackgroundColor="#80FFFFFF"
                     tools:ignore="RtlHardcoded">
 
                     <LinearLayout
