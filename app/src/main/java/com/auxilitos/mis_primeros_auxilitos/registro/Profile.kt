@@ -112,7 +112,9 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    @SuppressLint("MissingInflatedId", "UseCompatLoadingForDrawables", "SuspiciousIndentation")
+    @SuppressLint("MissingInflatedId", "UseCompatLoadingForDrawables", "SuspiciousIndentation",
+      "CutPasteId"
+    )
     private fun Dialog() {
 
         //Vista
