@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -37,6 +38,8 @@ import retrofit2.Response
 @Suppress("NAME_SHADOWING")
 class Profile : AppCompatActivity(), View.OnClickListener {
 
+    var userData: User? = null
+
     var userId = 0
 
     private lateinit var binding: ActivityProfileBinding
@@ -56,7 +59,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvEmail: TextView
     private lateinit var tvCheckBox: TextView
     private lateinit var tvFechaNacimiento: TextView
-  private lateinit var tvDescription: EditText
+    private lateinit var tvDescription: EditText
 
     private lateinit var cerrarSesion: Button
 
@@ -117,6 +120,22 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
         viewRoot                = view.findViewById(R.id.viewRoot)
         hideKeyboard()
+
+        // Asegúrate de que 'userData' contiene los datos del usuario
+        userData?.let { user ->
+          val editTextName            = view.findViewById<EditText>(R.id.name)
+          editTextName.setText(user.name)
+
+          val editTextEmail           = view.findViewById<EditText>(R.id.email)
+          editTextEmail.setText(user.email)
+
+          val fechaNacimientoEditText = view.findViewById<EditText>(R.id.fechaNacimientoEditText)
+          fechaNacimientoEditText.setText(user.fechaNacimiento)
+
+          val descriptionEditText     = view.findViewById<EditText>(R.id.description)
+          descriptionEditText.setText(user.description)
+
+        }
 
         name                    = view.findViewById(R.id.name)
         email                   = view.findViewById(R.id.email)
@@ -360,8 +379,8 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         userProfileCall.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
-                    val user = response.body()
-                    user?.let {
+                  userData = response.body()
+                  userData?.let {
                         findViewById<TextView>(R.id.nombre).text          = it.name
                         findViewById<TextView>(R.id.correo).text          = it.email
                         findViewById<TextView>(R.id.genero).text          = it.genero
@@ -373,7 +392,6 @@ class Profile : AppCompatActivity(), View.OnClickListener {
                             .placeholder(R.drawable.logo) // Imagen de carga mientras se carga la imagen
                             .error(R.drawable.logo) // Imagen de error si no se puede cargar la imagen
                             .into(profileImage)
-
                     }
                 }
             }
