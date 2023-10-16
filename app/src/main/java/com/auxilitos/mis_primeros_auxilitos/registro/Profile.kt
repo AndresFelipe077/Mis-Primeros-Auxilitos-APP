@@ -21,9 +21,11 @@ import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.content.ContentPostActivity
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityProfileBinding
+import com.auxilitos.mis_primeros_auxilitos.model.request.UserRequest
 import com.auxilitos.mis_primeros_auxilitos.model.response.RegisterResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.User
 import com.auxilitos.mis_primeros_auxilitos.model.response.UserManager
+import com.auxilitos.mis_primeros_auxilitos.model.response.UserResponse
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -34,6 +36,8 @@ import retrofit2.Response
 
 @Suppress("NAME_SHADOWING")
 class Profile : AppCompatActivity(), View.OnClickListener {
+
+    var userId = 0
 
     private lateinit var binding: ActivityProfileBinding
 
@@ -76,7 +80,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
     private fun initData() {
 
-        val userId = UserManager.getUserId()
+        userId = UserManager.getUserId()
 
         getUserProfile(userId.toString())
 
@@ -139,20 +143,30 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         val dialog: AlertDialog = alertDialog.create()
         dialog.show()//.setPositiveButtonIcon(resources.getDrawable(R.drawable.logo, theme))
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+
             if (validateEmail() and validateNameAndDate() and validateCheckBox()) {
-                if (name.text.toString().isEmpty() && !email.text.toString()
-                        .isEmpty() && !fechaNacimientoEditText.text.toString()
-                        .isEmpty() && validateCheckBox()
+                if (name.text.toString().isNotEmpty() && email.text.toString()
+                        .isNotEmpty() && fechaNacimientoEditText.text.toString()
+                        .isNotEmpty() && validateCheckBox()
                 ) {
-                    toast.toastSuccess(this, "Perfil", "Perfil editado correctamente")
-                    dialog.dismiss()
+
+                  val userRequest = UserRequest(
+                    name.text.toString(),
+                    email.text.toString(),
+                    checkBoxValidate(checkMasculino, checkFemenino, checkOtro),
+                    fechaNacimientoEditText.text.toString()
+                  )
+
+                  toast.toastSuccess(this, "Perfil", "Perfil editado correctamente")
+                  updateProfile(userRequest, userId.toString())
+                  dialog.dismiss()
                 } else {
-                    validate()
-                    toast.toastError(this, "Perfil", "Por favor llena todos los campos!!!")
+                  validate()
+                  toast.toastError(this, "Perfil", "Por favor llena todos los campos!!!")
                 }
             }
+
         }
-        checkBoxValidate(checkMasculino, checkFemenino, checkOtro)
 
     }
 
@@ -282,7 +296,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    fun hideKeyboard(){
+    private fun hideKeyboard(){
         val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(viewRoot.windowToken, 0)
     }
@@ -336,7 +350,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
     /**
      *  Get data of User by id login
      */
-    fun getUserProfile(userId: String) {
+    private fun getUserProfile(userId: String) {
         val apiService = ApiClient.getApiService()
 
         val userProfileCall: Call<User> = apiService.getUserProfile(userId)
@@ -365,6 +379,38 @@ class Profile : AppCompatActivity(), View.OnClickListener {
                 toast.toastError(this@Profile, "Conexión", "Error de conexión")
             }
         })
+    }
+
+    /**
+     * Update user by id
+     */
+    private fun updateProfile(userRequest: UserRequest, userId: String) {
+
+        val apiService = ApiClient.getApiService()
+
+        val userProfileCall: Call<UserResponse> = apiService.updateProfile(userRequest, userId)
+        userProfileCall.enqueue(object : Callback<UserResponse>{
+          override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+            if(response.isSuccessful)
+            {
+              val user = response.body()
+              user?.let {
+                findViewById<TextView>(R.id.nombre).text          = it.name
+                findViewById<TextView>(R.id.correo).text          = it.email
+                findViewById<TextView>(R.id.genero).text          = it.genero
+                findViewById<TextView>(R.id.fechaNacimiento).text = it.fechaNacimiento
+                findViewById<TextView>(R.id.description).text     = it.description
+
+              }
+            }
+          }
+
+          override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+            toast.toastError(this@Profile, "Conexión", "Error de conexión")
+          }
+
+        })
+
     }
 
 }//Fin
