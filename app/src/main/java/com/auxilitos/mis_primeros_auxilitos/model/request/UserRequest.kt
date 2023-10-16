@@ -5,5 +5,5 @@ data class UserRequest(
   val email: String,
   val genero: String,
   val fechaNacimiento: String,
-  //val description: String
+  val description: String?
 )

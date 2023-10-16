@@ -56,6 +56,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvEmail: TextView
     private lateinit var tvCheckBox: TextView
     private lateinit var tvFechaNacimiento: TextView
+  private lateinit var tvDescription: EditText
 
     private lateinit var cerrarSesion: Button
 
@@ -129,6 +130,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         tvEmail                 = view.findViewById(R.id.tvEmail)
         tvCheckBox              = view.findViewById(R.id.tvCheckBox)
         tvFechaNacimiento       = view.findViewById(R.id.tvFechaNacimiento)
+        tvDescription           = view.findViewById(R.id.description)
 
         btnSeleccionarFecha.setOnClickListener(this)
 
@@ -154,7 +156,8 @@ class Profile : AppCompatActivity(), View.OnClickListener {
                     name.text.toString(),
                     email.text.toString(),
                     checkBoxValidate(checkMasculino, checkFemenino, checkOtro),
-                    fechaNacimientoEditText.text.toString()
+                    fechaNacimientoEditText.text.toString(),
+                    tvDescription.text.toString()
                   )
 
                   toast.toastSuccess(this, "Perfil", "Perfil editado correctamente")
