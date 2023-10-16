@@ -3,10 +3,12 @@ package com.auxilitos.mis_primeros_auxilitos.service
 import com.auxilitos.mis_primeros_auxilitos.model.request.ContentRequest
 import com.auxilitos.mis_primeros_auxilitos.model.request.LoginRequest
 import com.auxilitos.mis_primeros_auxilitos.model.request.RegisterRequest
+import com.auxilitos.mis_primeros_auxilitos.model.request.UserRequest
 import com.auxilitos.mis_primeros_auxilitos.model.response.ContentResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.LoginResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.RegisterResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.User
+import com.auxilitos.mis_primeros_auxilitos.model.response.UserResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -52,6 +54,9 @@ interface ApiService {
 
     @POST("/api/register/")
     fun registerUser(@Body registerRequest: RegisterRequest): Call<RegisterResponse>
+
+    @PUT("/api/users/{userId}")
+    fun updateProfile(@Body userRequest: UserRequest, @Path("userId") userId: String): Call<UserResponse>
 
     @GET("/api/logout/")
     fun logoutUser(): Call<RegisterResponse>?
