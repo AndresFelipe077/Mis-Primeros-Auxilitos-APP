@@ -1,9 +1,12 @@
 package com.auxilitos.mis_primeros_auxilitos.registro
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.text.Editable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -11,6 +14,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.util.PatternsCompat
 import com.auxilitos.mis_primeros_auxilitos.MainActivity
 import com.auxilitos.mis_primeros_auxilitos.R
@@ -21,9 +26,11 @@ import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.content.ContentPostActivity
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityProfileBinding
+import com.auxilitos.mis_primeros_auxilitos.model.request.UserRequest
 import com.auxilitos.mis_primeros_auxilitos.model.response.RegisterResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.User
 import com.auxilitos.mis_primeros_auxilitos.model.response.UserManager
+import com.auxilitos.mis_primeros_auxilitos.model.response.UserResponse
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -34,6 +41,10 @@ import retrofit2.Response
 
 @Suppress("NAME_SHADOWING")
 class Profile : AppCompatActivity(), View.OnClickListener {
+
+    var userData: User? = null
+
+    var userId = 0
 
     private lateinit var binding: ActivityProfileBinding
 
@@ -52,6 +63,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvEmail: TextView
     private lateinit var tvCheckBox: TextView
     private lateinit var tvFechaNacimiento: TextView
+    private lateinit var tvDescription: EditText
 
     private lateinit var cerrarSesion: Button
 
@@ -76,7 +88,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
     private fun initData() {
 
-        val userId = UserManager.getUserId()
+        userId = UserManager.getUserId()
 
         getUserProfile(userId.toString())
 
@@ -104,10 +116,12 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    @SuppressLint("MissingInflatedId", "UseCompatLoadingForDrawables", "SuspiciousIndentation")
+    @SuppressLint("MissingInflatedId", "UseCompatLoadingForDrawables", "SuspiciousIndentation",
+      "CutPasteId"
+    )
     private fun Dialog() {
 
-        //Vista
+      //Vista
         val view                = layoutInflater.inflate(R.layout.edit_profile, null)
 
         viewRoot                = view.findViewById(R.id.viewRoot)
@@ -125,8 +139,21 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         tvEmail                 = view.findViewById(R.id.tvEmail)
         tvCheckBox              = view.findViewById(R.id.tvCheckBox)
         tvFechaNacimiento       = view.findViewById(R.id.tvFechaNacimiento)
+        tvDescription           = view.findViewById(R.id.description)
 
         btnSeleccionarFecha.setOnClickListener(this)
+
+      userData?.let { user ->
+        name.setText(user.name ?: "")
+        email.setText(user.email ?: "")
+        fechaNacimientoEditText.setText(user.fechaNacimiento ?: "")
+
+        // Maneja la selección de género
+        checkMasculino.isChecked = user.genero == "Masculino"
+        checkFemenino.isChecked = user.genero == "Femenino"
+        checkOtro.isChecked = user.genero == "Otro"
+        tvDescription.setText(user.description)
+      }
 
         val alertDialog = MaterialAlertDialogBuilder(this)
 
@@ -139,20 +166,31 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         val dialog: AlertDialog = alertDialog.create()
         dialog.show()//.setPositiveButtonIcon(resources.getDrawable(R.drawable.logo, theme))
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+
             if (validateEmail() and validateNameAndDate() and validateCheckBox()) {
-                if (name.text.toString().isEmpty() && !email.text.toString()
-                        .isEmpty() && !fechaNacimientoEditText.text.toString()
-                        .isEmpty() && validateCheckBox()
+                if (name.text.toString().isNotEmpty() && email.text.toString()
+                        .isNotEmpty() && fechaNacimientoEditText.text.toString()
+                        .isNotEmpty() && validateCheckBox()
                 ) {
-                    toast.toastSuccess(this, "Perfil", "Perfil editado correctamente")
-                    dialog.dismiss()
+
+                  val userRequest = UserRequest(
+                    name.text.toString(),
+                    email.text.toString(),
+                    checkBoxValidate(checkMasculino, checkFemenino, checkOtro),
+                    fechaNacimientoEditText.text.toString(),
+                    tvDescription.text.toString()
+                  )
+
+                  toast.toastSuccess(this, "Perfil", "Perfil editado correctamente")
+                  updateProfile(userRequest, userId.toString())
+                  dialog.dismiss()
                 } else {
-                    validate()
-                    toast.toastError(this, "Perfil", "Por favor llena todos los campos!!!")
+                  validate()
+                  toast.toastError(this, "Perfil", "Por favor llena todos los campos!!!")
                 }
             }
+
         }
-        checkBoxValidate(checkMasculino, checkFemenino, checkOtro)
 
     }
 
@@ -282,7 +320,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    fun hideKeyboard(){
+    private fun hideKeyboard(){
         val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(viewRoot.windowToken, 0)
     }
@@ -336,15 +374,15 @@ class Profile : AppCompatActivity(), View.OnClickListener {
     /**
      *  Get data of User by id login
      */
-    fun getUserProfile(userId: String) {
+    private fun getUserProfile(userId: String) {
         val apiService = ApiClient.getApiService()
 
         val userProfileCall: Call<User> = apiService.getUserProfile(userId)
         userProfileCall.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
-                    val user = response.body()
-                    user?.let {
+                  userData = response.body()
+                  userData?.let {
                         findViewById<TextView>(R.id.nombre).text          = it.name
                         findViewById<TextView>(R.id.correo).text          = it.email
                         findViewById<TextView>(R.id.genero).text          = it.genero
@@ -356,7 +394,6 @@ class Profile : AppCompatActivity(), View.OnClickListener {
                             .placeholder(R.drawable.logo) // Imagen de carga mientras se carga la imagen
                             .error(R.drawable.logo) // Imagen de error si no se puede cargar la imagen
                             .into(profileImage)
-
                     }
                 }
             }
@@ -365,6 +402,38 @@ class Profile : AppCompatActivity(), View.OnClickListener {
                 toast.toastError(this@Profile, "Conexión", "Error de conexión")
             }
         })
+    }
+
+    /**
+     * Update user by id
+     */
+    private fun updateProfile(userRequest: UserRequest, userId: String) {
+
+        val apiService = ApiClient.getApiService()
+
+        val userProfileCall: Call<UserResponse> = apiService.updateProfile(userRequest, userId)
+        userProfileCall.enqueue(object : Callback<UserResponse>{
+          override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+            if(response.isSuccessful)
+            {
+              val user = response.body()
+              user?.let {
+                findViewById<TextView>(R.id.nombre).text          = it.name
+                findViewById<TextView>(R.id.correo).text          = it.email
+                findViewById<TextView>(R.id.genero).text          = it.genero
+                findViewById<TextView>(R.id.fechaNacimiento).text = it.fechaNacimiento
+                findViewById<TextView>(R.id.description).text     = it.description
+
+              }
+            }
+          }
+
+          override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+            toast.toastError(this@Profile, "Conexión", "Error de conexión")
+          }
+
+        })
+
     }
 
 }//Fin
