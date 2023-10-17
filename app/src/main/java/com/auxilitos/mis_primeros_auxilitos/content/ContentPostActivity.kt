@@ -2,7 +2,6 @@ package com.auxilitos.mis_primeros_auxilitos.content
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
@@ -14,6 +13,7 @@ import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityContentPostBinding
 import com.auxilitos.mis_primeros_auxilitos.model.request.ContentRequest
+import com.auxilitos.mis_primeros_auxilitos.model.response.UserManager
 import com.auxilitos.mis_primeros_auxilitos.registro.Profile
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -77,6 +77,10 @@ class ContentPostActivity : AppCompatActivity() {
 
   @SuppressLint("Recycle")
   private fun createContent() {
+
+    /*val userId = UserManager.getUserId()
+
+    getUserProfile(userId.toString())*/
 
     binding.btnUploadContent.setOnClickListener {
 
