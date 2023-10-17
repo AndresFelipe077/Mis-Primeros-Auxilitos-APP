@@ -1,8 +1,10 @@
 package com.auxilitos.mis_primeros_auxilitos.registro
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
 import android.view.Menu
@@ -12,6 +14,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.util.PatternsCompat
 import com.auxilitos.mis_primeros_auxilitos.MainActivity
 import com.auxilitos.mis_primeros_auxilitos.R
@@ -117,27 +121,11 @@ class Profile : AppCompatActivity(), View.OnClickListener {
     )
     private fun Dialog() {
 
-        //Vista
+      //Vista
         val view                = layoutInflater.inflate(R.layout.edit_profile, null)
 
         viewRoot                = view.findViewById(R.id.viewRoot)
         hideKeyboard()
-
-        // Asegúrate de que 'userData' contiene los datos del usuario
-        userData?.let { user ->
-          val editTextName            = view.findViewById<EditText>(R.id.name)
-          editTextName.setText(user.name)
-
-          val editTextEmail           = view.findViewById<EditText>(R.id.email)
-          editTextEmail.setText(user.email)
-
-          val fechaNacimientoEditText = view.findViewById<EditText>(R.id.fechaNacimientoEditText)
-          fechaNacimientoEditText.setText(user.fechaNacimiento)
-
-          val descriptionEditText     = view.findViewById<EditText>(R.id.description)
-          descriptionEditText.setText(user.description)
-
-        }
 
         name                    = view.findViewById(R.id.name)
         email                   = view.findViewById(R.id.email)
@@ -154,6 +142,18 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         tvDescription           = view.findViewById(R.id.description)
 
         btnSeleccionarFecha.setOnClickListener(this)
+
+      userData?.let { user ->
+        name.setText(user.name ?: "")
+        email.setText(user.email ?: "")
+        fechaNacimientoEditText.setText(user.fechaNacimiento ?: "")
+
+        // Maneja la selección de género
+        checkMasculino.isChecked = user.genero == "Masculino"
+        checkFemenino.isChecked = user.genero == "Femenino"
+        checkOtro.isChecked = user.genero == "Otro"
+        tvDescription.setText(user.description)
+      }
 
         val alertDialog = MaterialAlertDialogBuilder(this)
 
