@@ -254,7 +254,6 @@
                 >
 
                 <TextView
-                    android:id="@+id/genero"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/genero"
@@ -271,6 +270,7 @@
                     card_view:cardCornerRadius="10dp">
 
                     <TextView
+                        android:id="@+id/genero"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/txt_masculino"
