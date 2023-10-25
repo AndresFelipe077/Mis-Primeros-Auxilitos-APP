@@ -149,7 +149,7 @@ class ContentPostActivity : AppCompatActivity() {
           if (response != null) {
             if (response.isSuccessful) {
               // Solicitud exitosa
-              toast.toastSuccess(this@ContentPostActivity, "Mis primeros auxilitos", "Contenido creado exitosamente!!!")
+              toast.toastSuccess(this@ContentPostActivity, "Mis primeros auxilitos", "Contenido creado exitosamente, se revisará lo más pronto posible!!! 😊😊😊😊😊")
               startActivity(Intent(applicationContext, MainActivity::class.java))
             } else {
               // Manejar error
