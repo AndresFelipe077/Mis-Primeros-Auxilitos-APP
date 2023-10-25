@@ -4,7 +4,6 @@ import okhttp3.MultipartBody
 
 data class ContentRequest(
   val title: String,
-  val slug: String?,
   val url: MultipartBody.Part,
   val autor: String, //
   val description: String,

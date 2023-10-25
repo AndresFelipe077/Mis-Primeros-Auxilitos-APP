@@ -79,5 +79,7 @@
     <string name="preview_image_content_description">This ImageButton deals with a preview image to upload</string>
     <string name="go_to_upload">Go to upload</string>
     <string name="subir_contenido">Subir contenido</string>
+    <string name="facebook">facebook</string>
+    <string name="google">google</string>
 
 </resources>
