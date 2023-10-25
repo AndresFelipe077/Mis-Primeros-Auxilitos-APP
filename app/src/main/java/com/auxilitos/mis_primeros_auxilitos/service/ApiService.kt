@@ -36,7 +36,6 @@ interface ApiService {
     @POST("/api/contenidos")
     fun createContent(
         @Part("title") title: RequestBody,
-        @Part("slug") slug: RequestBody,
         @Part url: MultipartBody.Part,
         @Part("autor") autor: RequestBody,
         @Part("description") description: RequestBody,

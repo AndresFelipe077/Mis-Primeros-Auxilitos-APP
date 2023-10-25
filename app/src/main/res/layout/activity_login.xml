@@ -157,6 +157,7 @@
                     android:backgroundTint="#0C6EFC"
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:contentDescription="@string/iniciar_sesion"
                     />
 
 
@@ -230,7 +231,7 @@
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
                         app:srcCompat="@drawable/facebook"
-                        tools:ignore="ContentDescription"
+                        android:contentDescription="@string/facebook"
                         android:layout_margin="5dp"/>
 
                     <ImageButton
@@ -240,27 +241,25 @@
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
                         app:srcCompat="@drawable/google"
-                        tools:ignore="ContentDescription"
-                        android:layout_margin="5dp"/>
+                        android:layout_margin="5dp"
+                        android:contentDescription="@string/google" />
 
                 </LinearLayout>
 
 
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="287dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10sp"
-                    android:layout_marginBottom="10sp"
-                    android:background="@drawable/rounded"
-                    android:backgroundTint="#202528"
-                    android:fontFamily="@font/dynapuff"
-                    android:gravity="center"
-                    android:text="@string/copyryght"
-                    android:textColor="#FFFFFF"
-
-                    />
+     <!-- <TextView
+           android:id="@+id/textView6"
+           android:layout_width="287dp"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           android:layout_marginTop="10sp"
+           android:layout_marginBottom="10sp"
+           android:background="@drawable/rounded"
+           android:backgroundTint="#202528"
+           android:fontFamily="@font/dynapuff"
+           android:gravity="center"
+           android:text="@string/copyryght"
+           android:textColor="#FFFFFF"/>-->
 
 
             </LinearLayout>
