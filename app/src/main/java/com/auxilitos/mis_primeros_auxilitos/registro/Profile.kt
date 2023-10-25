@@ -37,7 +37,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
     var userData: User? = null
 
-    var userId = 0
+    private var userId = 0
 
     private lateinit var binding: ActivityProfileBinding
 
@@ -136,10 +136,12 @@ class Profile : AppCompatActivity(), View.OnClickListener {
 
         btnSeleccionarFecha.setOnClickListener(this)
 
+      checkBoxValidate(checkMasculino, checkFemenino, checkOtro)
+
       userData?.let { user ->
-        name.setText(user.name ?: "")
-        email.setText(user.email ?: "")
-        fechaNacimientoEditText.setText(user.fechaNacimiento ?: "")
+        name.setText(user.name)
+        email.setText(user.email)
+        fechaNacimientoEditText.setText(user.fechaNacimiento)
 
         // Maneja la selección de género
         checkMasculino.isChecked = user.genero == "Masculino"
@@ -163,7 +165,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
             if (validateEmail() and validateNameAndDate() and validateCheckBox()) {
                 if (name.text.toString().isNotEmpty() && email.text.toString()
                         .isNotEmpty() && fechaNacimientoEditText.text.toString()
-                        .isNotEmpty() && validateCheckBox()
+                        .isNotEmpty()
                 ) {
 
                   val userRequest = UserRequest(
@@ -242,6 +244,57 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         }
 
     }
+
+  /*private fun checkBoxValidate(): String{
+    val checkM = binding.checkBoxMasculino
+    val checkF = binding.checkBoxFemenino
+    val checkO = binding.checkBoxOtro
+    checkM.setOnCheckedChangeListener { _: CompoundButton, _: Boolean ->
+
+      if (checkM.isChecked) {
+        checkF.isEnabled = false
+        checkO.isEnabled = false
+
+      } else if (!checkM.isChecked) {
+        checkF.isEnabled = true
+        checkO.isEnabled = true
+      }
+
+    }
+
+    checkF.setOnCheckedChangeListener { _: CompoundButton, _: Boolean ->
+
+      if (checkF.isChecked) {
+        checkM.isEnabled = false
+        checkO.isEnabled = false
+
+      } else if (!checkF.isChecked) {
+        checkM.isEnabled = true
+        checkO.isEnabled = true
+      }
+    }
+
+    checkO.setOnCheckedChangeListener { _: CompoundButton, _: Boolean ->
+
+      if (checkO.isChecked) {
+        checkM.isEnabled = false
+        checkF.isEnabled = false
+
+      } else if (!checkO.isChecked) {
+        checkM.isEnabled = true
+        checkF.isEnabled = true
+      }
+    }
+
+    return if(checkM.isChecked) {
+      "Masculino"
+    } else if(checkF.isChecked) {
+      "Femenino"
+    } else{
+      "Otro"
+    }
+
+  }*/
 
     private fun validate() {
         val result = arrayOf(validateEmail(), validateNameAndDate(), validateCheckBox())
