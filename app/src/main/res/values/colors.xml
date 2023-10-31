@@ -12,5 +12,7 @@
     <color name="green">#198654</color>
     <color name="red">#FF0000</color>
     <color name="light_blue">#33B5E5</color>
+    <color name="mi_color_indigo">#A41ACC</color>
+
 
 </resources>
