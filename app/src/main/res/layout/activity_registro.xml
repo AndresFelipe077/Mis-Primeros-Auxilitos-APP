@@ -227,6 +227,7 @@
                         android:inputType="date"
                         android:textColor="#0c30ff"
                         android:textColorHint="#0c30ff"
+                        android:enabled="false"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>

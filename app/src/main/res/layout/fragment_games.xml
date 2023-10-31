@@ -53,6 +53,7 @@
                     app:cardCornerRadius="16dp"
                     app:cardBackgroundColor="#FFFFFF">
 
+
                     <ImageButton
                         android:id="@+id/btn_touch_first_aid_game"
                         android:layout_width="match_parent"
@@ -74,6 +75,7 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="16dp"
                     app:cardBackgroundColor="#DDFFFFFF">
+
 
                     <ImageButton
                         android:id="@+id/btn_selectObjectWeb"
@@ -105,6 +107,7 @@
                     app:cardCornerRadius="16dp"
                     app:cardBackgroundColor="#FFFFFF">
 
+
                     <ImageButton
                         android:id="@+id/btn_questions_game"
                         android:layout_width="match_parent"
@@ -126,7 +129,7 @@
                     android:layout_margin="8dp"
                     android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="16dp"
-                    app:cardBackgroundColor="#80FFFFFF">
+                    app:cardBackgroundColor="#FFFFFF">
 
                     <!--<ImageButton
                         android:layout_width="match_parent"

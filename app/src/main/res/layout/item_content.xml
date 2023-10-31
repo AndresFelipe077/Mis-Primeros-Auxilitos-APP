@@ -12,9 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_margin="8dp"
-        android:foreground="?android:attr/selectableItemBackground"
         card_view:cardCornerRadius="16dp"
-        card_view:cardBackgroundColor="#80FFFFFF"
+        card_view:cardBackgroundColor="#FFFFFF"
         android:layout_marginBottom="100dp">
 
         <LinearLayout

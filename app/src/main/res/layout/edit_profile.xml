@@ -245,6 +245,7 @@
                         android:inputType="date"
                         android:textColor="#0c30ff"
                         android:textColorHint="#0c30ff"
+                        android:enabled="false"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -277,6 +278,40 @@
                 app:hintAnimationEnabled="true"
                 app:errorEnabled="true"
                 app:errorIconDrawable="@null"/>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="NestedScrolling">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tlDescription"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10sp"
+                    android:layout_marginTop="15sp"
+                    android:hint="@string/descripcion"
+                    android:textColor="#0511F2"
+                    android:textColorHint="#0511F2"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:hintAnimationEnabled="true"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@null">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dynapuff"
+                        android:textColor="#0511F2"
+                        android:textColorHint="#0511F2" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </ScrollView>
 
 
         </LinearLayout>
