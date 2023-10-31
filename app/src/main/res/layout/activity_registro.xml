@@ -23,7 +23,6 @@
             android:layout_marginLeft="10sp"
             android:layout_marginTop="25dp"
             android:layout_marginRight="10sp"
-            android:background="@drawable/roundedlayout"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="15sp"
@@ -37,7 +36,7 @@
                 android:background="@drawable/grandient"
                 android:fontFamily="@font/dynapuff"
                 android:gravity="center"
-                android:padding="15sp"
+                android:padding="5sp"
                 android:text="@string/title"
                 android:textColor="@color/white"
                 android:textSize="30sp" />

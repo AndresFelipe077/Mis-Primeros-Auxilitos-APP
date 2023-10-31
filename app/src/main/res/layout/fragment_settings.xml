@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.settings.SettingsFragment"
     android:orientation="vertical"
-    android:background="@drawable/fondo_login"
+    android:background="@drawable/imagenperfil70"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     >
 
@@ -59,7 +59,7 @@
                     android:layout_marginStart="30dp"
                     android:foreground="?android:attr/selectableItemBackground"
                     card_view:cardCornerRadius="16dp"
-                    card_view:cardBackgroundColor="#80FFFFFF"
+                    card_view:cardBackgroundColor="#FFFFFF"
                     tools:ignore="RtlHardcoded">
 
                     <LinearLayout
@@ -107,7 +107,7 @@
                     android:layout_marginStart="30dp"
                     android:foreground="?android:attr/selectableItemBackground"
                     card_view:cardCornerRadius="16dp"
-                    card_view:cardBackgroundColor="#80FFFFFF"
+                    card_view:cardBackgroundColor="#FFFFFF"
                     tools:ignore="RtlHardcoded">
 
                     <LinearLayout
@@ -154,7 +154,7 @@
                     android:layout_marginStart="30dp"
                     android:foreground="?android:attr/selectableItemBackground"
                     card_view:cardCornerRadius="16dp"
-                    card_view:cardBackgroundColor="#80FFFFFF"
+                    card_view:cardBackgroundColor="#FFFFFF"
                     tools:ignore="RtlHardcoded">
 
                     <LinearLayout
@@ -201,7 +201,7 @@
                     android:layout_marginStart="30dp"
                     android:foreground="?android:attr/selectableItemBackground"
                     card_view:cardCornerRadius="16dp"
-                    card_view:cardBackgroundColor="#80FFFFFF"
+                    card_view:cardBackgroundColor="#FFFFFF"
                     tools:ignore="RtlHardcoded">
 
                     <LinearLayout

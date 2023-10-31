@@ -18,14 +18,13 @@
     <!--  SplashScreen-->
     <style name="splashScreen" parent="Theme.SplashScreen">
 
-        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenBackground">@color/mi_color_indigo</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
-        <item name="windowSplashScreenAnimationDuration">800</item>
-        <item name="android:windowSplashScreenBrandingImage" tools:ignore="NewApi">@drawable/letras_logo</item>
+        <item name="windowSplashScreenAnimationDuration">1200</item>
+        <item name="android:windowSplashScreenBrandingImage" tools:ignore="NewApi">@drawable/titulos3</item>
         <item name="postSplashScreenTheme">@style/Theme.MisPrimerosAuxilitos</item>
         <item name="android:fontFamily">@font/dynapuff</item>
 
     </style>
-    
-    
+
 </resources>
