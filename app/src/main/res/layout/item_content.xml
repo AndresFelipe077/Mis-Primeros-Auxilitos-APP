@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -46,6 +48,7 @@
                 android:visibility="gone"
                 tools:ignore="ContentDescription" />
 
+
             <TextView
                 android:id="@+id/author"
                 android:layout_width="match_parent"
@@ -53,6 +56,16 @@
                 android:text="@string/this_is_a_author"
                 android:layout_gravity="bottom"
                 android:layout_margin="10dp" />
+
+            <ImageView
+                android:id="@+id/btn_choose_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/edit_content"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#376A6363"
+                android:layout_gravity="center"
+                />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
