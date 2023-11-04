@@ -59,7 +59,7 @@
 
             <!--Button update-->
             <ImageView
-                android:id="@+id/btn_choose_image"
+                android:id="@+id/btn_update_content"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/edit_content"

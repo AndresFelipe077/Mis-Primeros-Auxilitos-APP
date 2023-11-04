@@ -18,6 +18,7 @@ import com.auxilitos.mis_primeros_auxilitos.classesImport.ModalBottomSheet
 import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.content.ContentPostActivity
+import com.auxilitos.mis_primeros_auxilitos.content.ContentUpdate
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityProfileBinding
 import com.auxilitos.mis_primeros_auxilitos.model.request.UserRequest
 import com.auxilitos.mis_primeros_auxilitos.model.response.RegisterResponse
@@ -97,12 +98,12 @@ class Profile : AppCompatActivity(), View.OnClickListener {
             dialog()
         }
 
+        binding.myContent.setOnClickListener{
+          startActivity(Intent(this, ContentUpdate::class.java))
+        }
+
         binding.eliminarCuenta.setOnClickListener {
-
-            //val deleteUser = ApiClient.getApiService().deleteUser()
             toast.toastError(this, "Mis Primeros Auxilitos", "Perfil eliminado")
-            //val deleteUser =
-
         }
 
         buttonSheet()
@@ -244,57 +245,6 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         }
 
     }
-
-  /*private fun checkBoxValidate(): String{
-    val checkM = binding.checkBoxMasculino
-    val checkF = binding.checkBoxFemenino
-    val checkO = binding.checkBoxOtro
-    checkM.setOnCheckedChangeListener { _: CompoundButton, _: Boolean ->
-
-      if (checkM.isChecked) {
-        checkF.isEnabled = false
-        checkO.isEnabled = false
-
-      } else if (!checkM.isChecked) {
-        checkF.isEnabled = true
-        checkO.isEnabled = true
-      }
-
-    }
-
-    checkF.setOnCheckedChangeListener { _: CompoundButton, _: Boolean ->
-
-      if (checkF.isChecked) {
-        checkM.isEnabled = false
-        checkO.isEnabled = false
-
-      } else if (!checkF.isChecked) {
-        checkM.isEnabled = true
-        checkO.isEnabled = true
-      }
-    }
-
-    checkO.setOnCheckedChangeListener { _: CompoundButton, _: Boolean ->
-
-      if (checkO.isChecked) {
-        checkM.isEnabled = false
-        checkF.isEnabled = false
-
-      } else if (!checkO.isChecked) {
-        checkM.isEnabled = true
-        checkF.isEnabled = true
-      }
-    }
-
-    return if(checkM.isChecked) {
-      "Masculino"
-    } else if(checkF.isChecked) {
-      "Femenino"
-    } else{
-      "Otro"
-    }
-
-  }*/
 
     private fun validate() {
         val result = arrayOf(validateEmail(), validateNameAndDate(), validateCheckBox())
