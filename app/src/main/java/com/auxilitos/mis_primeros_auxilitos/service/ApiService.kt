@@ -32,6 +32,9 @@ interface ApiService {
     @GET("/api/contenidos/{id}")
     fun getOneContent(@Path("id") id: String): Call<ContentResponse>
 
+    @GET("/api/my_content/{id}")
+    fun getMyContent(@Path("id") id:String): Call<ContentResponse>
+
     @Multipart
     @POST("/api/contenidos")
     fun createContent(

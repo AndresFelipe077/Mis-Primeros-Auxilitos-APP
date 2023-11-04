@@ -1,17 +1,17 @@
 package com.auxilitos.mis_primeros_auxilitos.content
 
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.auxilitos.mis_primeros_auxilitos.R
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.auxilitos.mis_primeros_auxilitos.MainActivity
-import com.auxilitos.mis_primeros_auxilitos.R
 import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
-import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityContentPostBinding
+import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityContentUpdateBinding
 import com.auxilitos.mis_primeros_auxilitos.model.request.ContentRequest
 import com.auxilitos.mis_primeros_auxilitos.model.response.User
 import com.auxilitos.mis_primeros_auxilitos.model.response.UserManager
@@ -33,9 +33,9 @@ import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
 
-class ContentPostActivity : AppCompatActivity() {
+class ContentUpdate : AppCompatActivity() {
 
-  private lateinit var binding: ActivityContentPostBinding
+  private lateinit var binding: ActivityContentUpdateBinding
   private val toast = ToastCustom()
   private lateinit var imageUri: Uri
 
@@ -67,7 +67,7 @@ class ContentPostActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    binding = ActivityContentPostBinding.inflate(layoutInflater)
+    binding = ActivityContentUpdateBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
     binding.btnChooseImage.setOnClickListener {
@@ -79,8 +79,8 @@ class ContentPostActivity : AppCompatActivity() {
     }
 
     createContent()
-
   }
+
 
   @SuppressLint("Recycle")
   private fun createContent() {
@@ -119,7 +119,7 @@ class ContentPostActivity : AppCompatActivity() {
 
         // Llamar a la función para enviar los datos al servidor
         if (contentRequest != null) {
-          postContent(contentRequest)
+          updateContent(contentRequest)
         }
 
       } else {
@@ -130,7 +130,7 @@ class ContentPostActivity : AppCompatActivity() {
     }
   }
 
-  private fun postContent(contentRequest: ContentRequest) {
+  private fun updateContent(contentRequest: ContentRequest) {
 
     CoroutineScope(Dispatchers.IO).launch {
       try {
@@ -142,7 +142,7 @@ class ContentPostActivity : AppCompatActivity() {
         val userIdRequestBody = contentRequest.user_id.toString().toRequestBody("text/plain".toMediaTypeOrNull())
 
         val response = titleRequestBody.let {
-          apiService.createContent(
+          apiService.updateContent(
             titleRequestBody,
             contentRequest.url,
             authorRequestBody,
@@ -154,18 +154,18 @@ class ContentPostActivity : AppCompatActivity() {
         withContext(Dispatchers.Main) {
           if (response.isSuccessful) {
             // Solicitud exitosa
-            toast.toastSuccess(this@ContentPostActivity, "Mis primeros auxilitos", "Contenido creado exitosamente, se revisará lo más pronto posible!!! 😊😊😊😊😊")
+            toast.toastSuccess(this@ContentUpdate, "Mis primeros auxilitos", "Contenido actualizado exitosamente, se revisará lo más pronto posible!!! 😊😊😊😊😊")
             startActivity(Intent(applicationContext, MainActivity::class.java))
           } else {
             // Manejar error
-            toast.toastError(this@ContentPostActivity, "Error", "Por favor, llena todos los campos")
+            toast.toastError(this@ContentUpdate, "Error", "Por favor, llena todos los campos")
           }
         }
       } catch (e: Exception) {
 
         // Manejar excepciones
         withContext(Dispatchers.Main) {
-          toast.toastError(this@ContentPostActivity, "Error", "e " + e.localizedMessage)
+          toast.toastError(this@ContentUpdate, "Error", "e " + e.localizedMessage)
         }
 
       }
@@ -188,7 +188,7 @@ class ContentPostActivity : AppCompatActivity() {
       }
 
       override fun onFailure(call: Call<User>, t: Throwable) {
-        toast.toastError(this@ContentPostActivity, "Conexión", "Error de conexión")
+        toast.toastError(this@ContentUpdate, "Conexión", "Error de conexión")
       }
     })
   }
