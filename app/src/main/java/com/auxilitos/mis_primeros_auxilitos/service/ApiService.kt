@@ -42,8 +42,15 @@ interface ApiService {
         @Part("user_id") userId: RequestBody
     ): Call<ContentResponse>
 
+    @Multipart
     @PUT("/api/contenidos/{id}")
-    fun updateContent(@Body contentRequest: ContentRequest, @Path("id") id: String): Call<ContentResponse>
+    fun updateContent(
+        @Part("title") title: RequestBody,
+        @Part url: MultipartBody.Part,
+        @Part("autor") autor: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("user_id") userId: RequestBody
+    ): Call<ContentResponse>
 
     @DELETE("/api/contenidos/{id}")
     fun deleteContent(@Body contentRequest: ContentRequest, @Path("id") id: String): Call<ContentResponse>

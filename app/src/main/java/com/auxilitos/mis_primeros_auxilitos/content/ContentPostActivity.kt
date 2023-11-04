@@ -172,6 +172,46 @@ class ContentPostActivity : AppCompatActivity() {
     }
   }
 
+  private suspend fun updateContent(contentRequest: ContentRequest) {
+    try {
+      val apiService = ApiClient.getApiService()
+
+      val titleRequestBody = contentRequest.title.toRequestBody("text/plain".toMediaTypeOrNull())
+      val authorRequestBody = contentRequest.autor.toRequestBody("text/plain".toMediaTypeOrNull())
+      val descriptionRequestBody = contentRequest.description.toRequestBody("text/plain".toMediaTypeOrNull())
+      val userIdRequestBody = contentRequest.user_id.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+
+      val response = titleRequestBody.let {
+        apiService.updateContent(
+          titleRequestBody,
+          contentRequest.url,
+          authorRequestBody,
+          descriptionRequestBody,
+          userIdRequestBody
+        ).execute()
+      }
+
+      withContext(Dispatchers.Main) {
+        if (response.isSuccessful) {
+          // Solicitud exitosa
+          toast.toastSuccess(
+            this@ContentPostActivity,
+            "Mis primeros auxilios",
+            "Contenido actualizado exitosamente, se revisará lo más pronto posible!!! 😊😊😊😊😊"
+          )
+          startActivity(Intent(applicationContext, MainActivity::class.java))
+        } else {
+          // Manejar error
+          toast.toastError(this@ContentPostActivity, "Error", "Por favor, llena todos los campos")
+        }
+      }
+    } catch (e: Exception) {
+      // Manejar excepciones
+      withContext(Dispatchers.Main) {
+        toast.toastError(this@ContentPostActivity, "Error", "Error: ${e.localizedMessage}")
+      }
+    }
+  }
 
   /**
    *  Get data of User by id login
