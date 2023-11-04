@@ -82,5 +82,6 @@
     <string name="facebook">facebook</string>
     <string name="google">google</string>
     <string name="mi_contenido">Mi contenido</string>
+    <string name="editar_contenido">Editar contenido</string>
 
 </resources>
