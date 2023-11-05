@@ -10,7 +10,7 @@ class MyContentAdapter(private val contentList: List<ContentResponse>) : Recycle
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyContentViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return MyContentViewHolder(layoutInflater.inflate(R.layout.item_content, parent, false))
+        return MyContentViewHolder(layoutInflater.inflate(R.layout.my_item_content, parent, false))
     }
 
     override fun getItemCount(): Int =  contentList.size

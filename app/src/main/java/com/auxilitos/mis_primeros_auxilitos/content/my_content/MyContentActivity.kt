@@ -1,7 +1,9 @@
 package com.auxilitos.mis_primeros_auxilitos.content.my_content
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.auxilitos.mis_primeros_auxilitos.registro.Profile
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
@@ -33,6 +35,10 @@ class MyContentActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     binding = ActivityMyContentBinding.inflate(layoutInflater)
     setContentView(binding.root)
+
+    binding.btnReturn.setOnClickListener {
+      startActivity(Intent(this, Profile::class.java))
+    }
 
     userId = UserManager.getUserId()
 
