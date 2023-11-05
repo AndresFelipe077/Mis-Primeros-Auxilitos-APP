@@ -29,8 +29,6 @@ class MyContentActivity : AppCompatActivity() {
 
   private var _contentData = mutableListOf<ContentResponse>()
 
-
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityMyContentBinding.inflate(layoutInflater)
@@ -44,8 +42,6 @@ class MyContentActivity : AppCompatActivity() {
 
     getUserProfile(userId.toString())
 
-    getMyContent()
-
     initRecyclerView()
 
   }// Fin onCreate
@@ -53,7 +49,8 @@ class MyContentActivity : AppCompatActivity() {
   private fun initRecyclerView()
   {
     binding.recyclerMyContent.layoutManager = LinearLayoutManager(this)
-    binding.recyclerMyContent.adapter = MyContentAdapter(_contentData)
+    //binding.recyclerMyContent.adapter = MyContentAdapter(_contentData)
+    getMyContent()
   }
 
   private fun getMyContent() {
@@ -68,7 +65,8 @@ class MyContentActivity : AppCompatActivity() {
           if (response.isSuccessful) {
             val contentResponseList = response.body()
             contentResponseList?.let {
-              _contentData = it.toMutableList()
+              val myContent = MyContentAdapter(contentResponseList)
+              binding.recyclerMyContent.adapter = myContent
             }
           }
         }
