@@ -27,8 +27,6 @@ class MyContentActivity : AppCompatActivity() {
   var userData: User? = null
   private var userId = 0
 
-  private var _contentData = mutableListOf<ContentResponse>()
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityMyContentBinding.inflate(layoutInflater)
@@ -72,6 +70,7 @@ class MyContentActivity : AppCompatActivity() {
         }
 
         override fun onFailure(call: Call<List<ContentResponse>>, t: Throwable) {
+          toast.toastError(this@MyContentActivity, "Error 😢😢😢😢😢", "Ups!, ha ocurrido un error")
           Log.e("Error content", t.toString())
         }
       })
