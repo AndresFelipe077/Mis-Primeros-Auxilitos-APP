@@ -6,18 +6,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.auxilitos.mis_primeros_auxilitos.R
 import com.auxilitos.mis_primeros_auxilitos.model.response.ContentResponse
 
-class ContentAdapter(private val contentList: List<ContentResponse>) : RecyclerView.Adapter<ContentViewHolder>() {
+class MyContentAdapter(private val contentList: List<ContentResponse>) : RecyclerView.Adapter<MyContentViewHolder>() {
 
     //private val verifiedContentList = contentList.filter { it.verified }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyContentViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return ContentViewHolder(layoutInflater.inflate(R.layout.item_content, parent, false))
+        return MyContentViewHolder(layoutInflater.inflate(R.layout.item_content, parent, false))
     }
 
     override fun getItemCount(): Int =  contentList.size
 
-    override fun onBindViewHolder(holder: ContentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyContentViewHolder, position: Int) {
         val item = contentList[position]
         holder.render(item)
     }

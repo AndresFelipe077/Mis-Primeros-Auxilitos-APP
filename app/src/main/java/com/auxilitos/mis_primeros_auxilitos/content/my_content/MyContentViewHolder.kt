@@ -9,7 +9,7 @@ import com.auxilitos.mis_primeros_auxilitos.databinding.ItemContentBinding
 import com.auxilitos.mis_primeros_auxilitos.model.response.ContentResponse
 import com.bumptech.glide.Glide
 
-class ContentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class MyContentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding: ItemContentBinding = ItemContentBinding.bind(view)
 
