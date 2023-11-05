@@ -8,8 +8,6 @@ import com.auxilitos.mis_primeros_auxilitos.model.response.ContentResponse
 
 class MyContentAdapter(private val contentList: List<ContentResponse>) : RecyclerView.Adapter<MyContentViewHolder>() {
 
-    //private val verifiedContentList = contentList.filter { it.verified }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyContentViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return MyContentViewHolder(layoutInflater.inflate(R.layout.item_content, parent, false))

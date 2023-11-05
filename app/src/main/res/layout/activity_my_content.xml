@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/text_home"
-        android:text="@string/title_home"
+        android:text="@string/mi_contenido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -32,7 +32,7 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
+                android:id="@+id/recycler_my_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 

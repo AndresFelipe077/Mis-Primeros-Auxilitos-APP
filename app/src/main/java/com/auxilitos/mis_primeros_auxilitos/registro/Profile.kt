@@ -19,6 +19,7 @@ import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.content.ContentPostActivity
 import com.auxilitos.mis_primeros_auxilitos.content.ContentUpdate
+import com.auxilitos.mis_primeros_auxilitos.content.my_content.MyContentActivity
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityProfileBinding
 import com.auxilitos.mis_primeros_auxilitos.model.request.UserRequest
 import com.auxilitos.mis_primeros_auxilitos.model.response.RegisterResponse
@@ -99,7 +100,7 @@ class Profile : AppCompatActivity(), View.OnClickListener {
         }
 
         binding.myContent.setOnClickListener{
-          startActivity(Intent(this, ContentUpdate::class.java))
+          startActivity(Intent(this, MyContentActivity::class.java))
         }
 
         binding.eliminarCuenta.setOnClickListener {

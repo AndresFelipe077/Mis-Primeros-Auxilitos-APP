@@ -5,13 +5,13 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.auxilitos.mis_primeros_auxilitos.R
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
-import com.auxilitos.mis_primeros_auxilitos.databinding.ItemContentBinding
+import com.auxilitos.mis_primeros_auxilitos.databinding.MyItemContentBinding
 import com.auxilitos.mis_primeros_auxilitos.model.response.ContentResponse
 import com.bumptech.glide.Glide
 
 class MyContentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    private val binding: ItemContentBinding = ItemContentBinding.bind(view)
+    private val binding: MyItemContentBinding = MyItemContentBinding.bind(view)
 
     fun render(contentModel: ContentResponse) {
         binding.title.text = contentModel.title
@@ -40,7 +40,7 @@ class MyContentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             }
 
             // Manejar clics en otro lugar para detener la reproducción
-            binding.itemLayout.setOnClickListener {
+            binding.myItemLayout.setOnClickListener {
                 if (binding.videoView.isPlaying) {
                     binding.videoView.stopPlayback() // Detener la reproducción si se está reproduciendo
                 }
