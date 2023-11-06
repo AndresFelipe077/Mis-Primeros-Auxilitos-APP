@@ -6,7 +6,9 @@ import com.auxilitos.mis_primeros_auxilitos.R
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.auxilitos.mis_primeros_auxilitos.MainActivity
@@ -71,7 +73,6 @@ class ContentUpdate : AppCompatActivity() {
     }
   }
 
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityContentUpdateBinding.inflate(layoutInflater)
@@ -133,12 +134,15 @@ class ContentUpdate : AppCompatActivity() {
             part,
             autor = user.name,
             description,
-            user_id = user.id
+            user_id = myContent?.let { myContent ->
+              parseInt(myContent.user_id)
+            } ?: 0
           )
         }
 
         // Llamar a la función para enviar los datos al servidor
         if (contentRequest != null) {
+          Log.e("CONTENT", "${contentRequest}")
           updateContent(contentRequest)
         }
 
@@ -224,6 +228,7 @@ class ContentUpdate : AppCompatActivity() {
       override fun onResponse(call: Call<ContentResponse>, response: Response<ContentResponse>) {
         if (response.isSuccessful) {
           val myContent = response.body()
+          this@ContentUpdate.myContent = myContent
           myContent?.let {
             findViewById<TextView>(R.id.title_update).text          = it.title
             findViewById<TextView>(R.id.description_update).text    = it.description
