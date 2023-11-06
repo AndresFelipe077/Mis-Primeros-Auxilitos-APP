@@ -6,6 +6,7 @@ import com.auxilitos.mis_primeros_auxilitos.R
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.auxilitos.mis_primeros_auxilitos.MainActivity
@@ -69,6 +70,14 @@ class ContentUpdate : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     binding = ActivityContentUpdateBinding.inflate(layoutInflater)
     setContentView(binding.root)
+
+    val intent = intent
+    if (intent != null && intent.hasExtra("CONTENIDO_ID")) {
+      val contenidoId = intent.getStringExtra("CONTENIDO_ID")
+      Log.d("Contenido ID", "ID del contenido: $contenidoId")
+    } else {
+      toast.toastError(this, "Error", "Ups!, ha ocurrido un error inesperado, intentalo de nuevo o más tarde")
+    }
 
     binding.btnChooseImage.setOnClickListener {
       contract.launch("image/*")

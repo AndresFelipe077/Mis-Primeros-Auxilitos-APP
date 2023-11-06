@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Integer.parseInt
 
 class MyContentActivity : AppCompatActivity() {
 
@@ -81,13 +82,13 @@ class MyContentActivity : AppCompatActivity() {
     }
   }
 
-  fun onItemSelected(myContentResponse: ContentResponse)
-  {
-    toast.toastSuccess(this, "id", myContentResponse.id)
+  fun onItemSelected(myContentResponse: ContentResponse) {
+    Log.d("Contenido ID", "ID del contenido: ${myContentResponse.id}")
     val intent = Intent(this, ContentUpdate::class.java)
     intent.putExtra("CONTENIDO_ID", myContentResponse.id)
     startActivity(intent)
   }
+
 
   private fun getUserProfile(userId: String) {
     val apiService = ApiClient.getApiService()
