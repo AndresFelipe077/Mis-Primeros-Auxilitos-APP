@@ -48,12 +48,14 @@ interface ApiService {
     @Multipart
     @PUT("/api/contenidos/{id}")
     fun updateContent(
+        @Path("id") id: String, // Capturar la ID como un parámetro de ruta
         @Part("title") title: RequestBody,
         @Part url: MultipartBody.Part,
         @Part("autor") autor: RequestBody,
         @Part("description") description: RequestBody,
         @Part("user_id") userId: RequestBody
     ): Call<ContentResponse>
+
 
     @DELETE("/api/contenidos/{id}")
     fun deleteContent(@Body contentRequest: ContentRequest, @Path("id") id: String): Call<ContentResponse>

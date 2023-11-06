@@ -17,6 +17,7 @@ import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityContentUpdateBin
 import com.auxilitos.mis_primeros_auxilitos.model.request.ContentRequest
 import com.auxilitos.mis_primeros_auxilitos.model.response.ContentResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.User
+import com.auxilitos.mis_primeros_auxilitos.model.response.UserManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
@@ -25,17 +26,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.io.FileOutputStream
 import java.lang.Integer.parseInt
 
 class ContentUpdate : AppCompatActivity() {
 
   private lateinit var binding: ActivityContentUpdateBinding
   private val toast = ToastCustom()
-  private lateinit var imageUri: Uri
+  private lateinit var imageUriToUpdate: Uri
 
   private var contentId = 0
 
@@ -46,7 +51,7 @@ class ContentUpdate : AppCompatActivity() {
 
   private val contract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
     uri?.let {
-      imageUri = it
+      imageUriToUpdate = it
       binding.imageUrlUpdate.setImageURI(it)
 
       val borderDrawable = ContextCompat.getDrawable(this, R.drawable.bordernavigation) // Obtén el fondo redondeado desde los recursos
@@ -58,7 +63,7 @@ class ContentUpdate : AppCompatActivity() {
         .diskCacheStrategy(DiskCacheStrategy.NONE) // Evita el almacenamiento en caché de la imagen para que se vuelva a cargar cada vez
 
       Glide.with(this)
-        .load(imageUri)
+        .load(imageUriToUpdate)
         .apply(requestOptions)
         .centerCrop() // Escala la imagen para llenar el área del ImageButton mientras mantiene las proporciones y corta el exceso
         .into(binding.imageUrlUpdate)
@@ -72,19 +77,19 @@ class ContentUpdate : AppCompatActivity() {
     binding = ActivityContentUpdateBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
-    getIdMyContent()
-
-    getMyContentById(contentId)
-
     binding.btnChooseImage.setOnClickListener {
       contract.launch("image/*")
     }
+
+    getIdMyContent()
+
+    getMyContentById(contentId)
 
     binding.btnReturn.setOnClickListener {
       startActivity(Intent(this, MyContentActivity::class.java))
     }
 
-    //updateContent()
+    sendContentToUpdate()
   }
 
   private fun getIdMyContent()
@@ -94,6 +99,54 @@ class ContentUpdate : AppCompatActivity() {
       contentId = intent.getStringExtra("CONTENIDO_ID")?.let { parseInt(it) }!!
     } else {
       toast.toastError(this, "Error", "Ups!, ha ocurrido un error inesperado, intentalo de nuevo o más tarde")
+    }
+  }
+
+  @SuppressLint("Recycle")
+  private fun sendContentToUpdate() {
+
+    userId = UserManager.getUserId()
+
+    getUserProfile(userId.toString())
+
+    binding.btnUploadContent.setOnClickListener {
+
+      val filesDir = applicationContext.filesDir
+      val file = File(filesDir, "image.png")
+
+      val inputStream = imageUriToUpdate.let { contentResolver.openInputStream(it) }
+      val outputStream = FileOutputStream(file)
+      inputStream!!.copyTo(outputStream)
+
+      val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+      val part = MultipartBody.Part.createFormData("url", file.name, requestBody)
+
+      val title = binding.titleUpdate.text.toString()
+      val description = binding.descriptionUpdate.text.toString()
+
+      if (title.isNotEmpty() && description.isNotEmpty()) {
+
+        // Object of content
+        val contentRequest = userData?.let { user ->
+          ContentRequest(
+            title,
+            part,
+            autor = user.name,
+            description,
+            user_id = user.id
+          )
+        }
+
+        // Llamar a la función para enviar los datos al servidor
+        if (contentRequest != null) {
+          updateContent(contentRequest)
+        }
+
+      } else {
+
+        toast.toastWarning(this, "Campos incompletos", "Completa los campos y selecciona una imagen")
+
+      }
     }
   }
 
@@ -110,6 +163,7 @@ class ContentUpdate : AppCompatActivity() {
 
         val response = titleRequestBody.let {
           apiService.updateContent(
+            contentId.toString(),
             titleRequestBody,
             contentRequest.url,
             authorRequestBody,
