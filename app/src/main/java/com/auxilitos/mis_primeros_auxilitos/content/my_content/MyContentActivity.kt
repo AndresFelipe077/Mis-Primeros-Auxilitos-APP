@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
+import com.auxilitos.mis_primeros_auxilitos.content.ContentUpdate
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityMyContentBinding
 import com.auxilitos.mis_primeros_auxilitos.model.response.ContentResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.User
@@ -47,7 +48,6 @@ class MyContentActivity : AppCompatActivity() {
   private fun initRecyclerView()
   {
     binding.recyclerMyContent.layoutManager = LinearLayoutManager(this)
-    //binding.recyclerMyContent.adapter = MyContentAdapter(_contentData)
     getMyContent()
   }
 
@@ -63,7 +63,11 @@ class MyContentActivity : AppCompatActivity() {
           if (response.isSuccessful) {
             val contentResponseList = response.body()
             contentResponseList?.let {
-              val myContent = MyContentAdapter(contentResponseList)
+              val myContent = MyContentAdapter(contentResponseList) { myContent ->
+                onItemSelected(
+                  myContent
+                )
+              }
               binding.recyclerMyContent.adapter = myContent
             }
           }
@@ -75,6 +79,14 @@ class MyContentActivity : AppCompatActivity() {
         }
       })
     }
+  }
+
+  fun onItemSelected(myContentResponse: ContentResponse)
+  {
+    toast.toastSuccess(this, "id", myContentResponse.id)
+    val intent = Intent(this, ContentUpdate::class.java)
+    intent.putExtra("CONTENIDO_ID", myContentResponse.id)
+    startActivity(intent)
   }
 
   private fun getUserProfile(userId: String) {

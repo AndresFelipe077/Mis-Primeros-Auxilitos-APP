@@ -1,10 +1,14 @@
 package com.auxilitos.mis_primeros_auxilitos.content.my_content
 
+import android.content.Intent
 import android.net.Uri
 import android.view.View
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.auxilitos.mis_primeros_auxilitos.R
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
+import com.auxilitos.mis_primeros_auxilitos.content.ContentUpdate
 import com.auxilitos.mis_primeros_auxilitos.databinding.MyItemContentBinding
 import com.auxilitos.mis_primeros_auxilitos.model.response.ContentResponse
 import com.bumptech.glide.Glide
@@ -13,9 +17,12 @@ class MyContentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding: MyItemContentBinding = MyItemContentBinding.bind(view)
 
-    fun render(contentModel: ContentResponse) {
+    fun render(contentModel: ContentResponse, onClickListener:(ContentResponse) -> Unit) {
         binding.title.text = contentModel.title
         binding.author.text = contentModel.autor
+
+
+        itemView.setOnClickListener { onClickListener(contentModel) }
 
         // Verificar si la URL es para un video o una imagen
         if (contentModel.url.matches(Regex(".+\\.(mp4|avi|mov|mkv|wmv|flv|webm)$", RegexOption.IGNORE_CASE))) {

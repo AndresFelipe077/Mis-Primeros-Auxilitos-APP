@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.auxilitos.mis_primeros_auxilitos.R
 import com.auxilitos.mis_primeros_auxilitos.model.response.ContentResponse
 
-class MyContentAdapter(private val contentList: List<ContentResponse>) : RecyclerView.Adapter<MyContentViewHolder>() {
+class MyContentAdapter(private val contentList: List<ContentResponse>, private val onClickListener:(ContentResponse) -> Unit) : RecyclerView.Adapter<MyContentViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyContentViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -17,7 +17,7 @@ class MyContentAdapter(private val contentList: List<ContentResponse>) : Recycle
 
     override fun onBindViewHolder(holder: MyContentViewHolder, position: Int) {
         val item = contentList[position]
-        holder.render(item)
+        holder.render(item, onClickListener)
     }
 
 }
