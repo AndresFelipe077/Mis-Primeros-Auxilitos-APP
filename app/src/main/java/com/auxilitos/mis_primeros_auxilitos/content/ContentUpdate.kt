@@ -42,16 +42,18 @@ class ContentUpdate : AppCompatActivity() {
 
   private lateinit var binding: ActivityContentUpdateBinding
   private val toast = ToastCustom()
-  private lateinit var imageUriToUpdate: Uri
 
   private var contentId = 0
 
-  private var myContent: ContentResponse? = null
+  private var myContentToUpdate: ContentResponse? = null
+
+  //private lateinit var imageUriToUpdate: Uri
+  private var imageUriToUpdate = Uri.parse(ApiClient.baseUrl + myContentToUpdate?.url)
 
   private var userData: User? = null
   private var userId = 0
 
-  private val contract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+  /*private val contract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
     uri?.let {
       imageUriToUpdate = it
       binding.imageUrlUpdate.setImageURI(it)
@@ -71,7 +73,33 @@ class ContentUpdate : AppCompatActivity() {
         .into(binding.imageUrlUpdate)
 
     }
+  }*/
+
+  private val contract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+    uri?.let {
+      // Usuario seleccionó una nueva imagen
+      imageUriToUpdate = it
+      // Resto del código para cargar y mostrar la imagen...
+      loadAndDisplayImage(imageUriToUpdate.toString())
+    } ?: run {
+      // Usuario no seleccionó una nueva imagen, usa la imagen existente
+      loadAndDisplayImage(imageUriToUpdate.toString())
+    }
   }
+
+  private fun loadAndDisplayImage(imageUrl: String) {
+    val requestOptions = RequestOptions()
+      .placeholder(R.drawable.image_preview) // Imagen de placeholder mientras se carga la imagen
+      .error(R.drawable.error) // Imagen de error si la carga falla
+      .diskCacheStrategy(DiskCacheStrategy.NONE) // Evita el almacenamiento en caché de la imagen para que se vuelva a cargar cada vez
+
+    Glide.with(this)
+      .load(imageUrl)
+      .apply(requestOptions)
+      .centerCrop() // Escala la imagen para llenar el área del ImageButton mientras mantiene las proporciones y corta el exceso
+      .into(binding.imageUrlUpdate)
+  }
+
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -112,15 +140,20 @@ class ContentUpdate : AppCompatActivity() {
 
     binding.btnUploadContent.setOnClickListener {
 
-      val filesDir = applicationContext.filesDir
-      val file = File(filesDir, "image.png")
+      var part: MultipartBody.Part? = null
 
-      val inputStream = imageUriToUpdate.let { contentResolver.openInputStream(it) }
-      val outputStream = FileOutputStream(file)
-      inputStream!!.copyTo(outputStream)
+      if(imageUriToUpdate != null) {
+        val filesDir = applicationContext.filesDir
+        val file = File(filesDir, "image.png")
 
-      val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-      val part = MultipartBody.Part.createFormData("url", file.name, requestBody)
+        val inputStream = imageUriToUpdate.let { contentResolver.openInputStream(it) }
+
+        val outputStream = FileOutputStream(file)
+        inputStream!!.copyTo(outputStream)
+
+        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+        part = MultipartBody.Part.createFormData("url", file.name, requestBody)
+      }
 
       val title = binding.titleUpdate.text.toString()
       val description = binding.descriptionUpdate.text.toString()
@@ -131,11 +164,11 @@ class ContentUpdate : AppCompatActivity() {
         val contentRequest = userData?.let { user ->
           ContentRequest(
             title,
-            part,
+            part!!,
             autor = user.name,
             description,
-            user_id = myContent?.let { myContent ->
-              parseInt(myContent.user_id)
+            user_id = myContentToUpdate?.let { myContentToUpdate ->
+              parseInt(myContentToUpdate.user_id)
             } ?: 0
           )
         }
@@ -228,14 +261,14 @@ class ContentUpdate : AppCompatActivity() {
       override fun onResponse(call: Call<ContentResponse>, response: Response<ContentResponse>) {
         if (response.isSuccessful) {
           val myContent = response.body()
-          this@ContentUpdate.myContent = myContent
+          myContentToUpdate = myContent
           myContent?.let {
             findViewById<TextView>(R.id.title_update).text          = it.title
             findViewById<TextView>(R.id.description_update).text    = it.description
             Glide.with(this@ContentUpdate)
               .load(ApiClient.baseUrl + it.url)
-              .placeholder(R.drawable.logo) // Imagen de carga mientras se carga la imagen
-              .error(R.drawable.logo) // Imagen de error si no se puede cargar la imagen
+              .placeholder(R.drawable.logo)
+              .error(R.drawable.logo)
               .into(binding.imageUrlUpdate)
           }
         }
