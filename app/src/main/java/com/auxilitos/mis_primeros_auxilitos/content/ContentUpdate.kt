@@ -46,7 +46,7 @@ class ContentUpdate : AppCompatActivity() {
 
   private var myContentToUpdate: ContentResponse? = null
 
-  private lateinit var imageUriToUpdate: Uri
+  private var imageUriToUpdate: Uri? = null
 
   private var userData: User? = null
   private var userId = 0
@@ -122,20 +122,26 @@ class ContentUpdate : AppCompatActivity() {
 
     binding.btnUploadContent.setOnClickListener {
 
-      val part: MultipartBody.Part?
+      //val part: MultipartBody.Part?
 
       val filesDir = applicationContext.filesDir
       val file = File(filesDir, "image.png")
 
-      val inputStream = imageUriToUpdate.let { contentResolver.openInputStream(it) }
+      val part: MultipartBody.Part? = imageUriToUpdate?.let { uri ->
+        val inputStream = contentResolver.openInputStream(uri)
+        val file = File(applicationContext.filesDir, "image.png")
+        inputStream?.use { input ->
+          FileOutputStream(file).use { output ->
+            input.copyTo(output)
+          }
+        }
+        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+        MultipartBody.Part.createFormData("url", file.name, requestBody)
+      }
 
-      val outputStream = FileOutputStream(file)
-      inputStream!!.copyTo(outputStream)
-
-      val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-      part = MultipartBody.Part.createFormData("url", file.name, requestBody)
 
       val title = binding.titleUpdate.text.toString()
+
       val description = binding.descriptionUpdate.text.toString()
 
       if (title.isNotEmpty() && description.isNotEmpty()) {
@@ -147,9 +153,7 @@ class ContentUpdate : AppCompatActivity() {
             part,
             autor = user.name,
             description,
-            user_id = myContentToUpdate?.let { myContentToUpdate ->
-              parseInt(myContentToUpdate.user_id)
-            } ?: 0
+            user_id = myContentToUpdate?.user_id?.toIntOrNull() ?: 0
           )
         }
 
@@ -193,7 +197,7 @@ class ContentUpdate : AppCompatActivity() {
           if (response.isSuccessful) {
             // Solicitud exitosa
             toast.toastSuccess(this@ContentUpdate, "Mis primeros auxilitos", "Contenido actualizado exitosamente, se revisará lo más pronto posible!!! 😊😊😊😊😊")
-            startActivity(Intent(applicationContext, MainActivity::class.java))
+            startActivity(Intent(applicationContext, MyContentActivity::class.java))
           } else {
             // Manejar error
             toast.toastError(this@ContentUpdate, "Error", "Por favor, llena todos los campos")
