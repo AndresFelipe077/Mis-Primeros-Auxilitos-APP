@@ -260,7 +260,6 @@ class ContentUpdate : AppCompatActivity() {
     })
   }
 
-
   private fun deleteContentById(contentId: String) {
     val apiService = ApiClient.getApiService()
 
