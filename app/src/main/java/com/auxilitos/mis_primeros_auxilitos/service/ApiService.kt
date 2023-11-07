@@ -46,7 +46,7 @@ interface ApiService {
     ): Call<ContentResponse>
 
     @Multipart
-    @PUT("/api/contenidos/{id}")
+    @POST("/api/update_content/{id}")
     fun updateContent(
         @Path("id") id: String, // Capturar la ID como un parámetro de ruta
         @Part("title") title: RequestBody,
