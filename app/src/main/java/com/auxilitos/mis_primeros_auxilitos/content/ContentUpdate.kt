@@ -1,21 +1,24 @@
 package com.auxilitos.mis_primeros_auxilitos.content
 
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.auxilitos.mis_primeros_auxilitos.R
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
+import android.util.Log
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.auxilitos.mis_primeros_auxilitos.MainActivity
-import com.auxilitos.mis_primeros_auxilitos.R
 import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
-import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityContentPostBinding
+import com.auxilitos.mis_primeros_auxilitos.content.my_content.MyContentActivity
+import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityContentUpdateBinding
 import com.auxilitos.mis_primeros_auxilitos.model.request.ContentRequest
+import com.auxilitos.mis_primeros_auxilitos.model.response.ContentResponse
 import com.auxilitos.mis_primeros_auxilitos.model.response.User
 import com.auxilitos.mis_primeros_auxilitos.model.response.UserManager
-import com.auxilitos.mis_primeros_auxilitos.registro.Profile
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
@@ -32,23 +35,29 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
+import java.lang.Integer.parseInt
 
-class ContentPostActivity : AppCompatActivity() {
+class ContentUpdate : AppCompatActivity() {
 
-  private lateinit var binding: ActivityContentPostBinding
+  private lateinit var binding: ActivityContentUpdateBinding
   private val toast = ToastCustom()
-  private lateinit var imageUri: Uri
 
-  var userData: User? = null
+  private var contentId = 0
+
+  private var myContentToUpdate: ContentResponse? = null
+
+  private lateinit var imageUriToUpdate: Uri
+
+  private var userData: User? = null
   private var userId = 0
 
   private val contract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
     uri?.let {
-      imageUri = it
-      binding.imageUrl.setImageURI(it)
+      imageUriToUpdate = it
+      binding.imageUrlUpdate.setImageURI(it)
 
       val borderDrawable = ContextCompat.getDrawable(this, R.drawable.bordernavigation) // Obtén el fondo redondeado desde los recursos
-      binding.imageUrl.background = borderDrawable // Establece el fondo redondeado en el ImageButton
+      binding.imageUrlUpdate.background = borderDrawable // Establece el fondo redondeado en el ImageButton
 
       val requestOptions = RequestOptions()
         .placeholder(R.drawable.image_preview) // Imagen de placeholder mientras se carga la imagen
@@ -56,34 +65,46 @@ class ContentPostActivity : AppCompatActivity() {
         .diskCacheStrategy(DiskCacheStrategy.NONE) // Evita el almacenamiento en caché de la imagen para que se vuelva a cargar cada vez
 
       Glide.with(this)
-        .load(imageUri)
+        .load(imageUriToUpdate)
         .apply(requestOptions)
         .centerCrop() // Escala la imagen para llenar el área del ImageButton mientras mantiene las proporciones y corta el exceso
-        .into(binding.imageUrl)
+        .into(binding.imageUrlUpdate)
 
     }
   }
 
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    binding = ActivityContentPostBinding.inflate(layoutInflater)
+    binding = ActivityContentUpdateBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
     binding.btnChooseImage.setOnClickListener {
       contract.launch("image/*")
     }
 
+    getIdMyContent()
+
+    getMyContentById(contentId)
+
     binding.btnReturn.setOnClickListener {
-      startActivity(Intent(this, Profile::class.java))
+      startActivity(Intent(this, MyContentActivity::class.java))
     }
 
-    createContent()
+    sendContentToUpdate()
+  }
 
+  private fun getIdMyContent()
+  {
+    val intent = intent
+    if (intent != null && intent.hasExtra("CONTENIDO_ID")) {
+      contentId = intent.getStringExtra("CONTENIDO_ID")?.let { parseInt(it) }!!
+    } else {
+      toast.toastError(this, "Error", "Ups!, ha ocurrido un error inesperado, intentalo de nuevo o más tarde")
+    }
   }
 
   @SuppressLint("Recycle")
-  private fun createContent() {
+  private fun sendContentToUpdate() {
 
     userId = UserManager.getUserId()
 
@@ -91,18 +112,21 @@ class ContentPostActivity : AppCompatActivity() {
 
     binding.btnUploadContent.setOnClickListener {
 
+      val part: MultipartBody.Part?
+
       val filesDir = applicationContext.filesDir
       val file = File(filesDir, "image.png")
 
-      val inputStream = imageUri.let { contentResolver.openInputStream(it) }
+      val inputStream = imageUriToUpdate.let { contentResolver.openInputStream(it) }
+
       val outputStream = FileOutputStream(file)
       inputStream!!.copyTo(outputStream)
 
       val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-      val part = MultipartBody.Part.createFormData("url", file.name, requestBody)
+      part = MultipartBody.Part.createFormData("url", file.name, requestBody)
 
-      val title = binding.title.text.toString()
-      val description = binding.description.text.toString()
+      val title = binding.titleUpdate.text.toString()
+      val description = binding.descriptionUpdate.text.toString()
 
       if (title.isNotEmpty() && description.isNotEmpty()) {
 
@@ -113,13 +137,16 @@ class ContentPostActivity : AppCompatActivity() {
             part,
             autor = user.name,
             description,
-            user_id = user.id
+            user_id = myContentToUpdate?.let { myContentToUpdate ->
+              parseInt(myContentToUpdate.user_id)
+            } ?: 0
           )
         }
 
         // Llamar a la función para enviar los datos al servidor
         if (contentRequest != null) {
-          postContent(contentRequest)
+          Log.e("CONTENT", "${contentRequest}")
+          updateContent(contentRequest)
         }
 
       } else {
@@ -130,7 +157,7 @@ class ContentPostActivity : AppCompatActivity() {
     }
   }
 
-  private fun postContent(contentRequest: ContentRequest) {
+  private fun updateContent(contentRequest: ContentRequest) {
 
     CoroutineScope(Dispatchers.IO).launch {
       try {
@@ -142,7 +169,8 @@ class ContentPostActivity : AppCompatActivity() {
         val userIdRequestBody = contentRequest.user_id.toString().toRequestBody("text/plain".toMediaTypeOrNull())
 
         val response = titleRequestBody.let {
-          apiService.createContent(
+          apiService.updateContent(
+            contentId.toString(),
             titleRequestBody,
             contentRequest.url!!,
             authorRequestBody,
@@ -154,18 +182,18 @@ class ContentPostActivity : AppCompatActivity() {
         withContext(Dispatchers.Main) {
           if (response.isSuccessful) {
             // Solicitud exitosa
-            toast.toastSuccess(this@ContentPostActivity, "Mis primeros auxilitos", "Contenido creado exitosamente, se revisará lo más pronto posible!!! 😊😊😊😊😊")
+            toast.toastSuccess(this@ContentUpdate, "Mis primeros auxilitos", "Contenido actualizado exitosamente, se revisará lo más pronto posible!!! 😊😊😊😊😊")
             startActivity(Intent(applicationContext, MainActivity::class.java))
           } else {
             // Manejar error
-            toast.toastError(this@ContentPostActivity, "Error", "Por favor, llena todos los campos")
+            toast.toastError(this@ContentUpdate, "Error", "Por favor, llena todos los campos")
           }
         }
       } catch (e: Exception) {
 
         // Manejar excepciones
         withContext(Dispatchers.Main) {
-          toast.toastError(this@ContentPostActivity, "Error", "e " + e.localizedMessage)
+          toast.toastError(this@ContentUpdate, "Error", "e " + e.localizedMessage)
         }
 
       }
@@ -188,7 +216,36 @@ class ContentPostActivity : AppCompatActivity() {
       }
 
       override fun onFailure(call: Call<User>, t: Throwable) {
-        toast.toastError(this@ContentPostActivity, "Conexión", "Error de conexión")
+        toast.toastError(this@ContentUpdate, "Conexión", "Error de conexión")
+      }
+    })
+  }
+
+  private fun getMyContentById(contentId: Int)
+  {
+    val apiService = ApiClient.getApiService()
+
+    val myContentCall: Call<ContentResponse> = apiService.getOneContent(contentId.toString())
+    myContentCall.enqueue(object : Callback<ContentResponse> {
+      @SuppressLint("SetTextI18n")
+      override fun onResponse(call: Call<ContentResponse>, response: Response<ContentResponse>) {
+        if (response.isSuccessful) {
+          val myContent = response.body()
+          myContentToUpdate = myContent
+          myContent?.let {
+            findViewById<TextView>(R.id.title_update).text          = it.title
+            findViewById<TextView>(R.id.description_update).text    = it.description
+            Glide.with(this@ContentUpdate)
+              .load(ApiClient.baseUrl + it.url)
+              .placeholder(R.drawable.logo)
+              .error(R.drawable.logo)
+              .into(binding.imageUrlUpdate)
+          }
+        }
+      }
+
+      override fun onFailure(call: Call<ContentResponse>, t: Throwable) {
+        toast.toastError(this@ContentUpdate, "Conexión", "Error de conexión")
       }
     })
   }
