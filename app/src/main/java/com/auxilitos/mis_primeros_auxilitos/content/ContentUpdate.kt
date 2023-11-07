@@ -10,7 +10,6 @@ import android.util.Log
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import com.auxilitos.mis_primeros_auxilitos.MainActivity
 import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.content.my_content.MyContentActivity
@@ -122,11 +121,6 @@ class ContentUpdate : AppCompatActivity() {
 
     binding.btnUploadContent.setOnClickListener {
 
-      //val part: MultipartBody.Part?
-
-      val filesDir = applicationContext.filesDir
-      val file = File(filesDir, "image.png")
-
       val part: MultipartBody.Part? = imageUriToUpdate?.let { uri ->
         val inputStream = contentResolver.openInputStream(uri)
         val file = File(applicationContext.filesDir, "image.png")
@@ -159,7 +153,7 @@ class ContentUpdate : AppCompatActivity() {
 
         // Llamar a la función para enviar los datos al servidor
         if (contentRequest != null) {
-          Log.e("CONTENT", "${contentRequest}")
+          Log.e("CONTENT", "$contentRequest")
           updateContent(contentRequest)
         }
 
@@ -186,7 +180,7 @@ class ContentUpdate : AppCompatActivity() {
           apiService.updateContent(
             contentId.toString(),
             titleRequestBody,
-            contentRequest.url!!,
+            contentRequest.url,
             authorRequestBody,
             descriptionRequestBody,
             userIdRequestBody
