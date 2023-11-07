@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    const val baseUrl = "http://192.168.10.79:8000" // Reemplaza esto con tu baseUrl
+    const val baseUrl = "http://192.168.14.190:8000" // Reemplaza esto con tu baseUrl
 
     private fun getRetrofit(): Retrofit {
 

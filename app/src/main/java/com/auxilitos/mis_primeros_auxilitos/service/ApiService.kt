@@ -32,6 +32,9 @@ interface ApiService {
     @GET("/api/contenidos/{id}")
     fun getOneContent(@Path("id") id: String): Call<ContentResponse>
 
+    @GET("/api/my_content/{id}")
+    fun getMyContent(@Path("id") id:String): Call<List<ContentResponse>>
+
     @Multipart
     @POST("/api/contenidos")
     fun createContent(
@@ -42,8 +45,17 @@ interface ApiService {
         @Part("user_id") userId: RequestBody
     ): Call<ContentResponse>
 
+    @Multipart
     @PUT("/api/contenidos/{id}")
-    fun updateContent(@Body contentRequest: ContentRequest, @Path("id") id: String): Call<ContentResponse>
+    fun updateContent(
+        @Path("id") id: String, // Capturar la ID como un parámetro de ruta
+        @Part("title") title: RequestBody,
+        @Part url: MultipartBody.Part?,
+        @Part("autor") autor: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("user_id") userId: RequestBody
+    ): Call<ContentResponse>
+
 
     @DELETE("/api/contenidos/{id}")
     fun deleteContent(@Body contentRequest: ContentRequest, @Path("id") id: String): Call<ContentResponse>

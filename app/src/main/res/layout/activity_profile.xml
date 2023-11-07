@@ -102,6 +102,15 @@
                     android:backgroundTint="#0D6EFD"
                     />
 
+                <Button
+                    android:id="@+id/myContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mi_contenido"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#673AB7"
+                    />
+
 
                 <Button
                     android:id="@+id/eliminarCuenta"
