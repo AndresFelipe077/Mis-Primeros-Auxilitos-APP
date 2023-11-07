@@ -8,7 +8,6 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.auxilitos.mis_primeros_auxilitos.MainActivity
@@ -47,13 +46,12 @@ class ContentUpdate : AppCompatActivity() {
 
   private var myContentToUpdate: ContentResponse? = null
 
-  //private lateinit var imageUriToUpdate: Uri
-  private var imageUriToUpdate = Uri.parse(ApiClient.baseUrl + myContentToUpdate?.url)
+  private lateinit var imageUriToUpdate: Uri
 
   private var userData: User? = null
   private var userId = 0
 
-  /*private val contract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+  private val contract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
     uri?.let {
       imageUriToUpdate = it
       binding.imageUrlUpdate.setImageURI(it)
@@ -73,33 +71,7 @@ class ContentUpdate : AppCompatActivity() {
         .into(binding.imageUrlUpdate)
 
     }
-  }*/
-
-  private val contract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-    uri?.let {
-      // Usuario seleccionó una nueva imagen
-      imageUriToUpdate = it
-      // Resto del código para cargar y mostrar la imagen...
-      loadAndDisplayImage(imageUriToUpdate.toString())
-    } ?: run {
-      // Usuario no seleccionó una nueva imagen, usa la imagen existente
-      loadAndDisplayImage(imageUriToUpdate.toString())
-    }
   }
-
-  private fun loadAndDisplayImage(imageUrl: String) {
-    val requestOptions = RequestOptions()
-      .placeholder(R.drawable.image_preview) // Imagen de placeholder mientras se carga la imagen
-      .error(R.drawable.error) // Imagen de error si la carga falla
-      .diskCacheStrategy(DiskCacheStrategy.NONE) // Evita el almacenamiento en caché de la imagen para que se vuelva a cargar cada vez
-
-    Glide.with(this)
-      .load(imageUrl)
-      .apply(requestOptions)
-      .centerCrop() // Escala la imagen para llenar el área del ImageButton mientras mantiene las proporciones y corta el exceso
-      .into(binding.imageUrlUpdate)
-  }
-
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -140,20 +112,18 @@ class ContentUpdate : AppCompatActivity() {
 
     binding.btnUploadContent.setOnClickListener {
 
-      var part: MultipartBody.Part? = null
+      val part: MultipartBody.Part?
 
-      if(imageUriToUpdate != null) {
-        val filesDir = applicationContext.filesDir
-        val file = File(filesDir, "image.png")
+      val filesDir = applicationContext.filesDir
+      val file = File(filesDir, "image.png")
 
-        val inputStream = imageUriToUpdate.let { contentResolver.openInputStream(it) }
+      val inputStream = imageUriToUpdate.let { contentResolver.openInputStream(it) }
 
-        val outputStream = FileOutputStream(file)
-        inputStream!!.copyTo(outputStream)
+      val outputStream = FileOutputStream(file)
+      inputStream!!.copyTo(outputStream)
 
-        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-        part = MultipartBody.Part.createFormData("url", file.name, requestBody)
-      }
+      val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+      part = MultipartBody.Part.createFormData("url", file.name, requestBody)
 
       val title = binding.titleUpdate.text.toString()
       val description = binding.descriptionUpdate.text.toString()
@@ -164,7 +134,7 @@ class ContentUpdate : AppCompatActivity() {
         val contentRequest = userData?.let { user ->
           ContentRequest(
             title,
-            part!!,
+            part,
             autor = user.name,
             description,
             user_id = myContentToUpdate?.let { myContentToUpdate ->
@@ -202,7 +172,7 @@ class ContentUpdate : AppCompatActivity() {
           apiService.updateContent(
             contentId.toString(),
             titleRequestBody,
-            contentRequest.url,
+            contentRequest.url!!,
             authorRequestBody,
             descriptionRequestBody,
             userIdRequestBody

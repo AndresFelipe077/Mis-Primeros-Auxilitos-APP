@@ -144,7 +144,7 @@ class ContentPostActivity : AppCompatActivity() {
         val response = titleRequestBody.let {
           apiService.createContent(
             titleRequestBody,
-            contentRequest.url,
+            contentRequest.url!!,
             authorRequestBody,
             descriptionRequestBody,
             userIdRequestBody

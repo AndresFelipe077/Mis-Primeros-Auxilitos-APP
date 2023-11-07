@@ -50,7 +50,7 @@ interface ApiService {
     fun updateContent(
         @Path("id") id: String, // Capturar la ID como un parámetro de ruta
         @Part("title") title: RequestBody,
-        @Part url: MultipartBody.Part,
+        @Part url: MultipartBody.Part?,
         @Part("autor") autor: RequestBody,
         @Part("description") description: RequestBody,
         @Part("user_id") userId: RequestBody
