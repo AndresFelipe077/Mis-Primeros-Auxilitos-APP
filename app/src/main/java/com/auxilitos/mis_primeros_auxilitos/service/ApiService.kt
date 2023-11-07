@@ -56,9 +56,8 @@ interface ApiService {
         @Part("user_id") userId: RequestBody
     ): Call<ContentResponse>
 
-
     @DELETE("/api/contenidos/{id}")
-    fun deleteContent(@Body contentRequest: ContentRequest, @Path("id") id: String): Call<ContentResponse>
+    fun deleteContent(@Path("id") id: String): Call<Void>
 
     @POST("/api/login/")
     fun loginUser(@Body loginRequest: LoginRequest): Call<LoginResponse>

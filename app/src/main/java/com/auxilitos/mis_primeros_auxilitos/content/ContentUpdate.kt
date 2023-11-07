@@ -91,6 +91,16 @@ class ContentUpdate : AppCompatActivity() {
     }
 
     sendContentToUpdate()
+
+    binding.btnDeleteContent.setOnClickListener {
+      deleteContent(contentId.toString())
+      startActivity(Intent(this@ContentUpdate, MyContentActivity::class.java))
+    }
+
+  }
+
+  private fun deleteContent(idContent: String) {
+    deleteContentById(idContent)
   }
 
   private fun getIdMyContent()
@@ -246,6 +256,25 @@ class ContentUpdate : AppCompatActivity() {
 
       override fun onFailure(call: Call<ContentResponse>, t: Throwable) {
         toast.toastError(this@ContentUpdate, "Conexión", "Error de conexión")
+      }
+    })
+  }
+
+
+  private fun deleteContentById(contentId: String) {
+    val apiService = ApiClient.getApiService()
+
+    apiService.deleteContent(contentId).enqueue(object : Callback<Void> {
+      override fun onResponse(call: Call<Void>, response: Response<Void>) {
+        if (response.isSuccessful) {
+          toast.toastSuccess(this@ContentUpdate, "Contenido", "El contenido fue eliminado exitosamente!!!")
+        } else {
+          toast.toastError(this@ContentUpdate, "Contenido", "Ups, ha ocurrido un error inesperado")
+        }
+      }
+
+      override fun onFailure(call: Call<Void>, t: Throwable) {
+        toast.toastError(this@ContentUpdate, "Error", "Error de conexión")
       }
     })
   }
