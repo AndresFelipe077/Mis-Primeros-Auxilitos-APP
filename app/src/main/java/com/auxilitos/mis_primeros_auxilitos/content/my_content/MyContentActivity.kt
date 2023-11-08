@@ -83,7 +83,6 @@ class MyContentActivity : AppCompatActivity() {
   }
 
   fun onItemSelected(myContentResponse: ContentResponse) {
-    Log.d("Contenido ID", "ID del contenido: ${myContentResponse.id}")
     val intent = Intent(this, ContentUpdate::class.java)
     intent.putExtra("CONTENIDO_ID", myContentResponse.id)
     startActivity(intent)

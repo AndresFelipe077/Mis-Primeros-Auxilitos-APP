@@ -188,6 +188,17 @@
                         android:src="@drawable/carga2"
                         />
 
+
+                    <ImageView
+                        android:id="@+id/btn_delete_content"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/delete"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="#376A6363"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/delete_contenido" />
+
                 </LinearLayout>
 
 

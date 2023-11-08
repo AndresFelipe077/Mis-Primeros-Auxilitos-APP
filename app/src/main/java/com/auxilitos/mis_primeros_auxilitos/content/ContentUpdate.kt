@@ -10,7 +10,6 @@ import android.util.Log
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import com.auxilitos.mis_primeros_auxilitos.MainActivity
 import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.content.my_content.MyContentActivity
@@ -46,7 +45,7 @@ class ContentUpdate : AppCompatActivity() {
 
   private var myContentToUpdate: ContentResponse? = null
 
-  private lateinit var imageUriToUpdate: Uri
+  private var imageUriToUpdate: Uri? = null
 
   private var userData: User? = null
   private var userId = 0
@@ -91,6 +90,16 @@ class ContentUpdate : AppCompatActivity() {
     }
 
     sendContentToUpdate()
+
+    binding.btnDeleteContent.setOnClickListener {
+      deleteContent(contentId.toString())
+      startActivity(Intent(this@ContentUpdate, MyContentActivity::class.java))
+    }
+
+  }
+
+  private fun deleteContent(idContent: String) {
+    deleteContentById(idContent)
   }
 
   private fun getIdMyContent()
@@ -112,20 +121,21 @@ class ContentUpdate : AppCompatActivity() {
 
     binding.btnUploadContent.setOnClickListener {
 
-      val part: MultipartBody.Part?
+      val part: MultipartBody.Part? = imageUriToUpdate?.let { uri ->
+        val inputStream = contentResolver.openInputStream(uri)
+        val file = File(applicationContext.filesDir, "image.png")
+        inputStream?.use { input ->
+          FileOutputStream(file).use { output ->
+            input.copyTo(output)
+          }
+        }
+        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+        MultipartBody.Part.createFormData("url", file.name, requestBody)
+      }
 
-      val filesDir = applicationContext.filesDir
-      val file = File(filesDir, "image.png")
-
-      val inputStream = imageUriToUpdate.let { contentResolver.openInputStream(it) }
-
-      val outputStream = FileOutputStream(file)
-      inputStream!!.copyTo(outputStream)
-
-      val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-      part = MultipartBody.Part.createFormData("url", file.name, requestBody)
 
       val title = binding.titleUpdate.text.toString()
+
       val description = binding.descriptionUpdate.text.toString()
 
       if (title.isNotEmpty() && description.isNotEmpty()) {
@@ -137,15 +147,13 @@ class ContentUpdate : AppCompatActivity() {
             part,
             autor = user.name,
             description,
-            user_id = myContentToUpdate?.let { myContentToUpdate ->
-              parseInt(myContentToUpdate.user_id)
-            } ?: 0
+            user_id = myContentToUpdate?.user_id?.toIntOrNull() ?: 0
           )
         }
 
         // Llamar a la función para enviar los datos al servidor
         if (contentRequest != null) {
-          Log.e("CONTENT", "${contentRequest}")
+          Log.e("CONTENT", "$contentRequest")
           updateContent(contentRequest)
         }
 
@@ -172,7 +180,7 @@ class ContentUpdate : AppCompatActivity() {
           apiService.updateContent(
             contentId.toString(),
             titleRequestBody,
-            contentRequest.url!!,
+            contentRequest.url,
             authorRequestBody,
             descriptionRequestBody,
             userIdRequestBody
@@ -183,7 +191,7 @@ class ContentUpdate : AppCompatActivity() {
           if (response.isSuccessful) {
             // Solicitud exitosa
             toast.toastSuccess(this@ContentUpdate, "Mis primeros auxilitos", "Contenido actualizado exitosamente, se revisará lo más pronto posible!!! 😊😊😊😊😊")
-            startActivity(Intent(applicationContext, MainActivity::class.java))
+            startActivity(Intent(applicationContext, MyContentActivity::class.java))
           } else {
             // Manejar error
             toast.toastError(this@ContentUpdate, "Error", "Por favor, llena todos los campos")
@@ -246,6 +254,24 @@ class ContentUpdate : AppCompatActivity() {
 
       override fun onFailure(call: Call<ContentResponse>, t: Throwable) {
         toast.toastError(this@ContentUpdate, "Conexión", "Error de conexión")
+      }
+    })
+  }
+
+  private fun deleteContentById(contentId: String) {
+    val apiService = ApiClient.getApiService()
+
+    apiService.deleteContent(contentId).enqueue(object : Callback<Void> {
+      override fun onResponse(call: Call<Void>, response: Response<Void>) {
+        if (response.isSuccessful) {
+          toast.toastSuccess(this@ContentUpdate, "Contenido", "El contenido fue eliminado exitosamente!!!")
+        } else {
+          toast.toastError(this@ContentUpdate, "Contenido", "Ups, ha ocurrido un error inesperado")
+        }
+      }
+
+      override fun onFailure(call: Call<Void>, t: Throwable) {
+        toast.toastError(this@ContentUpdate, "Error", "Error de conexión")
       }
     })
   }
