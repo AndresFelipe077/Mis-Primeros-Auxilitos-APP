@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
+import com.auxilitos.mis_primeros_auxilitos.content.CreditosActivity
 import com.auxilitos.mis_primeros_auxilitos.databinding.FragmentSettingsBinding
 import com.auxilitos.mis_primeros_auxilitos.registro.Login
 import com.auxilitos.mis_primeros_auxilitos.registro.Profile
@@ -43,6 +44,11 @@ class SettingsFragment : Fragment() {
         binding.btnProfile.setOnClickListener{
             toast.toastSuccess(this.requireActivity(), "Mis Primeros Auxilitos", "Perfil del usuario")
             startActivity(Intent(this.requireContext(), Profile::class.java))
+        }
+
+        binding.btnCredits.setOnClickListener {
+            toast.toastSuccess(this.requireActivity(), "Mis Primeros Auxilitos", "Créditos 😊😊👌")
+            startActivity(Intent(this.requireContext(), CreditosActivity::class.java))
         }
 
         binding.btnMisionVision.setOnClickListener{
