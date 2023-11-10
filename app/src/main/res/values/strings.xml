@@ -85,5 +85,23 @@
     <string name="editar_contenido">Editar contenido</string>
     <string name="delete_contenido">Eliminar contenido</string>
     <string name="imagen_of_doctor">Imagen of doctor</string>
+    <string name="cr_ditos">Créditos</string>
+    <string name="link1">https://icons8.com/icon/118497/facebook-nuevo</string>
+    <string name="link2">https://icons8.com/icon/17949/logo-de-google</string>
+    <string name="linkn3">https://icons8.com/icon/888P4ZTyO87z/calendario</string>
+    <string name="link4">https://icons8.com/icon/92055/avi%C3%B3n-de-papel</string>
+    <string name="link5">https://icons8.com/icon/7KfGv0q2npp0/cancelar</string>
+    <string name="link6">https://icons8.com/icon/y1uHVxXxLrdQ/aprobaci%C3%B3n</string>
+    <string name="link7">https://www.flaticon.es/iconos-gratis/contenido</string>
+    <string name="link8">https://www.flaticon.es/iconos-gratis/sanado</string>
+    <string name="link9">https://www.flaticon.es/iconos-gratis/luna</string>
+    <string name="link10">https://www.flaticon.es/iconos-gratis/observacion</string>
+    <string name="link11">https://www.flaticon.com/free-icons/quiz</string>
+    <string name="link12">https://www.flaticon.es/iconos-gratis/adivinar</string>
+    <string name="link13">https://www.flaticon.es/iconos-gratis/ninos</string>
+    <string name="link14">https://www.flaticon.es/iconos-gratis/nina</string>
+    <string name="link15">https://www.flaticon.es/iconos-gratis/jardin-de-infancia</string>
+    <string name="link16">https://www.flaticon.es/iconos-gratis/imagen</string>
+    <string name="link17">https://www.flaticon.es/stickers-gratis/arte</string>
 
 </resources>
