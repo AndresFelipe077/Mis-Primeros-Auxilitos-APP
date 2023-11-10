@@ -12,7 +12,7 @@
     <string name="iniciar_sesion">iniciar sesión</string>
     <string name="txt_cuenta_NULL">¿No tienes cuenta?</string>
     <string name="registrate">Registrate</string>
-    <string name="txt_olvidar_password">He olvidado mi contraseña</string>
+    <string name="txt_olvidar_password">He olvidado mi contraseña 😢😢😢</string>
     <string name="copyryght">Copyryght © 2023</string>
     <string name="title">Mis primeros auxilitos</string>
     <string name="registro">Registro</string>
@@ -84,5 +84,6 @@
     <string name="mi_contenido">Mi contenido</string>
     <string name="editar_contenido">Editar contenido</string>
     <string name="delete_contenido">Eliminar contenido</string>
+    <string name="imagen_of_doctor">Imagen of doctor</string>
 
 </resources>

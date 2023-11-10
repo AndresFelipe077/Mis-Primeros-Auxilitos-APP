@@ -26,7 +26,7 @@ class SplashScreen : AppCompatActivity() {
                 // set an animator that goes from height to 0, it will use AnticipateInterpolator set at the bottom of this code
                 val animator = ValueAnimator
                     .ofInt(icon.height, 0)
-                    .setDuration(2000)
+                    .setDuration(1000)
                 //update the icon height and width every time the animator value change
                 animator.addUpdateListener {
                     val value = it.animatedValue as Int
