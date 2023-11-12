@@ -23,20 +23,20 @@ import retrofit2.http.Path
 
 interface ApiService {
 
-    @GET("api/users/{userId}")
+    @GET("/api/users/{userId}")
     fun getUserProfile(@Path("userId") userId: String): Call<User>
 
-    @GET("api/contenidos")
+    @GET("/api/contenidos")
     fun getContent(): Call<List<ContentResponse>>
 
-    @GET("api/contenidos/{id}")
+    @GET("/api/contenidos/{id}")
     fun getOneContent(@Path("id") id: String): Call<ContentResponse>
 
-    @GET("api/my_content/{id}")
+    @GET("/api/my_content/{id}")
     fun getMyContent(@Path("id") id:String): Call<List<ContentResponse>>
 
     @Multipart
-    @POST("api/contenidos")
+    @POST("/api/contenidos")
     fun createContent(
         @Part("title") title: RequestBody,
         @Part url: MultipartBody.Part,
@@ -46,7 +46,7 @@ interface ApiService {
     ): Call<ContentResponse>
 
     @Multipart
-    @POST("api/update_content/{id}")
+    @POST("/api/update_content/{id}")
     fun updateContent(
         @Path("id") id: String, // Capturar la ID como un parámetro de ruta
         @Part("title") title: RequestBody,
@@ -56,23 +56,23 @@ interface ApiService {
         @Part("user_id") userId: RequestBody
     ): Call<ContentResponse>
 
-    @DELETE("api/contenidos/{id}")
+    @DELETE("/api/contenidos/{id}")
     fun deleteContent(@Path("id") id: String): Call<Void>
 
-    @POST("api/login/")
+    @POST("/api/login/")
     fun loginUser(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
-    @POST("api/register/")
+    @POST("/api/register/")
     fun registerUser(@Body registerRequest: RegisterRequest): Call<RegisterResponse>
 
-    @PUT("api/users/{userId}")
+    @PUT("/api/users/{userId}")
     fun updateProfile(@Body userRequest: UserRequest, @Path("userId") userId: String): Call<UserResponse>
 
-    @GET("api/logout/")
+    @GET("/api/logout/")
     fun logoutUser(): Call<RegisterResponse>?
     //fun getPublicaciones(): Call<List<Publicaciones?>?>?
 
-    @GET("api/delete/")
+    @GET("/api/delete/")
     fun deleteUser(): Call<User>
 
 

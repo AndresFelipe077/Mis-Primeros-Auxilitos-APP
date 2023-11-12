@@ -113,7 +113,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/question_mark"
+                        android:src="@drawable/empearejar"
                         android:scaleType="fitCenter"
                         android:padding="16dp"
                         android:background="?android:attr/selectableItemBackground"
@@ -131,16 +131,71 @@
                     app:cardCornerRadius="16dp"
                     app:cardBackgroundColor="#FFFFFF">
 
-                    <!--<ImageButton
+                    <ImageButton
+                        android:id="@+id/btn_trivias"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/settings"
+                        android:src="@drawable/trivias"
                         android:scaleType="fitCenter"
                         android:padding="16dp"
                         android:background="?android:attr/selectableItemBackground"
                         android:contentDescription="@string/game_of_auxilitos"/>
--->
+
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="16dp"
+                    app:cardBackgroundColor="#FFFFFF">
+
+
+                    <ImageButton
+                        android:id="@+id/btn_ahorcado"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ahorcado"
+                        android:scaleType="fitCenter"
+                        android:padding="16dp"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:contentDescription="@string/game_of_auxilitos"/>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="16dp"
+                    app:cardBackgroundColor="#FFFFFF">
+
+                    <ImageButton
+                        android:id="@+id/btn_draw"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/dibujar"
+                        android:scaleType="fitCenter"
+                        android:padding="16dp"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:contentDescription="@string/game_of_auxilitos"/>
+
 
                 </androidx.cardview.widget.CardView>
 
