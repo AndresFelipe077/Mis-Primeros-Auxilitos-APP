@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".games.DibujarActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.auxilitos.mis_primeros_auxilitos.classesImport.DrawingView
+        android:id="@+id/drawingView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="50dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/btn_return_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/regresar"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#376A6363"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/triki_auxilitos"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_margin="10sp"
+            />
+
+        <ImageButton
+            android:id="@+id/btn_reset_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/reset"
+            android:contentDescription="@string/reset_game" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+

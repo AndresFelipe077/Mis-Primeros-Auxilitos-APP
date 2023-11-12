@@ -33,10 +33,10 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="31">
         <activity
-            android:name=".games.DibujarAdivinarActivity"
+            android:name=".games.TrikiActivity"
             android:exported="false" />
         <activity
-            android:name=".games.AhorcadoActivity"
+            android:name=".games.DibujarActivity"
             android:exported="false" />
         <activity
             android:name=".games.TriviasActivity"

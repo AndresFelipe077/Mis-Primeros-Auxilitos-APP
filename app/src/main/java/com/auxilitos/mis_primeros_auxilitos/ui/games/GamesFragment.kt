@@ -9,9 +9,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.auxilitos.mis_primeros_auxilitos.databinding.FragmentGamesBinding
-import com.auxilitos.mis_primeros_auxilitos.games.AhorcadoActivity
+import com.auxilitos.mis_primeros_auxilitos.games.DibujarActivity
 import com.auxilitos.mis_primeros_auxilitos.games.AparecerObjetosAuxilitos
-import com.auxilitos.mis_primeros_auxilitos.games.DibujarAdivinarActivity
+import com.auxilitos.mis_primeros_auxilitos.games.TrikiActivity
 import com.auxilitos.mis_primeros_auxilitos.games.QuestionsActivity
 import com.auxilitos.mis_primeros_auxilitos.games.SelectObjectWeb
 import com.auxilitos.mis_primeros_auxilitos.games.TriviasActivity
@@ -59,11 +59,11 @@ class GamesFragment : Fragment() {
         }
 
         binding.btnAhorcado.setOnClickListener{
-            startActivity(Intent(this.requireContext(), AhorcadoActivity::class.java))
+            startActivity(Intent(this.requireContext(), DibujarActivity::class.java))
         }
 
         binding.btnDraw.setOnClickListener{
-            startActivity(Intent(this.requireContext(), DibujarAdivinarActivity::class.java))
+            startActivity(Intent(this.requireContext(), TrikiActivity::class.java))
         }
 
         return root

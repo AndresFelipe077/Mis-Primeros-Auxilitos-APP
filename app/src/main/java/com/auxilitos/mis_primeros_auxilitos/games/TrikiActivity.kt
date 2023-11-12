@@ -12,7 +12,7 @@ import com.auxilitos.mis_primeros_auxilitos.R
 import com.auxilitos.mis_primeros_auxilitos.classesImport.ToastCustom
 import de.hdodenhof.circleimageview.CircleImageView
 
-class DibujarAdivinarActivity : AppCompatActivity() {
+class TrikiActivity : AppCompatActivity() {
 
   private lateinit var gridLayout: GridLayout
   private lateinit var buttons: Array<Array<Button>>
@@ -26,11 +26,11 @@ class DibujarAdivinarActivity : AppCompatActivity() {
   @SuppressLint("MissingInflatedId")
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_dibujar_adivinar)
+    setContentView(R.layout.activity_triki)
 
     btnReturnView = findViewById(R.id.btn_return_view)
     btnReturnView.setOnClickListener {
-      startActivity(Intent(this@DibujarAdivinarActivity, MainActivity::class.java))
+      startActivity(Intent(this@TrikiActivity, MainActivity::class.java))
     }
 
     btnResetGame = findViewById(R.id.btn_reset_game)
@@ -84,7 +84,7 @@ class DibujarAdivinarActivity : AppCompatActivity() {
   }
 
   private fun announceWinner() {
-    toast.toastSuccess(this@DibujarAdivinarActivity, "Ganador", currentPlayer)
+    toast.toastSuccess(this@TrikiActivity, "Ganador", currentPlayer)
     resetGame()
   }
 
