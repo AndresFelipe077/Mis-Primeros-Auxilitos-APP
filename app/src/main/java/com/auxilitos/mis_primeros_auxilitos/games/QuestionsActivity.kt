@@ -6,13 +6,14 @@ import android.os.Bundle
 import android.webkit.WebChromeClient
 import androidx.appcompat.app.AppCompatActivity
 import com.auxilitos.mis_primeros_auxilitos.classesImport.CustomWebViewClient
+import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
 import com.auxilitos.mis_primeros_auxilitos.databinding.ActivityQuestionsBinding
 
 class QuestionsActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityQuestionsBinding
 
-  private val url: String = "https://www.sesamestreet.org/games?id=20838"
+  private val url: String = ApiClient.baseUrl + "/juegos"
 
   @SuppressLint("SetJavaScriptEnabled")
   override fun onCreate(savedInstanceState: Bundle?) {
