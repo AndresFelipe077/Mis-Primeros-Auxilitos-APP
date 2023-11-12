@@ -111,7 +111,7 @@
 
 
                     <ImageButton
-                        android:id="@+id/btn_questions_game"
+                        android:id="@+id/btn_adivinar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"

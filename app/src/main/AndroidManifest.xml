@@ -18,7 +18,6 @@
     <uses-permission
         android:name="android.permission.INTERACT_ACROSS_USERS"
         tools:ignore="ProtectedPermissions" />
-
     <uses-permission android:name="android.permission.BLUETOOTH" />
 
     <application
@@ -33,6 +32,15 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="31">
+        <activity
+            android:name=".games.DibujarAdivinarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".games.AhorcadoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".games.TriviasActivity"
+            android:exported="false" />
         <activity
             android:name=".content.CreditosActivity"
             android:exported="false" />
