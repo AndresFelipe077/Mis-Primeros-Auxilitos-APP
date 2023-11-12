@@ -1,0 +1,16 @@
+<!-- res/drawable/button_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Fondo del botón -->
+    <solid android:color="#FF4081" /> <!-- Puedes cambiar el color según tus preferencias -->
+
+    <!-- Borde del botón -->
+    <stroke
+        android:width="2dp"
+        android:color="#FFFFFF" /> <!-- Puedes cambiar el color y el ancho del borde según tus preferencias -->
+
+    <!-- Esquinas redondeadas del botón -->
+    <corners android:radius="8dp" /> <!-- Puedes ajustar el radio según tus preferencias -->
+
+</shape>
