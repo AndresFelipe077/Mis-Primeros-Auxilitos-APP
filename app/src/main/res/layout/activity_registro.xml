@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".registro.Registro"
-    android:background="@drawable/fondoregister"
+    android:background="@drawable/fondo_ajustes"
     android:orientation="vertical"
     >
 
@@ -26,7 +26,7 @@
             android:gravity="center"
             android:orientation="vertical"
             android:padding="15sp"
-
+            android:background="@drawable/bordernavigation"
             >
 
 
@@ -324,8 +324,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/dynapuff"
-                android:text="@string/terminos"
+                android:text="@string/terminos_de_servicio"
                 android:textColor="#2e3337" />
+
+            <TextView
+                android:id="@+id/policy_privacy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/politica_de_privacidad"
+                android:fontFamily="@font/dynapuff"
+                android:textColor="#1189EA"
+                android:onClick="onPrivacyPolicyClicked"
+                android:clickable="true"
+                tools:ignore="UsingOnClickInXml"
+                android:focusable="true" />
 
             <TextView
                 android:id="@+id/tvCheckBoxTerms"

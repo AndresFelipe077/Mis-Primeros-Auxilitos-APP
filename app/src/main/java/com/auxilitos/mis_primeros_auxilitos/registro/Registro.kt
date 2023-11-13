@@ -2,11 +2,18 @@ package com.auxilitos.mis_primeros_auxilitos.registro
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.util.PatternsCompat
+import com.auxilitos.mis_primeros_auxilitos.R
 import com.auxilitos.mis_primeros_auxilitos.classesImport.DatePicker
 import com.auxilitos.mis_primeros_auxilitos.classesImport.KeyBoard
 import com.auxilitos.mis_primeros_auxilitos.client.ApiClient
@@ -40,7 +47,47 @@ class Registro : AppCompatActivity(), View.OnClickListener {//Fin
 
         initDate()
 
+        onClickPrivacyPolicy()
+
     }//Fin oncreate
+
+    private fun onClickPrivacyPolicy()
+    {
+        val privacyPolicyString = getString(R.string.politica_de_privacidad)
+
+        // Configurar un ClickableSpan para abrir la URL al hacer clic
+        val privacyPolicyClickableSpan = object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                // Abrir la URL de la política de privacidad
+                val privacyPolicyUrl = "https://docs.google.com/document/d/1_8qQSJLaxLqHdYYfx97Tv4haY6DcBwVy40iCSGo3Pj0/edit"
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(privacyPolicyUrl))
+                startActivity(intent)
+            }
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                // Configurar el color y el subrayado del enlace
+                ds.color = ContextCompat.getColor(applicationContext, R.color.light_blue)
+                ds.isUnderlineText = true
+            }
+        }
+
+        // Crear un SpannableString para el texto de la política de privacidad
+        val spannableString = SpannableString(privacyPolicyString)
+
+        // Aplicar el ClickableSpan a toda la cadena
+        spannableString.setSpan(
+            privacyPolicyClickableSpan,
+            0,
+            privacyPolicyString.length,
+            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        // Aplicar el SpannableString al TextView
+        binding.policyPrivacy.text = spannableString
+        binding.policyPrivacy.movementMethod = LinkMovementMethod.getInstance()
+    }
+
 
     private fun initDate()
     {
