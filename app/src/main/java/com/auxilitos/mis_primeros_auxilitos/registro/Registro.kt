@@ -94,7 +94,6 @@ class Registro : AppCompatActivity(), View.OnClickListener {//Fin
 
         checkBoxValidate()
         keyBoard
-        binding.btnSeleccionarFecha.setOnClickListener(this)
 
         binding.btnRegister.setOnClickListener {
             validate()
@@ -104,6 +103,9 @@ class Registro : AppCompatActivity(), View.OnClickListener {//Fin
         binding.btnRegresar.setOnClickListener {
             startActivity(Intent(this, Login::class.java))
         }
+
+        binding.btnSeleccionarFecha.setOnClickListener(this)
+
 
     }
 

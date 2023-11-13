@@ -107,5 +107,6 @@
     <string name="reset_game">Reset Game</string>
     <string name="terminos_de_servicio">Acepto los terminos de servicio y</string>
     <string name="politica_de_privacidad">Politica de privacidad</string>
+    <string name="seleccionar_fecha_de_nacimiento">Seleccionar fecha de nacimiento</string>
 
 </resources>
